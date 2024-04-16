@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/bnv_refrigerator"
-        android:icon="@drawable/ic_menu"
-        android:title="메뉴 보기" />
+        android:icon="@drawable/ic_refrigerator"
+        android:title="@string/main_bnv_refrigerator" />
     <item
         android:id="@+id/bnv_home"
         android:icon="@drawable/ic_home"
-        android:title="홈" />
+        android:title="@string/main_bnv_home" />
     <item
         android:id="@+id/bnv_person"
         android:icon="@drawable/ic_person"
-        android:title="마이페이지" />
+        android:title="@string/main_bnv_person" />
 </menu>
