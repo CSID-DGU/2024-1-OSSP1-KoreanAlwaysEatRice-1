@@ -1,7 +1,8 @@
-package com.kaer.menuw
+package com.kaer.menuw.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kaer.menuw.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
