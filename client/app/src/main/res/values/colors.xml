@@ -6,8 +6,8 @@
     <!-- primary color -->
     <color name="green_primary">#FF3A5348</color>
     <color name="gray">#FFAAABAE</color>
+    <color name="bright">#FFF9F8F0</color>
 
     <!--    background-->
     <color name="background">#FFEEEDE8</color>
-    <color name="background_bright">#FFF9F8F0</color>
 </resources>

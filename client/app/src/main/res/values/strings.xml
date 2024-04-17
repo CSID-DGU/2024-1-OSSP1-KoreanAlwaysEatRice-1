@@ -5,4 +5,6 @@
     <string name="main_bnv_refrigerator">냉장고페이지</string>
     <string name="main_bnv_home">홈</string>
     <string name="main_bnv_person">마이페이지</string>
+    <string name="refrigerator_see_recommend">추천 레시피 보기</string>
+    <string name="refrigerator_add_ingredient">재료 추가하기</string>
 </resources>
