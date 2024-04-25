@@ -6,10 +6,10 @@
     <data>
 
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:background="@color/bright">
 
         <androidx.recyclerview.widget.RecyclerView
