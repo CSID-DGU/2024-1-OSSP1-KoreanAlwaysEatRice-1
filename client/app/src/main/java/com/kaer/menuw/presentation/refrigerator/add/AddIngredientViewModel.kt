@@ -38,6 +38,34 @@ class AddIngredientViewModel: ViewModel() {
                     IngredientTotal.IngredientItem(9, "식용유", "")
                 )
             ),
+            IngredientTotal(
+                "시험",
+                arrayListOf(
+                    IngredientTotal.IngredientItem(10, "끝났다", ""),
+                    IngredientTotal.IngredientItem(11, "행복해", "")
+                )
+            ),
+            IngredientTotal(
+                "이제",
+                arrayListOf(
+                    IngredientTotal.IngredientItem(12, "개발", ""),
+                    IngredientTotal.IngredientItem(13, "시작", "")
+                )
+            ),
+            IngredientTotal(
+                "더미",
+                arrayListOf(
+                    IngredientTotal.IngredientItem(14, "데이터", ""),
+                    IngredientTotal.IngredientItem(15, "뭐넣지", "")
+                )
+            ),
+            IngredientTotal(
+                "생각이",
+                arrayListOf(
+                    IngredientTotal.IngredientItem(16, "더이상", ""),
+                    IngredientTotal.IngredientItem(17, "안나요", "")
+                )
+            ),
         )
     )
 
