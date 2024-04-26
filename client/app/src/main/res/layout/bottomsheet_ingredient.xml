@@ -11,9 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        android:background="@color/bright">
+        android:background="@drawable/shape_bright_fill_top20_rect">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_add_ingredient_type"
@@ -39,12 +39,13 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_add_ingredient_ingredient"
+            android:id="@+id/rcv_add_ingredient_list"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="200dp"
             android:layout_marginTop="12dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="20dp"
+            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="4"
             app:layout_constraintStart_toStartOf="parent"

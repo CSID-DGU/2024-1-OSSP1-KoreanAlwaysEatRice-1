@@ -14,11 +14,15 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: BottomsheetIngredientBinding? = null
     val binding: BottomsheetIngredientBinding
-        get() = requireNotNull(_binding)
+        get() = requireNotNull(_binding as BottomsheetIngredientBinding)
 
     private var _ingredientTypeAdapter: IngredientTypeAdapter? = null
     private val ingredientTypeAdapter
         get() = requireNotNull(_ingredientTypeAdapter)
+
+    private var _ingredientListAdapter: IngredientListAdapter? = null
+    private val ingredientListAdapter
+        get() = requireNotNull(_ingredientListAdapter)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,14 +37,23 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
 
-        initMakeAdapter()
+        initMakeTypeAdapter()
+        initMakeListAdapter()
     }
 
-    private fun initMakeAdapter() {
+    private fun initMakeTypeAdapter() {
         _ingredientTypeAdapter = IngredientTypeAdapter()
         binding.rcvAddIngredientType.adapter = ingredientTypeAdapter
-        viewModel.mockIngredientList.observe(this) {
+        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
             ingredientTypeAdapter.submitList(it)
+        }
+    }
+
+    private fun initMakeListAdapter() {
+        _ingredientListAdapter = IngredientListAdapter()
+        binding.rcvAddIngredientList.adapter = ingredientListAdapter
+        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
+            ingredientListAdapter.submitList(it[0].ingredientListItem)
         }
     }
 
