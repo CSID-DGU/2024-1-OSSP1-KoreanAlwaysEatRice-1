@@ -7,6 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kaer.menuw.databinding.BottomsheetIngredientBinding
+import com.kaer.menuw.domain.entity.IngredientTotal
+import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.DAIRY_FOOD
+import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.FISH
+import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.GRAIN
+import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.MEAT
+import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.OTHERS
+import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
+import timber.log.Timber
 
 class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
@@ -37,23 +45,46 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
 
-        initMakeTypeAdapter()
-        initMakeListAdapter()
+        initSetAdapter()
     }
 
-    private fun initMakeTypeAdapter() {
-        _ingredientTypeAdapter = IngredientTypeAdapter()
+    private fun initSetAdapter() {
+        makeListAdapter()
+        setTypeAdapter()
+        changeListAdapter()
+    }
+
+    private fun makeListAdapter() {
+        _ingredientListAdapter = IngredientListAdapter()
+        binding.rcvAddIngredientList.adapter = ingredientListAdapter
+    }
+
+    private fun setTypeAdapter() {
+        _ingredientTypeAdapter = IngredientTypeAdapter().apply {
+            setOnItemClickListener(object: IngredientTypeAdapter.OnItemClickListener {
+                override fun onItemClick(item: IngredientTotal, position: Int) {
+                    when (item.type) {
+                        VEGETABLE -> viewModel.clickTypeId(0)
+                        DAIRY_FOOD -> viewModel.clickTypeId(1)
+                        GRAIN -> viewModel.clickTypeId(2)
+                        MEAT -> viewModel.clickTypeId(3)
+                        FISH -> viewModel.clickTypeId(4)
+                        OTHERS -> viewModel.clickTypeId(5)
+                    }
+                    Timber.d("clicked -> ${viewModel.selectedTypeId.value}")
+                }
+            })
+        }
+
         binding.rcvAddIngredientType.adapter = ingredientTypeAdapter
         viewModel.mockIngredientList.observe(viewLifecycleOwner) {
             ingredientTypeAdapter.submitList(it)
         }
     }
 
-    private fun initMakeListAdapter() {
-        _ingredientListAdapter = IngredientListAdapter()
-        binding.rcvAddIngredientList.adapter = ingredientListAdapter
-        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
-            ingredientListAdapter.submitList(it[0].ingredientListItem)
+    private fun changeListAdapter() {
+        viewModel.selectedTypeId.observe(viewLifecycleOwner) {
+            ingredientListAdapter.submitList(viewModel.mockIngredientList.value?.get(it)?.ingredientListItem)
         }
     }
 

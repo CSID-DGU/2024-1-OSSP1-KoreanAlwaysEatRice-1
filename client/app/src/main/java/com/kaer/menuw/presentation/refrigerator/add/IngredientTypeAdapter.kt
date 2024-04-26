@@ -16,11 +16,31 @@ class IngredientTypeAdapter :
         )
     ) {
 
-    class IngredientTypeViewHolder(
+    private var onItemClickListener: OnItemClickListener? = null
+    private var selectedPosition: Int = 0
+
+    interface OnItemClickListener {
+        fun onItemClick(item: IngredientTotal, position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.onItemClickListener = listener
+    }
+
+    inner class IngredientTypeViewHolder(
         private val binding: ItemIngredientTypeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: IngredientTotal) {
             binding.tvItemIngredientTypeName.text = data.type
+
+            if (onItemClickListener != null) {
+                binding.root.setOnClickListener {
+                    onItemClickListener?.onItemClick(data, absoluteAdapterPosition)
+                    if (selectedPosition != absoluteAdapterPosition) {
+                        selectedPosition = absoluteAdapterPosition
+                    }
+                }
+            }
         }
     }
 

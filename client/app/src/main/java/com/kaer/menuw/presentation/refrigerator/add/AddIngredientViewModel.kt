@@ -69,4 +69,21 @@ class AddIngredientViewModel: ViewModel() {
     val mockIngredientList: LiveData<List<IngredientTotal>>
         get() = _mockIngredientList
 
+    private val _selectedTypeId: MutableLiveData<Int> = MutableLiveData(0)
+    val selectedTypeId: LiveData<Int>
+        get() = _selectedTypeId
+
+    fun clickTypeId(typeId: Int) {
+        _selectedTypeId.value = typeId
+    }
+
+    companion object {
+        const val VEGETABLE = "채소"
+        const val DAIRY_FOOD = "유제품"
+        const val GRAIN = "곡류"
+        const val MEAT = "육류"
+        const val FISH = "생선"
+        const val OTHERS = "기타"
+    }
+
 }
