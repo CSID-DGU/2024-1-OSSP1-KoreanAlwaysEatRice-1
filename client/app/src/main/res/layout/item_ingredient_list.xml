@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.kaer.menuw.domain.entity.IngredientTotal.IngredientItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +31,7 @@
             android:id="@+id/tv_ingredient_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="가지"
+            android:text="@{item.ingredientName}"
             android:textSize="12dp"
             android:textColor="@color/selector_ingredient_text"
             app:layout_constraintTop_toBottomOf="@id/iv_ingredient_img"

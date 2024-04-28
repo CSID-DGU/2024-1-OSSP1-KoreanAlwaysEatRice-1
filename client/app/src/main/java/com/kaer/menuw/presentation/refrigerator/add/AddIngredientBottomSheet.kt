@@ -49,14 +49,9 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun initSetAdapter() {
-        makeListAdapter()
+//        makeListAdapter()
         setTypeAdapter()
         changeListAdapter()
-    }
-
-    private fun makeListAdapter() {
-        _ingredientListAdapter = IngredientListAdapter()
-        binding.rcvAddIngredientList.adapter = ingredientListAdapter
     }
 
     private fun setTypeAdapter() {
@@ -80,6 +75,12 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         viewModel.mockIngredientList.observe(viewLifecycleOwner) {
             ingredientTypeAdapter.submitList(it)
         }
+        makeListAdapter()
+    }
+
+    private fun makeListAdapter() {
+        _ingredientListAdapter = IngredientListAdapter()
+        binding.rcvAddIngredientList.adapter = ingredientListAdapter
     }
 
     private fun changeListAdapter() {
@@ -92,6 +93,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     private fun selectedIngredientList() {
         ingredientListAdapter.setOnIngredientClickListener {
             viewModel.selectedIngredientList(ingredientListAdapter.selectedIngredientArray)
+            Timber.d("selected array -> ${viewModel.selectedIngredientArray.value}")
         }
     }
 

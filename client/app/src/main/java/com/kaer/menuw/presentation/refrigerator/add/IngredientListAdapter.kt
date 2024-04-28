@@ -24,7 +24,7 @@ class IngredientListAdapter :
         val binding: ItemIngredientListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: IngredientTotal.IngredientItem, onClickListener: View.OnClickListener) {
-            binding.tvIngredientName.text = data.ingredientName
+            binding.item = data
             binding.root.setOnClickListener(onClickListener)
         }
     }
