@@ -73,8 +73,16 @@ class AddIngredientViewModel: ViewModel() {
     val selectedTypeId: LiveData<Int>
         get() = _selectedTypeId
 
+    private val _selectedIngredientArray: MutableLiveData<ArrayList<Int>> = MutableLiveData()
+    val selectedIngredientArray: LiveData<ArrayList<Int>>
+        get() = _selectedIngredientArray
+
     fun clickTypeId(typeId: Int) {
         _selectedTypeId.value = typeId
+    }
+
+    fun selectedIngredientList(selectedArray: ArrayList<Int>) {
+        _selectedIngredientArray.value = selectedArray
     }
 
     companion object {

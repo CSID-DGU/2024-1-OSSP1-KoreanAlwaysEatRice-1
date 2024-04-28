@@ -86,10 +86,19 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         viewModel.selectedTypeId.observe(viewLifecycleOwner) {
             ingredientListAdapter.submitList(viewModel.mockIngredientList.value?.get(it)?.ingredientListItem)
         }
+        selectedIngredientList()
+    }
+
+    private fun selectedIngredientList() {
+        ingredientListAdapter.setOnIngredientClickListener {
+            viewModel.selectedIngredientList(ingredientListAdapter.selectedIngredientArray)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _ingredientTypeAdapter = null
+        _ingredientListAdapter = null
     }
 }
