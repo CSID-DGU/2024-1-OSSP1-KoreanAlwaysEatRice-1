@@ -38,6 +38,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = BottomsheetIngredientBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -111,7 +112,9 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun clickAddBtn() {
-        //
+        binding.btnAddIngredientAdd.setOnClickListener {
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {

@@ -63,7 +63,7 @@
             android:text="@string/refrigerator_add_ingredient_btn"
             android:outlineProvider="none"
             android:background="@{viewModel.addBtnEnabled ? @drawable/shape_green_fill_5_rect : @drawable/shape_gray_bright_fill_5_rect}"
-            android:textColor="@color/gray"
+            android:textColor="@{viewModel.addBtnEnabled ? @color/bright : @color/gray}"
             android:enabled="@{viewModel.addBtnEnabled ? true : false}"
             android:clickable="@{viewModel.addBtnEnabled ? true : false}"
             app:layout_constraintBottom_toBottomOf="parent"
