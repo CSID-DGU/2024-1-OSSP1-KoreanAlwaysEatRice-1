@@ -9,7 +9,7 @@ import com.kaer.menuw.databinding.ItemIngredientListBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
 
-class IngredientListAdapter :
+class IngredientListAdapter(selectedArray: ArrayList<Int>) :
     ListAdapter<IngredientTotal.IngredientItem, IngredientListAdapter.IngredientListViewHolder>(
         ItemDiffCallback<IngredientTotal.IngredientItem>(
             onItemsTheSame = { oldItem, newItem -> oldItem.ingredientId == newItem.ingredientId },
@@ -18,14 +18,18 @@ class IngredientListAdapter :
     ) {
 
     private var onItemClickListener: ((IngredientTotal.IngredientItem) -> Unit)? = null
-    var selectedIngredientArray = arrayListOf<Int>()
+//    var selectedIngredientArray = arrayListOf<Int>()
+    var selectedIngredientArray = selectedArray
 
     inner class IngredientListViewHolder(
         val binding: ItemIngredientListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: IngredientTotal.IngredientItem, onClickListener: View.OnClickListener) {
-            binding.item = data
-            binding.root.setOnClickListener(onClickListener)
+            with (binding) {
+                item = data
+                root.isActivated = selectedIngredientArray.contains(data.ingredientId)
+                root.setOnClickListener(onClickListener)
+            }
         }
     }
 

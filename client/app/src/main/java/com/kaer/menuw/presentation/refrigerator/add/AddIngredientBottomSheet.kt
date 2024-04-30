@@ -79,7 +79,12 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun makeListAdapter() {
-        _ingredientListAdapter = IngredientListAdapter()
+        viewModel.selectedIngredientList(ArrayList(0))
+        _ingredientListAdapter = viewModel.selectedIngredientArray.value?.let {
+            IngredientListAdapter(
+                it
+            )
+        }
         binding.rcvAddIngredientList.adapter = ingredientListAdapter
     }
 
