@@ -9,6 +9,7 @@ import com.kaer.menuw.presentation.refrigerator.add.AddIngredientBottomSheet
 import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.refrigerator.add.SharedPreferenceManager
 import com.kaer.menuw.util.base.BaseFragment
+import timber.log.Timber
 
 class RefrigeratorFragment :
     BaseFragment<FragmentRefrigeratorBinding>(R.layout.fragment_refrigerator) {
@@ -21,6 +22,7 @@ class RefrigeratorFragment :
         binding.viewModel = viewModel
 
         sharedPreferences = SharedPreferenceManager(requireContext())
+        Timber.d("테스트테스트 -> fragment에 보이는 : ${sharedPreferences.getIngredientList()}")
 
         clickAddIngredientBtn()
     }

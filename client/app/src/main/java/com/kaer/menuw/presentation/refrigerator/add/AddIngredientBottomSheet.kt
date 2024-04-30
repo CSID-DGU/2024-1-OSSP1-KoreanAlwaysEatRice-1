@@ -70,7 +70,6 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
                         FISH -> viewModel.clickTypeId(4)
                         OTHERS -> viewModel.clickTypeId(5)
                     }
-                    Timber.d("clicked -> ${viewModel.selectedTypeId.value}")
                 }
             })
         }
@@ -83,7 +82,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun makeListAdapter() {
-        viewModel.selectedIngredientList(ArrayList(0))
+        viewModel.selectedIngredientList(sharedPreferences.getIngredientList())
         _ingredientListAdapter = viewModel.selectedIngredientArray.value?.let {
             IngredientListAdapter(
                 it
@@ -102,7 +101,6 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     private fun selectedIngredientList() {
         ingredientListAdapter.setOnIngredientClickListener {
             viewModel.selectedIngredientList(ingredientListAdapter.selectedIngredientArray)
-            Timber.d("selected array -> ${viewModel.selectedIngredientArray.value}")
         }
         setAddBtnEnabled()
     }
