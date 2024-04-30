@@ -77,12 +77,20 @@ class AddIngredientViewModel: ViewModel() {
     val selectedIngredientArray: LiveData<ArrayList<Int>>
         get() = _selectedIngredientArray
 
+    private val _addBtnEnabled: MutableLiveData<Boolean> = MutableLiveData()
+    val addBtnEnabled: LiveData<Boolean>
+        get() = _addBtnEnabled
+
     fun clickTypeId(typeId: Int) {
         _selectedTypeId.value = typeId
     }
 
     fun selectedIngredientList(selectedArray: ArrayList<Int>) {
         _selectedIngredientArray.value = selectedArray
+    }
+
+    fun setAddBtnEnabled(enabled: Boolean) {
+        _addBtnEnabled.value = enabled
     }
 
     companion object {

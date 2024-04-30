@@ -100,6 +100,18 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
             viewModel.selectedIngredientList(ingredientListAdapter.selectedIngredientArray)
             Timber.d("selected array -> ${viewModel.selectedIngredientArray.value}")
         }
+        setAddBtnEnabled()
+    }
+
+    private fun setAddBtnEnabled() {
+        ingredientListAdapter.addEnabled.observe(viewLifecycleOwner) {
+            viewModel.setAddBtnEnabled(it)
+            clickAddBtn()
+        }
+    }
+
+    private fun clickAddBtn() {
+        //
     }
 
     override fun onDestroyView() {

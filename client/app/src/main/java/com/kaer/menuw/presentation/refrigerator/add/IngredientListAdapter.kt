@@ -3,6 +3,8 @@ package com.kaer.menuw.presentation.refrigerator.add
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemIngredientListBinding
@@ -20,6 +22,9 @@ class IngredientListAdapter(selectedArray: ArrayList<Int>) :
     private var onItemClickListener: ((IngredientTotal.IngredientItem) -> Unit)? = null
 //    var selectedIngredientArray = arrayListOf<Int>()
     var selectedIngredientArray = selectedArray
+    private val _addEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
+    val addEnabled: LiveData<Boolean>
+        get() = _addEnabled
 
     inner class IngredientListViewHolder(
         val binding: ItemIngredientListBinding
@@ -39,6 +44,10 @@ class IngredientListAdapter(selectedArray: ArrayList<Int>) :
 
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+
+    private fun setAddEnabled() {
+        _addEnabled.value = selectedIngredientArray.isNotEmpty()
     }
 
     private fun ingredientSelection(
@@ -82,6 +91,7 @@ class IngredientListAdapter(selectedArray: ArrayList<Int>) :
                 View.OnClickListener {
                     ingredientSelection(binding, currentList[position])
                     onItemClickListener?.let { it(currentList[position]) }
+                    setAddEnabled()
                 }
             )
         }
