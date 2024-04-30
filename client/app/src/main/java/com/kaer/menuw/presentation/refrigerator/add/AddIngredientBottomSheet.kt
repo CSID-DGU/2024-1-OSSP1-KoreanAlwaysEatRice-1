@@ -20,6 +20,8 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private val viewModel by viewModels<AddIngredientViewModel>()
 
+    private lateinit var sharedPreferences: SharedPreferenceManager
+
     private var _binding: BottomsheetIngredientBinding? = null
     val binding: BottomsheetIngredientBinding
         get() = requireNotNull(_binding as BottomsheetIngredientBinding)
@@ -46,18 +48,19 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
 
+        sharedPreferences = SharedPreferenceManager(requireContext())
+
         initSetAdapter()
     }
 
     private fun initSetAdapter() {
-//        makeListAdapter()
         setTypeAdapter()
         changeListAdapter()
     }
 
     private fun setTypeAdapter() {
         _ingredientTypeAdapter = IngredientTypeAdapter().apply {
-            setOnItemClickListener(object: IngredientTypeAdapter.OnItemClickListener {
+            setOnItemClickListener(object : IngredientTypeAdapter.OnItemClickListener {
                 override fun onItemClick(item: IngredientTotal, position: Int) {
                     when (item.type) {
                         VEGETABLE -> viewModel.clickTypeId(0)
@@ -113,6 +116,10 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private fun clickAddBtn() {
         binding.btnAddIngredientAdd.setOnClickListener {
+            viewModel.selectedIngredientArray.observe(viewLifecycleOwner) {
+                sharedPreferences.storeIngredientIdList(it)
+                Timber.d("테스트테스트 -> 바텀시트 : ${sharedPreferences.getIngredientList()}")
+            }
             dismiss()
         }
     }
