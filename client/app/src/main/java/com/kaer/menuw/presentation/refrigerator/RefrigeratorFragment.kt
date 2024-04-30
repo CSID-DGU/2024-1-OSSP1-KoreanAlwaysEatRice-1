@@ -28,7 +28,7 @@ class RefrigeratorFragment :
     }
 
     private fun clickSeeRecommendBtn() {
-        //
+        // TODO 레시피 추천
     }
 
     private fun clickAddIngredientBtn() {
