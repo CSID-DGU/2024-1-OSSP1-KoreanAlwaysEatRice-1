@@ -15,6 +15,6 @@ public class Ingredient {
     private String ingredientImageURL;
 
     @ManyToOne
-    @Column(name = "refrigeratorId")
+    @JoinColumn(name = "refrigeratorId")
     private Refrigerator refrigerator;
 }
