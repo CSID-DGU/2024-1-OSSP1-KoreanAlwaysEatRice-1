@@ -3,19 +3,16 @@ package com.kaer.menuw.presentation.refrigerator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentRefrigeratorBinding
 import com.kaer.menuw.presentation.refrigerator.add.AddIngredientBottomSheet
 import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.refrigerator.add.SharedPreferenceManager
 import com.kaer.menuw.util.base.BaseFragment
-import timber.log.Timber
 
 class RefrigeratorFragment :
     BaseFragment<FragmentRefrigeratorBinding>(R.layout.fragment_refrigerator) {
 
-//    private val viewModel by viewModels<AddIngredientViewModel>()
     private val viewModel by activityViewModels<AddIngredientViewModel>()
     private lateinit var sharedPreferences: SharedPreferenceManager
 
@@ -31,7 +28,6 @@ class RefrigeratorFragment :
 
         clickAddIngredientBtn()
         initSetRefrigerator()
-//        updateRefrigerator()
     }
 
     private fun initSetRefrigerator() {
@@ -44,7 +40,6 @@ class RefrigeratorFragment :
 
     private fun updateRefrigerator() {
         viewModel.updateStoredIngredientArray.observe(viewLifecycleOwner) {
-            Timber.d("테스트테스트 -> fragment에 보이는2 : $it")
             refrigeratorAdapter.submitList(it)
         }
     }

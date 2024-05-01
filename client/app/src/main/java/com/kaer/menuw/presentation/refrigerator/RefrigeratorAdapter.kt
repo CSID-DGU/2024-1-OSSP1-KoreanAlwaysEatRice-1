@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemIngredientListBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
-import timber.log.Timber
 
 class RefrigeratorAdapter :
     ListAdapter<IngredientTotal.IngredientItem, RefrigeratorAdapter.RefrigeratorViewHolder>(

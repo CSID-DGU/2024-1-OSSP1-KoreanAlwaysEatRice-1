@@ -20,7 +20,7 @@ class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientI
     ) {
 
     private var onItemClickListener: ((IngredientTotal.IngredientItem) -> Unit)? = null
-//    var selectedIngredientArray = arrayListOf<Int>()
+
     var selectedIngredientArray = selectedArray
     private val _addEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
     val addEnabled: LiveData<Boolean>
@@ -55,7 +55,6 @@ class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientI
         ingredientItem: IngredientTotal.IngredientItem
     ) {
         val isIngredientSelected: Boolean =
-//            selectedIngredientArray.contains(ingredientItem.ingredientId)
             selectedIngredientArray.contains(ingredientItem)
 
         if (isIngredientSelected) {
