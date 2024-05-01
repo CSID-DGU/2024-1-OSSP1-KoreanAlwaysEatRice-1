@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kaer.menuw.databinding.BottomsheetIngredientBinding
@@ -18,7 +19,8 @@ import timber.log.Timber
 
 class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
-    private val viewModel by viewModels<AddIngredientViewModel>()
+//    private val viewModel by viewModels<AddIngredientViewModel>()
+    private val viewModel by activityViewModels<AddIngredientViewModel>()
 
     private lateinit var sharedPreferences: SharedPreferenceManager
 
@@ -117,6 +119,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
             viewModel.selectedIngredientArray.observe(viewLifecycleOwner) {
                 sharedPreferences.storeIngredientIdList(it)
                 Timber.d("테스트테스트 -> 바텀시트 : ${sharedPreferences.getIngredientList()}")
+                viewModel.updateStoredList(it)
             }
             dismiss()
         }

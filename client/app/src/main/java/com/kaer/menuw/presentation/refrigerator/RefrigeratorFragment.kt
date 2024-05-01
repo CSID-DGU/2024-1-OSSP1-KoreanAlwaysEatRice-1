@@ -2,6 +2,7 @@ package com.kaer.menuw.presentation.refrigerator
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentRefrigeratorBinding
@@ -14,7 +15,8 @@ import timber.log.Timber
 class RefrigeratorFragment :
     BaseFragment<FragmentRefrigeratorBinding>(R.layout.fragment_refrigerator) {
 
-    private val viewModel by viewModels<AddIngredientViewModel>()
+//    private val viewModel by viewModels<AddIngredientViewModel>()
+    private val viewModel by activityViewModels<AddIngredientViewModel>()
     private lateinit var sharedPreferences: SharedPreferenceManager
 
     private var _refrigeratorAdapter: RefrigeratorAdapter? = null
@@ -26,24 +28,25 @@ class RefrigeratorFragment :
         binding.viewModel = viewModel
 
         sharedPreferences = SharedPreferenceManager(requireContext())
-//        Timber.d("테스트테스트 -> fragment에 보이는 : ${sharedPreferences.getIngredientList()}")
 
         clickAddIngredientBtn()
         initSetRefrigerator()
+//        updateRefrigerator()
     }
 
     private fun initSetRefrigerator() {
-        _refrigeratorAdapter = RefrigeratorAdapter(sharedPreferences.getIngredientList())
-        Timber.d("테스트테스트 -> fragment에 보이는 : ${sharedPreferences.getIngredientList()}")
+        _refrigeratorAdapter = RefrigeratorAdapter()
         binding.rcvRefrigeratorList.adapter = refrigeratorAdapter
-        viewModel.selectedIngredientArray.observe(viewLifecycleOwner) {
+        refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
+
+        updateRefrigerator()
+    }
+
+    private fun updateRefrigerator() {
+        viewModel.updateStoredIngredientArray.observe(viewLifecycleOwner) {
+            Timber.d("테스트테스트 -> fragment에 보이는2 : $it")
             refrigeratorAdapter.submitList(it)
         }
-//        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
-//            for (i in it.indices) {
-//                refrigeratorAdapter.submitList(it[i].ingredientListItem)
-//            }
-//        }
     }
 
     private fun clickSeeRecommendBtn() {
