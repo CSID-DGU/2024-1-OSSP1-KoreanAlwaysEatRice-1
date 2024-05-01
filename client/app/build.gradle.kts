@@ -57,6 +57,7 @@ dependencies {
 
     // Shared Preference
     implementation("androidx.security:security-crypto-ktx:1.1.0-alpha06")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // KTX
     implementation("androidx.activity:activity-ktx:1.8.2")

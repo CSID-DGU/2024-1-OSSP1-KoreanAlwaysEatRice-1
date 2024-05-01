@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kaer.menuw.databinding.BottomsheetIngredientBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
@@ -14,11 +14,12 @@ import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Compa
 import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.MEAT
 import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.OTHERS
 import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
-import timber.log.Timber
 
 class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
-    private val viewModel by viewModels<AddIngredientViewModel>()
+    private val viewModel by activityViewModels<AddIngredientViewModel>()
+
+    private lateinit var sharedPreferences: SharedPreferenceManager
 
     private var _binding: BottomsheetIngredientBinding? = null
     val binding: BottomsheetIngredientBinding
@@ -38,6 +39,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = BottomsheetIngredientBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -45,23 +47,19 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
 
+        sharedPreferences = SharedPreferenceManager(requireContext())
+
         initSetAdapter()
     }
 
     private fun initSetAdapter() {
-        makeListAdapter()
         setTypeAdapter()
         changeListAdapter()
     }
 
-    private fun makeListAdapter() {
-        _ingredientListAdapter = IngredientListAdapter()
-        binding.rcvAddIngredientList.adapter = ingredientListAdapter
-    }
-
     private fun setTypeAdapter() {
         _ingredientTypeAdapter = IngredientTypeAdapter().apply {
-            setOnItemClickListener(object: IngredientTypeAdapter.OnItemClickListener {
+            setOnItemClickListener(object : IngredientTypeAdapter.OnItemClickListener {
                 override fun onItemClick(item: IngredientTotal, position: Int) {
                     when (item.type) {
                         VEGETABLE -> viewModel.clickTypeId(0)
@@ -71,7 +69,6 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
                         FISH -> viewModel.clickTypeId(4)
                         OTHERS -> viewModel.clickTypeId(5)
                     }
-                    Timber.d("clicked -> ${viewModel.selectedTypeId.value}")
                 }
             })
         }
@@ -80,16 +77,54 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         viewModel.mockIngredientList.observe(viewLifecycleOwner) {
             ingredientTypeAdapter.submitList(it)
         }
+        makeListAdapter()
+    }
+
+    private fun makeListAdapter() {
+        viewModel.selectedIngredientList(sharedPreferences.getIngredientList())
+        _ingredientListAdapter = viewModel.selectedIngredientArray.value?.let {
+            IngredientListAdapter(
+                it
+            )
+        }
+        binding.rcvAddIngredientList.adapter = ingredientListAdapter
     }
 
     private fun changeListAdapter() {
         viewModel.selectedTypeId.observe(viewLifecycleOwner) {
             ingredientListAdapter.submitList(viewModel.mockIngredientList.value?.get(it)?.ingredientListItem)
         }
+        selectedIngredientList()
+    }
+
+    private fun selectedIngredientList() {
+        ingredientListAdapter.setOnIngredientClickListener {
+            viewModel.selectedIngredientList(ingredientListAdapter.selectedIngredientArray)
+        }
+        setAddBtnEnabled()
+    }
+
+    private fun setAddBtnEnabled() {
+        ingredientListAdapter.addEnabled.observe(viewLifecycleOwner) {
+            viewModel.setAddBtnEnabled(it)
+            clickAddBtn()
+        }
+    }
+
+    private fun clickAddBtn() {
+        binding.btnAddIngredientAdd.setOnClickListener {
+            viewModel.selectedIngredientArray.observe(viewLifecycleOwner) {
+                sharedPreferences.storeIngredientIdList(it)
+                viewModel.updateStoredList(it)
+            }
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _ingredientTypeAdapter = null
+        _ingredientListAdapter = null
     }
 }
