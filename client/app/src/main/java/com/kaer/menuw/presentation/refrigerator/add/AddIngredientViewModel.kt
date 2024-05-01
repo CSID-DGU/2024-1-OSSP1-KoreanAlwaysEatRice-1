@@ -73,8 +73,12 @@ class AddIngredientViewModel: ViewModel() {
     val selectedTypeId: LiveData<Int>
         get() = _selectedTypeId
 
-    private val _selectedIngredientArray: MutableLiveData<ArrayList<Int>> = MutableLiveData()
-    val selectedIngredientArray: LiveData<ArrayList<Int>>
+//    private val _selectedIngredientIdArray: MutableLiveData<ArrayList<Int>> = MutableLiveData()
+//    val selectedIngredientIdArray: LiveData<ArrayList<Int>>
+//        get() = _selectedIngredientIdArray
+
+    private val _selectedIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> = MutableLiveData()
+    val selectedIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
         get() = _selectedIngredientArray
 
     private val _addBtnEnabled: MutableLiveData<Boolean> = MutableLiveData()
@@ -85,7 +89,7 @@ class AddIngredientViewModel: ViewModel() {
         _selectedTypeId.value = typeId
     }
 
-    fun selectedIngredientList(selectedArray: ArrayList<Int>) {
+    fun selectedIngredientList(selectedArray: ArrayList<IngredientTotal.IngredientItem>) {
         _selectedIngredientArray.value = selectedArray
     }
 

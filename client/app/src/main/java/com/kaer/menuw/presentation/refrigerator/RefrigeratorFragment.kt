@@ -17,14 +17,33 @@ class RefrigeratorFragment :
     private val viewModel by viewModels<AddIngredientViewModel>()
     private lateinit var sharedPreferences: SharedPreferenceManager
 
+    private var _refrigeratorAdapter: RefrigeratorAdapter? = null
+    private val refrigeratorAdapter
+        get() = requireNotNull(_refrigeratorAdapter)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
 
         sharedPreferences = SharedPreferenceManager(requireContext())
-        Timber.d("테스트테스트 -> fragment에 보이는 : ${sharedPreferences.getIngredientList()}")
+//        Timber.d("테스트테스트 -> fragment에 보이는 : ${sharedPreferences.getIngredientList()}")
 
         clickAddIngredientBtn()
+        initSetRefrigerator()
+    }
+
+    private fun initSetRefrigerator() {
+        _refrigeratorAdapter = RefrigeratorAdapter(sharedPreferences.getIngredientList())
+        Timber.d("테스트테스트 -> fragment에 보이는 : ${sharedPreferences.getIngredientList()}")
+        binding.rcvRefrigeratorList.adapter = refrigeratorAdapter
+        viewModel.selectedIngredientArray.observe(viewLifecycleOwner) {
+            refrigeratorAdapter.submitList(it)
+        }
+//        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
+//            for (i in it.indices) {
+//                refrigeratorAdapter.submitList(it[i].ingredientListItem)
+//            }
+//        }
     }
 
     private fun clickSeeRecommendBtn() {
@@ -36,6 +55,11 @@ class RefrigeratorFragment :
         binding.btnRefrigeratorAddIngredient.setOnClickListener {
             AddIngredientBottomSheet().show(parentFragmentManager, BOTTOM_SHEET)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _refrigeratorAdapter = null
     }
 
     companion object {

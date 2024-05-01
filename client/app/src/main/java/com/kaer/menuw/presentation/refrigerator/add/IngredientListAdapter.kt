@@ -11,7 +11,7 @@ import com.kaer.menuw.databinding.ItemIngredientListBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
 
-class IngredientListAdapter(selectedArray: ArrayList<Int>) :
+class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientItem>) :
     ListAdapter<IngredientTotal.IngredientItem, IngredientListAdapter.IngredientListViewHolder>(
         ItemDiffCallback<IngredientTotal.IngredientItem>(
             onItemsTheSame = { oldItem, newItem -> oldItem.ingredientId == newItem.ingredientId },
@@ -32,7 +32,7 @@ class IngredientListAdapter(selectedArray: ArrayList<Int>) :
         fun onBind(data: IngredientTotal.IngredientItem, onClickListener: View.OnClickListener) {
             with (binding) {
                 item = data
-                root.isActivated = selectedIngredientArray.contains(data.ingredientId)
+                root.isActivated = selectedIngredientArray.contains(data)
                 root.setOnClickListener(onClickListener)
             }
         }
@@ -55,22 +55,23 @@ class IngredientListAdapter(selectedArray: ArrayList<Int>) :
         ingredientItem: IngredientTotal.IngredientItem
     ) {
         val isIngredientSelected: Boolean =
-            selectedIngredientArray.contains(ingredientItem.ingredientId)
+//            selectedIngredientArray.contains(ingredientItem.ingredientId)
+            selectedIngredientArray.contains(ingredientItem)
 
         if (isIngredientSelected) {
             removeIngredientItem(
                 selectedIngredientArray,
-                selectedIngredientArray.indexOf(ingredientItem.ingredientId),
+                selectedIngredientArray.indexOf(ingredientItem),
                 binding
             )
         } else {
-            selectedIngredientArray.add(ingredientItem.ingredientId)
+            selectedIngredientArray.add(ingredientItem)
             binding.root.isActivated = true
         }
     }
 
     private fun removeIngredientItem(
-        ingredientArray: ArrayList<Int>,
+        ingredientArray: ArrayList<IngredientTotal.IngredientItem>,
         selectedId: Int,
         binding: ItemIngredientListBinding
     ) {
