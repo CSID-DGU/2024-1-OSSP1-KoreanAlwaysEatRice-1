@@ -11,12 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/upload")
+@RequestMapping("Image")
 @RequiredArgsConstructor
 public class S3ImageController {
     private final S3ImageService s3ImageService;
 
-    @PostMapping
+    @PostMapping("/upload")
     public String saveFile(@RequestParam("file") MultipartFile multipartFile) {
         try {
             return s3ImageService.saveFile(multipartFile);
