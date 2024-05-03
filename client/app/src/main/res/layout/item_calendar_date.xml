@@ -17,7 +17,7 @@
             android:id="@+id/tv_item_calendar_date"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:text="@{Integer.toString(item.date)}"
+            android:text="@{item.date == 0 ? @string/blank : Integer.toString(item.date)}"
             android:textColor="@{item.isTodayDate ? @color/bright : @color/green_primary}"
             android:textSize="15dp"
             android:layout_margin="10dp"
