@@ -1,20 +1,29 @@
 package com.example.menuw.web;
 
+import com.example.menuw.dto.IngredientDto;
+import com.example.menuw.service.IngredientService;
 import com.example.menuw.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("Image")
 @RequiredArgsConstructor
 public class S3ImageController {
     private final S3ImageService s3ImageService;
+    private final IngredientService ingredientService;
+
+    @GetMapping
+    public ResponseEntity<List<IngredientDto>> showIngredientImageURL(@PathVariable String ingredientType) {
+        List<IngredientDto> ingredientDtos = ingredientService.findByIngredientType(ingredientType);
+
+        return  ResponseEntity.ok(ingredientDtos);
+    }
 
     @PostMapping("/upload")
     public String saveFile(@RequestParam("file") MultipartFile multipartFile) {

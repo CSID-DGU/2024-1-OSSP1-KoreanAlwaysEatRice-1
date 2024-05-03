@@ -1,20 +1,11 @@
 package com.example.menuw.repository;
 
 import com.example.menuw.domain.Refrigerator;
-import jakarta.persistence.EntityManager;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import com.example.menuw.dto.RefrigeratorDto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-@Repository
-@RequiredArgsConstructor
-public class RefrigeratorRepository {
-    private final EntityManager em;
-
-    public void save(Refrigerator refrigerator) {
-        em.persist(refrigerator);
-    }
-
-    public Refrigerator findOne(Long id) {
-        return em.find(Refrigerator.class, id);
-    }
+public interface RefrigeratorRepository extends JpaRepository<Refrigerator, Integer> {
+    @Query("SELECT r FROM Refrigerator r WHERE r.user.id = :id")
+    RefrigeratorDto findRefrigeratorByUserId(Integer id);
 }

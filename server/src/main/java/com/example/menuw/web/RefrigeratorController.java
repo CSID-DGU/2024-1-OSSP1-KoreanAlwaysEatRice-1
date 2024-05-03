@@ -13,8 +13,4 @@ import java.util.List;
 public class RefrigeratorController {
     private final IngredientService ingredientService;
 
-    @GetMapping("/refrigerator")
-    public List<Ingredient> findAllIngredients(Ingredient ingredient) {
-        return ingredientService.findIngredients();
-    }
 }

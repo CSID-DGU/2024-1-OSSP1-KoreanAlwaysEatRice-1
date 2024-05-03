@@ -1,31 +1,12 @@
 package com.example.menuw.repository;
 
 import com.example.menuw.domain.Ingredient;
-import jakarta.persistence.EntityManager;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.relational.core.sql.In;
-import org.springframework.stereotype.Repository;
+import com.example.menuw.dto.IngredientDto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-@Repository
-@RequiredArgsConstructor
-public class IngredientRepository {
-    private final EntityManager em;
-
-    public void save(Ingredient ingredient) {
-        if (ingredient.getIngredientId() == null) {
-            em.persist(ingredient);
-        } else {
-            em.merge(ingredient);
-        }
-    }
-
-    public Ingredient findOne(Long id) {
-        return em.find(Ingredient.class, id);
-    }
-
-    public List<Ingredient> findAll() {
-        return em.createQuery("select i from Ingredient i", Ingredient.class).getResultList();
-    }
+public interface IngredientRepository extends JpaRepository<Ingredient, Integer> {
+    List<Ingredient> findAllByIngredientType(String ingredientType);
 }

@@ -9,5 +9,4 @@ class MenuwApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
