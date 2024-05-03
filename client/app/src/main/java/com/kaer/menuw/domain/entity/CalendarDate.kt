@@ -1,5 +1,6 @@
 package com.kaer.menuw.domain.entity
 
 data class CalendarDate (
-    val date: Int
+    val date: Int,
+    val isTodayDate: Boolean
 )

@@ -11,16 +11,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/bright">
+        android:background="@{item.isTodayDate ? @drawable/shape_green_fill_circle : null}">
 
         <TextView
             android:id="@+id/tv_item_calendar_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:text="@{Integer.toString(item.date)}"
-            android:textColor="@color/green_primary"
+            android:textColor="@{item.isTodayDate ? @color/bright : @color/green_primary}"
             android:textSize="15dp"
             android:layout_margin="10dp"
+            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

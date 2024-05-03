@@ -39,7 +39,7 @@
                 android:id="@+id/tv_home_calendar_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2024년 5월"
+                android:text="@{viewModel.currentMonth}"
                 android:textSize="20dp"
                 android:textColor="@color/green_primary"
                 android:textStyle="bold"

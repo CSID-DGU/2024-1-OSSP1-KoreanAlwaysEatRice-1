@@ -7,9 +7,8 @@ import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentHomeBinding
 import com.kaer.menuw.presentation.home.calendar.CalendarAdapter
 import com.kaer.menuw.util.base.BaseFragment
-import timber.log.Timber
 
-class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
@@ -25,13 +24,14 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initHomeView() {
+        viewModel.setCurrentMonth()
         initCalendarView()
     }
 
     private fun initCalendarView() {
         _calendarAdapter = CalendarAdapter()
         binding.rcvHomeCalendar.adapter = calendarAdapter
-        viewModel.setCurrentDate()
+        viewModel.setCurrentCalendar()
 
         viewModel.calendarDate.observe(viewLifecycleOwner) {
             calendarAdapter.submitList(it)

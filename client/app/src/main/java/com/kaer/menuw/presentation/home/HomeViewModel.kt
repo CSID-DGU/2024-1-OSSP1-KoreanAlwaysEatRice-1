@@ -13,12 +13,24 @@ class HomeViewModel: ViewModel() {
     val calendarDate: LiveData<ArrayList<CalendarDate>>
         get() = _calendarDate
 
-    private val currentDate = LocalDate.now().dayOfMonth
+    private val currentDate = LocalDate.now()
 
-    fun setCurrentDate() {
+    private val _currentMonth: MutableLiveData<String> = MutableLiveData()
+    val currentMonth: LiveData<String>
+        get() = _currentMonth
+
+    fun setCurrentMonth() {
+        _currentMonth.value = "${currentDate.year}년 ${currentDate.monthValue}월"
+    }
+
+    fun setCurrentCalendar() {
         val tempList: ArrayList<CalendarDate> = ArrayList()
         for (i in 1 until  32) {
-            tempList.add(CalendarDate(i))
+            if (i == currentDate.dayOfMonth) {
+                tempList.add(CalendarDate(i, true))
+            } else {
+                tempList.add(CalendarDate(i, false))
+            }
         }
         _calendarDate.value = tempList
     }
