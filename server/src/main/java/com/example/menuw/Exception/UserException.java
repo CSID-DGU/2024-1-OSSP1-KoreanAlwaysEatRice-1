@@ -1,7 +1,7 @@
 package com.example.menuw.Exception;
 
 public class UserException extends Exception {
-    private ResponseCode responseCode;
+    private final ResponseCode responseCode;
 
     public UserException(ResponseCode responseCode) {
         super(responseCode.getMessage());
