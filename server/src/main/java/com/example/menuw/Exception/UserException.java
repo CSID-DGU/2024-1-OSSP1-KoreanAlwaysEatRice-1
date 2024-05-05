@@ -1,9 +1,7 @@
 package com.example.menuw.Exception;
 
-import lombok.RequiredArgsConstructor;
-
 public class UserException extends Exception {
-    private final ResponseCode responseCode;
+    private ResponseCode responseCode;
 
     public UserException(ResponseCode responseCode) {
         super(responseCode.getMessage());
