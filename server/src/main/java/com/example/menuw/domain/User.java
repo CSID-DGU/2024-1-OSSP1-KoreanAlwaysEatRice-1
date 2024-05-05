@@ -6,13 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.relational.core.sql.In;
 
 @Entity
 @Getter @Setter
 public class User {
     @Id @GeneratedValue
-    @Column(name = "userId")
-    private Integer id;
+    @Column(name = "user_id")
+    private Integer userId;
 
     private String userName;
     private String password;
