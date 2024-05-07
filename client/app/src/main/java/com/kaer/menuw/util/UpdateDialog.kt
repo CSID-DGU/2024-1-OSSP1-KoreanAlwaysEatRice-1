@@ -29,6 +29,6 @@ class UpdateDialog: BaseDialog() {
     }
 
     override fun setBtnClick(action: () -> Unit) {
-        binding.btnDialogUpdate.setOnClickListener { action() }
+        binding.tvDialogUpdateBtn.setOnClickListener { action() }
     }
 }

@@ -44,4 +44,8 @@ abstract class BaseDialog : DialogFragment() {
         _binding = null
         super.onDestroyView()
     }
+
+    companion object {
+        const val DIALOG = "DIALOG"
+    }
 }
