@@ -14,6 +14,7 @@
     <string name="refrigerator_add_ingredient_text">재료를 추가해 보세요!</string>
     <string name="refrigerator_edit">편집</string>
     <string name="refrigerator_edit_cancel">취소</string>
+    <string name="refrigerator_delete">삭제하기</string>
 
 <!--    home page-->
     <string name="home_recommend_title">추천 레시피 보기</string>

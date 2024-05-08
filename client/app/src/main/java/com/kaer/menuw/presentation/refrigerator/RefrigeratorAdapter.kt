@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kaer.menuw.databinding.ItemIngredientListBinding
+import com.kaer.menuw.databinding.ItemIngredientListAddBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
 
@@ -17,7 +17,7 @@ class RefrigeratorAdapter :
     ) {
 
     inner class RefrigeratorViewHolder(
-        private val binding: ItemIngredientListBinding
+        private val binding: ItemIngredientListAddBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: IngredientTotal.IngredientItem) {
             binding.item = data
@@ -26,7 +26,7 @@ class RefrigeratorAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RefrigeratorViewHolder {
         val binding =
-            ItemIngredientListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemIngredientListAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RefrigeratorViewHolder(binding)
     }
 

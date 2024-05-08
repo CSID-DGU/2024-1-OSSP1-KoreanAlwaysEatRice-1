@@ -28,6 +28,7 @@ class RefrigeratorFragment :
 
         clickAddIngredientBtn()
         initSetRefrigerator()
+        clickEditBtn()
     }
 
     private fun initSetRefrigerator() {
@@ -43,6 +44,16 @@ class RefrigeratorFragment :
         viewModel.updateStoredIngredientArray.observe(viewLifecycleOwner) {
             refrigeratorAdapter.submitList(it)
             viewModel.setBackgroundTextVisible(it.isEmpty())
+        }
+    }
+
+    private fun clickEditBtn() {
+        binding.tvRefrigeratorEdit.setOnClickListener {
+            if (viewModel.deleteBtnVisible.value == true) {
+                viewModel.setDeleteBtnVisible(false)
+            } else {
+                viewModel.setDeleteBtnVisible(true)
+            }
         }
     }
 
