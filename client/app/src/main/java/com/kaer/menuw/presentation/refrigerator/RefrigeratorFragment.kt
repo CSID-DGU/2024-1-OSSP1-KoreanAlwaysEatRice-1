@@ -34,6 +34,7 @@ class RefrigeratorFragment :
         _refrigeratorAdapter = RefrigeratorAdapter()
         binding.rcvRefrigeratorList.adapter = refrigeratorAdapter
         refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
+        viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
 
         updateRefrigerator()
     }
@@ -41,6 +42,7 @@ class RefrigeratorFragment :
     private fun updateRefrigerator() {
         viewModel.updateStoredIngredientArray.observe(viewLifecycleOwner) {
             refrigeratorAdapter.submitList(it)
+            viewModel.setBackgroundTextVisible(it.isEmpty())
         }
     }
 

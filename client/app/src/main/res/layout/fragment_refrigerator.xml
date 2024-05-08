@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel" />
@@ -15,9 +18,14 @@
         android:background="@color/background">
 
         <TextView
+            android:id="@+id/tv_refrigerator_background"
+            style="@style/head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="재료를 추가해보세요"
+            android:text="@string/refrigerator_add_ingredient_text"
+            android:textSize="20dp"
+            android:textColor="@color/green_primary"
+            android:visibility="@{viewModel.backgroundTextVisible ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
