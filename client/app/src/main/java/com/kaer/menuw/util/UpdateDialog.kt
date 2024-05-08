@@ -1,9 +1,12 @@
 package com.kaer.menuw.util
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.kaer.menuw.R
 import com.kaer.menuw.databinding.DialogUpdateBinding
 import com.kaer.menuw.util.base.BaseDialog
 
@@ -17,6 +20,7 @@ class UpdateDialog: BaseDialog() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = DialogUpdateBinding.inflate(inflater, container, false)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return binding.root
     }
 
