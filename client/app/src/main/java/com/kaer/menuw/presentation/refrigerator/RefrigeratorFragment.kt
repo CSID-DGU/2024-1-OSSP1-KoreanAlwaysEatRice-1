@@ -9,7 +9,6 @@ import com.kaer.menuw.presentation.refrigerator.add.AddIngredientBottomSheet
 import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.refrigerator.add.SharedPreferenceManager
 import com.kaer.menuw.util.base.BaseFragment
-import timber.log.Timber
 
 class RefrigeratorFragment :
     BaseFragment<FragmentRefrigeratorBinding>(R.layout.fragment_refrigerator) {
@@ -56,15 +55,30 @@ class RefrigeratorFragment :
             } else {
                 viewModel.setDeleteBtnVisible(true)
                 refrigeratorAdapter.editEnabled.value = true
-                deleteIngredient()
+                setDeleteIngredient()
+            }
+        }
+    }
+
+    private fun setDeleteIngredient() {
+        refrigeratorAdapter.setOnIngredientClickListener {
+            viewModel.setDeleteEnabled(refrigeratorAdapter.selectedIngredientArray.isNotEmpty())
+            viewModel.deleteEnabled.observe(viewLifecycleOwner) {
+                binding.btnRefrigeratorDelete.setOnClickListener {
+                    deleteIngredient()
+                }
             }
         }
     }
 
     private fun deleteIngredient() {
-        refrigeratorAdapter.setOnIngredientClickListener {
-            Timber.d("삭제할 아이템 -> ${refrigeratorAdapter.selectedIngredientArray}")
+        for (i in 0 until refrigeratorAdapter.selectedIngredientArray.size) {
+            sharedPreferences.removeIngredientItem(refrigeratorAdapter.selectedIngredientArray[i])
         }
+
+        refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
+        viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
+        viewModel.setDeleteBtnVisible(false)
     }
 
     private fun clickSeeRecommendBtn() {
