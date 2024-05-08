@@ -41,6 +41,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_refrigerator_see_recommend"
+            style="@style/head"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:text="@string/refrigerator_see_recommend"
@@ -54,6 +55,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_refrigerator_add_ingredient"
+            style="@style/head"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:text="@string/refrigerator_add_ingredient"

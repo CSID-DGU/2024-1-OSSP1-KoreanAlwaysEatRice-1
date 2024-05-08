@@ -29,10 +29,11 @@
 
         <TextView
             android:id="@+id/tv_ingredient_name"
+            style="@style/body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{item.ingredientName}"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:textColor="@color/selector_ingredient_text"
             app:layout_constraintTop_toBottomOf="@id/iv_ingredient_img"
             app:layout_constraintStart_toStartOf="@id/iv_ingredient_img"

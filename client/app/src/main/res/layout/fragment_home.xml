@@ -37,6 +37,7 @@
 
             <TextView
                 android:id="@+id/tv_home_calendar_month"
+                style="@style/head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.currentMonth}"
@@ -187,6 +188,7 @@
 
             <TextView
                 android:id="@+id/tv_home_recommend"
+                style="@style/head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home_recommend_title"
@@ -199,10 +201,12 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_home_recommend"/>
 
             <TextView
+                style="@style/body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home_recommend_sub"
-                android:textSize="13dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
                 android:textColor="@color/green_primary"
                 android:gravity="center_horizontal"
                 app:layout_constraintStart_toStartOf="@id/tv_home_recommend"
@@ -254,6 +258,7 @@
 
             <TextView
                 android:id="@+id/tv_home_weather"
+                style="@style/head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home_weather_title"
@@ -266,10 +271,12 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_home_weather"/>
 
             <TextView
+                style="@style/body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home_weather_sub"
-                android:textSize="13dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
                 android:textColor="@color/green_primary"
                 android:gravity="center_horizontal"
                 app:layout_constraintStart_toStartOf="@id/tv_home_weather"

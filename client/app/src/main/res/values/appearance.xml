@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="head">
+        <item name="android:fontFamily">@font/jalnan2ttf</item>
+    </style>
+
+    <style name="body">
+        <item name="android:fontFamily">@font/omyupretty</item>
+    </style>
+
+</resources>

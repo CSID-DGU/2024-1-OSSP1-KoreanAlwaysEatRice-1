@@ -15,6 +15,7 @@
 
         <TextView
             android:id="@+id/tv_item_calendar_date"
+            style="@style/body"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:text="@{item.date == 0 ? @string/blank : Integer.toString(item.date)}"
