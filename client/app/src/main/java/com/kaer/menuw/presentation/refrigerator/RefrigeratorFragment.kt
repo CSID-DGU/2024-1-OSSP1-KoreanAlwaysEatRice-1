@@ -9,6 +9,7 @@ import com.kaer.menuw.presentation.refrigerator.add.AddIngredientBottomSheet
 import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.refrigerator.add.SharedPreferenceManager
 import com.kaer.menuw.util.base.BaseFragment
+import timber.log.Timber
 
 class RefrigeratorFragment :
     BaseFragment<FragmentRefrigeratorBinding>(R.layout.fragment_refrigerator) {
@@ -51,9 +52,18 @@ class RefrigeratorFragment :
         binding.tvRefrigeratorEdit.setOnClickListener {
             if (viewModel.deleteBtnVisible.value == true) {
                 viewModel.setDeleteBtnVisible(false)
+                refrigeratorAdapter.editEnabled.value = false
             } else {
                 viewModel.setDeleteBtnVisible(true)
+                refrigeratorAdapter.editEnabled.value = true
+                deleteIngredient()
             }
+        }
+    }
+
+    private fun deleteIngredient() {
+        refrigeratorAdapter.setOnIngredientClickListener {
+            Timber.d("삭제할 아이템 -> ${refrigeratorAdapter.selectedIngredientArray}")
         }
     }
 
