@@ -90,9 +90,17 @@ class AddIngredientViewModel: ViewModel() {
     val addBtnEnabled: LiveData<Boolean>
         get() = _addBtnEnabled
 
+    private val _deleteBtnVisible: MutableLiveData<Boolean> = MutableLiveData(false)
+    val deleteBtnVisible: LiveData<Boolean>
+        get() = _deleteBtnVisible
+
     fun setBackgroundTextVisible(visible: Boolean) {
         Timber.d("비어있나? -> $visible")
         _backgroundTextVisible.value = visible
+    }
+
+    fun setDeleteBtnVisible(visible: Boolean) {
+        _deleteBtnVisible.value = visible
     }
 
     fun clickTypeId(typeId: Int) {

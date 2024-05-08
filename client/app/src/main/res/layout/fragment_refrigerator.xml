@@ -18,6 +18,29 @@
         android:background="@color/background">
 
         <TextView
+            android:id="@+id/tv_refrigerator_title_text"
+            style="@style/head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/refrigerator_title_text"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_refrigerator_edit"
+            style="@style/body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.deleteBtnVisible ? @string/refrigerator_edit_cancel : @string/refrigerator_edit}"
+            android:textSize="25dp"
+            android:layout_marginEnd="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_refrigerator_title_text"/>
+
+        <TextView
             android:id="@+id/tv_refrigerator_background"
             style="@style/head"
             android:layout_width="wrap_content"
@@ -40,23 +63,25 @@
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="4"
+            app:spanCount="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_refrigerator_title_text"
             app:layout_constraintBottom_toTopOf="@id/btn_refrigerator_see_recommend"
-            tools:listitem="@layout/item_ingredient_list"/>
+            tools:listitem="@layout/item_ingredient_list_add"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_refrigerator_see_recommend"
             style="@style/head"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:text="@string/refrigerator_see_recommend"
+            android:paddingVertical="20dp"
             android:layout_marginBottom="20dp"
             android:outlineProvider="none"
-            android:background="@drawable/shape_green_fill_5_rect"
+            android:background="@drawable/shape_green_fill_10_rect"
             android:textColor="@color/bright"
+            android:visibility="@{viewModel.deleteBtnVisible ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/btn_refrigerator_add_ingredient"
             app:layout_constraintStart_toStartOf="@id/btn_refrigerator_add_ingredient"
             app:layout_constraintEnd_toEndOf="@id/btn_refrigerator_add_ingredient" />
@@ -65,13 +90,15 @@
             android:id="@+id/btn_refrigerator_add_ingredient"
             style="@style/head"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:text="@string/refrigerator_add_ingredient"
+            android:paddingVertical="20dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="34dp"
             android:outlineProvider="none"
-            android:background="@drawable/shape_green_fill_5_rect"
+            android:background="@drawable/shape_green_fill_10_rect"
             android:textColor="@color/bright"
+            android:visibility="@{viewModel.deleteBtnVisible ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

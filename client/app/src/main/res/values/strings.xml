@@ -7,10 +7,13 @@
     <string name="main_bnv_person">마이페이지</string>
 
 <!--    refrigerator page -->
+    <string name="refrigerator_title_text">냉장고 페이지</string>
     <string name="refrigerator_see_recommend">추천 레시피 보기</string>
     <string name="refrigerator_add_ingredient">재료 추가하기</string>
     <string name="refrigerator_add_ingredient_btn">재료 추가하기</string>
     <string name="refrigerator_add_ingredient_text">재료를 추가해 보세요!</string>
+    <string name="refrigerator_edit">편집</string>
+    <string name="refrigerator_edit_cancel">취소</string>
 
 <!--    home page-->
     <string name="home_recommend_title">추천 레시피 보기</string>
