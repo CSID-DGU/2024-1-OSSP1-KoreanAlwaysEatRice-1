@@ -21,6 +21,10 @@
     <string name="home_recommend_sub">사용자의 선호하는\n레시피를 추천해요!</string>
     <string name="home_weather_title">추천 메뉴 보기</string>
     <string name="home_weather_sub">오늘의 날씨를 기반으로\n레시피를 추천해요!</string>
+    <string name="home_title">홈 페이지</string>
+
+<!--    person page-->
+    <string name="person_title">개인 페이지</string>
 
 <!--    update dialog-->
     <string name="dialog_update_content">해당 기능은 업데이트 예정이에요!</string>
