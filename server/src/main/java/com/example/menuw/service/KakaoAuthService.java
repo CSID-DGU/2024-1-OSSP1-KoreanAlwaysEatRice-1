@@ -24,8 +24,8 @@ public class KakaoAuthService {
         if (user.isPresent()) {
             return user.get().getId();
         } else {
-            this.createUser(token);
-            return null;
+            UserDto userDto = this.createUser(token);
+            return userDto.id;
         }
     }
 
