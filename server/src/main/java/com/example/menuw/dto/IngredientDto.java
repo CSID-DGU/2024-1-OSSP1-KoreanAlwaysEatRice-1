@@ -21,8 +21,8 @@ public class IngredientDto {
                 .build();
     }
 
-    public void setIngredientImageURL(String baseUrl, String ingredientImageURL){
-        this.ingredientImageURL = baseUrl + ingredientImageURL;
+    public void setIngredientImageURL(String baseUrl){
+        this.ingredientImageURL = baseUrl + ingredientImageURL + ".svg";
     }
 }
 

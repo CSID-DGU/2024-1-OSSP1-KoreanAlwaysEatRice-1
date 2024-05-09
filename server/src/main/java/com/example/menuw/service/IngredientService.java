@@ -17,24 +17,23 @@ import java.util.stream.Collectors;
 public class IngredientService {
     @Value("${S3.baseurl")
     private String baseurl;
+    @Value("${S3.baseurl}")
+    private String baseURL;
 
     private final IngredientRepository ingredientRepository;
 
-    public List<IngredientDto> findAllOrderByType() {
-        List<Ingredient> ingredientList = ingredientRepository.findAllOrderByType();
-
-        return ingredientList.stream().map(ingredient -> {
-                    IngredientDto dto = IngredientDto.toDto(ingredient);
-                    dto.setIngredientImageURL(baseurl, dto.getIngredientImageURL());
-                    return dto;
-                }).collect(Collectors.toList());
-    }
-
-    public List<IngredientDto> findByIngredientType(String ingredientType) {
-        List<Ingredient> ingredientList = ingredientRepository.findAllByIngredientType(ingredientType);
-
-        return ingredientList.stream()
+    public List<IngredientDto> findAllIngredient() {
+        List<IngredientDto> ingredientList = ingredientRepository.findAll()
+                .stream()
                 .map(IngredientDto::toDto)
                 .collect(Collectors.toList());
+
+        return ingredientList
+                    .stream()
+                    .map(dto -> {
+                        dto.setIngredientImageURL(baseURL);
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
     }
 }
