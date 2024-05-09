@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+//유저의 고유번호(keyCode)를 통해서 userRepository에서 유저를 찾는 서비스
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {

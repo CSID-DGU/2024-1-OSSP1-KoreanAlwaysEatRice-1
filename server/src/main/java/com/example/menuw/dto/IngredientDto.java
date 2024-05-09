@@ -20,6 +20,10 @@ public class IngredientDto {
                 .ingredientType(ingredient.getIngredientType())
                 .build();
     }
+
+    public void setIngredientImageURL(String baseUrl, String ingredientImageURL){
+        this.ingredientImageURL = baseUrl + ingredientImageURL;
+    }
 }
 
 //map함수로 람다해서 변환

@@ -1,8 +1,7 @@
 package com.example.menuw.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,9 +14,15 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
     @Id @GeneratedValue
     private Integer id;
+
+    private String user_nickname;
+    private String password;
 
     //Jwt 전용 설정
     @Column(length = 100, nullable = false, unique = true)

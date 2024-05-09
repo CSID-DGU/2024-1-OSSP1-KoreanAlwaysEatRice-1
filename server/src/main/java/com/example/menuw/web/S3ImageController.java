@@ -19,6 +19,11 @@ public class S3ImageController {
     private final IngredientService ingredientService;
 
     @GetMapping
+    public ResponseEntity<List<IngredientDto>> showAllIngredient() {
+        List<IngredientDto> ingredientDtos = ingredientService.findAllOrderByType();
+        return ResponseEntity.ok(ingredientDtos);
+    }
+    @GetMapping("/type")
     public ResponseEntity<List<IngredientDto>> showIngredientImageURL(@RequestParam("ingredientType") String ingredientType) {
         List<IngredientDto> ingredientDtos = ingredientService.findByIngredientType(ingredientType);
 
