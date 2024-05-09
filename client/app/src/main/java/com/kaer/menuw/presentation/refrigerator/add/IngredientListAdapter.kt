@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemIngredientListBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
+import com.kaer.menuw.util.base.BindingAdapter.setCoilImage
 
 class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientItem>) :
     ListAdapter<IngredientTotal.IngredientItem, IngredientListAdapter.IngredientListViewHolder>(
@@ -30,8 +31,9 @@ class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientI
         val binding: ItemIngredientListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: IngredientTotal.IngredientItem, onClickListener: View.OnClickListener) {
-            with (binding) {
+            with(binding) {
                 item = data
+                ivIngredientImg.setCoilImage(data.ingredientImageUrl)
                 root.isActivated = selectedIngredientArray.contains(data)
                 root.setOnClickListener(onClickListener)
             }

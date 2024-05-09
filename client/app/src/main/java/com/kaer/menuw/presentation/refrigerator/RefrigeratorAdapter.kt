@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemIngredientListAddBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
-import timber.log.Timber
+import com.kaer.menuw.util.base.BindingAdapter.setCoilImage
 
 class RefrigeratorAdapter :
     ListAdapter<IngredientTotal.IngredientItem, RefrigeratorAdapter.RefrigeratorViewHolder>(
@@ -29,6 +29,7 @@ class RefrigeratorAdapter :
         fun onBind(data: IngredientTotal.IngredientItem, onClickListener: View.OnClickListener) {
             with(binding) {
                 item = data
+                ivIngredientImg.setCoilImage(data.ingredientImageUrl)
                 root.setOnClickListener(onClickListener)
             }
         }
