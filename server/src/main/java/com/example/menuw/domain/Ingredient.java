@@ -7,10 +7,9 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 public class Ingredient {
-    @Id @GeneratedValue
-    @Column(name = "ingredientId")
     private Integer ingredientId;
     private String ingredientType;
+    @Id @GeneratedValue
     private String ingredientName;
     private String ingredientImageURL;
 }
