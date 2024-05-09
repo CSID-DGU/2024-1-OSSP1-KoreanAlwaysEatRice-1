@@ -26,4 +26,3 @@ public class IngredientDto {
     }
 }
 
-//map함수로 람다해서 변환

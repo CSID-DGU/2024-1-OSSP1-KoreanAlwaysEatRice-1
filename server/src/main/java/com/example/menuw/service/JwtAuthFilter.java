@@ -12,7 +12,7 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor //토큰 필터링을 자동으로 하는 서비스
 public class JwtAuthFilter extends GenericFilterBean {
     private final JwtTokenProvider jwtTokenProvider;
 

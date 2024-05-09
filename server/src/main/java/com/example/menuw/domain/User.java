@@ -21,8 +21,9 @@ public class User implements UserDetails {
     @Id @GeneratedValue
     private Integer id;
 
-    private String user_nickname;
-    private String password;
+    public String nickname;
+    public String profile_image;
+    public String thumbnail_image;
 
     //Jwt 전용 설정
     @Column(length = 100, nullable = false, unique = true)

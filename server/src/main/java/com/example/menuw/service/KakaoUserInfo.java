@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 
 @Component
 @RequiredArgsConstructor
-public class KakaoUserInfo {
+public class KakaoUserInfo {//토큰을 이용해 사용자 정보를 가져오는 Service
     private final WebClient webClient;
     private static final String USER_INFO_URI = "https://kapi.kakao.com/v2/user/me";
 
@@ -21,5 +21,3 @@ public class KakaoUserInfo {
         return response.blockFirst();
     }
 }
-
-//토큰을 이용해 사용자 정보를 가져오는 Service

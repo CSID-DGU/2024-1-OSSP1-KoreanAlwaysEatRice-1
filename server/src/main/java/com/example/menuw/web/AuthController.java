@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RequiredArgsConstructor
-@RestController
+@RestController("/api/auth")
 public class AuthController {
     private final UserService userService;
     private final KakaoAuthService kakaoAuthService;
