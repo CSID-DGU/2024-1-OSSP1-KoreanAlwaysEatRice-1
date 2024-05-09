@@ -25,6 +25,9 @@ public class User implements UserDetails {
     public String profile_image;
     public String thumbnail_image;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Refrigerator refrigerator;
+
     //Jwt 전용 설정
     @Column(length = 100, nullable = false, unique = true)
     private String keyCode; //로그인 식별키
