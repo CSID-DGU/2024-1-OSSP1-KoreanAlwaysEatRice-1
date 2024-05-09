@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.kaer.menuw.domain.entity.CalendarDate" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@{item.isTodayDate ? @drawable/shape_green_fill_circle : null}">
+
+        <TextView
+            android:id="@+id/tv_item_calendar_date"
+            style="@style/body"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:text="@{item.date == 0 ? @string/blank : Integer.toString(item.date)}"
+            android:textColor="@{item.isTodayDate ? @color/bright : @color/green_primary}"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

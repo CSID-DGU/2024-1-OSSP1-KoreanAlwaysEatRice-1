@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kaer.menuw.domain.entity.IngredientTotal
+import timber.log.Timber
 
 class AddIngredientViewModel: ViewModel() {
 
@@ -69,6 +70,10 @@ class AddIngredientViewModel: ViewModel() {
     val mockIngredientList: LiveData<List<IngredientTotal>>
         get() = _mockIngredientList
 
+    private val _backgroundTextVisible: MutableLiveData<Boolean> = MutableLiveData()
+    val backgroundTextVisible: LiveData<Boolean>
+        get() = _backgroundTextVisible
+
     private val _selectedTypeId: MutableLiveData<Int> = MutableLiveData(0)
     val selectedTypeId: LiveData<Int>
         get() = _selectedTypeId
@@ -84,6 +89,27 @@ class AddIngredientViewModel: ViewModel() {
     private val _addBtnEnabled: MutableLiveData<Boolean> = MutableLiveData()
     val addBtnEnabled: LiveData<Boolean>
         get() = _addBtnEnabled
+
+    private val _deleteBtnVisible: MutableLiveData<Boolean> = MutableLiveData(false)
+    val deleteBtnVisible: LiveData<Boolean>
+        get() = _deleteBtnVisible
+
+    private val _deleteEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
+    val deleteEnabled: LiveData<Boolean>
+        get() = _deleteEnabled
+
+    fun setBackgroundTextVisible(visible: Boolean) {
+        Timber.d("비어있나? -> $visible")
+        _backgroundTextVisible.value = visible
+    }
+
+    fun setDeleteBtnVisible(visible: Boolean) {
+        _deleteBtnVisible.value = visible
+    }
+
+    fun setDeleteEnabled(enabled: Boolean) {
+        _deleteEnabled.value = enabled
+    }
 
     fun clickTypeId(typeId: Int) {
         _selectedTypeId.value = typeId

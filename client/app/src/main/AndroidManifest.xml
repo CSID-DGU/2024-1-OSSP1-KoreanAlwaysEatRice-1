@@ -27,8 +27,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.refrigerator.add.AddIngredientActivity"
-            android:exported="true"
+            android:name=".presentation.refrigerator.recommend.IngredientRecommendMenuActivity"
+            android:exported="false"
             android:screenOrientation="portrait"/>
     </application>
 

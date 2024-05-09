@@ -7,7 +7,29 @@
     <string name="main_bnv_person">마이페이지</string>
 
 <!--    refrigerator page -->
+    <string name="refrigerator_title_text">냉장고 페이지</string>
     <string name="refrigerator_see_recommend">추천 레시피 보기</string>
     <string name="refrigerator_add_ingredient">재료 추가하기</string>
     <string name="refrigerator_add_ingredient_btn">재료 추가하기</string>
+    <string name="refrigerator_add_ingredient_text">재료를 추가해 보세요!</string>
+    <string name="refrigerator_edit">편집</string>
+    <string name="refrigerator_edit_cancel">취소</string>
+    <string name="refrigerator_delete">삭제하기</string>
+
+<!--    home page-->
+    <string name="home_recommend_title">추천 레시피 보기</string>
+    <string name="home_recommend_sub">사용자의 선호하는\n레시피를 추천해요!</string>
+    <string name="home_weather_title">추천 메뉴 보기</string>
+    <string name="home_weather_sub">오늘의 날씨를 기반으로\n레시피를 추천해요!</string>
+    <string name="home_title">홈 페이지</string>
+
+<!--    person page-->
+    <string name="person_title">개인 페이지</string>
+
+<!--    update dialog-->
+    <string name="dialog_update_content">해당 기능은 업데이트 예정이에요!</string>
+    <string name="dialog_update_title">해당 기능은 업데이트 예정이에요!</string>
+    <string name="dialog_update_btn_text">확인</string>
+
+    <string name="blank"> </string>
 </resources>
