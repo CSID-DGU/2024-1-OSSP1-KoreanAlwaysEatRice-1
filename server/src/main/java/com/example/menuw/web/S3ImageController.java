@@ -12,18 +12,24 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("Image")
+@RequestMapping()
 @RequiredArgsConstructor
 public class S3ImageController {
     private final S3ImageService s3ImageService;
     private final IngredientService ingredientService;
 
-    @GetMapping
+    @GetMapping("/Image")
     public ResponseEntity<List<IngredientDto>> showAllIngredient() {
         List<IngredientDto> ingredientDtos = ingredientService.findAllIngredient();
 
         return  ResponseEntity.ok(ingredientDtos);
     }
+
+    @GetMapping("/")
+    public ResponseEntity<Integer> show() {
+        return  ResponseEntity.ok(1);
+    }
+
 
     @PostMapping("/upload")
     public String saveFile(@RequestParam("file") MultipartFile multipartFile) {

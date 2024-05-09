@@ -1,6 +1,5 @@
 package com.example.menuw.service;
 
-import com.example.menuw.domain.Ingredient;
 import com.example.menuw.dto.IngredientDto;
 import com.example.menuw.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +34,9 @@ public class IngredientService {
                         return dto;
                     })
                     .collect(Collectors.toList());
+    }
+
+    public String findIngredientNameById(Long id) {
+        return ingredientRepository.findById(id.intValue()).get().getIngredientName();
     }
 }
