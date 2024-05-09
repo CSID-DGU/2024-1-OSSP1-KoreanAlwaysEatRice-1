@@ -11,11 +11,24 @@ class IngredientRecommendMenuActivity :
 
     private val viewModel by viewModels<IngredientRecommendMenuViewModel>()
 
+    private var _recommendMenuAdapter: RecommendMenuAdapter? = null
+    private val recommendMenuAdapter
+        get() = requireNotNull(_recommendMenuAdapter)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
         clickBackBtn()
+        initSetRecommendMenuList()
+    }
+
+    private fun initSetRecommendMenuList() {
+        _recommendMenuAdapter = RecommendMenuAdapter()
+        binding.rcvIngredientRecommendList.adapter = recommendMenuAdapter
+        viewModel.mockMenuList.observe(this) {
+            recommendMenuAdapter.submitList(it)
+        }
     }
 
     private fun clickBackBtn() {
