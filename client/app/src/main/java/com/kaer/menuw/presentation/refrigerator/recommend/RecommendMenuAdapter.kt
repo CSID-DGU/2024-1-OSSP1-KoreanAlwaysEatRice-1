@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemRecommendMenuBinding
 import com.kaer.menuw.domain.entity.RecommendMenu
 import com.kaer.menuw.util.ItemDiffCallback
+import com.kaer.menuw.util.base.BindingAdapter.setImage
 
 class RecommendMenuAdapter :
     ListAdapter<RecommendMenu, RecommendMenuAdapter.RecommendMenuViewHolder>(
@@ -21,6 +22,7 @@ class RecommendMenuAdapter :
     ): RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RecommendMenu) {
             binding.item = data
+            binding.ivItemRecommendMenu.setImage(data.menuImgUrl)
         }
     }
 

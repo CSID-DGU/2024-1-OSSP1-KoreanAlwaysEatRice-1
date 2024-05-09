@@ -54,9 +54,9 @@ dependencies {
     kapt("com.github.bumptech.glide:glide:4.13.2")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.44.2")
+    implementation("com.google.dagger:hilt-android:2.48.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    kapt("com.google.dagger:hilt-compiler:2.44")
+    kapt("com.google.dagger:hilt-compiler:2.48.1")
 
     // Shared Preference
     implementation("androidx.security:security-crypto-ktx:1.1.0-alpha06")
@@ -94,7 +94,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
 
     // Coil
-    implementation("io.coil-kt:coil:2.4.0")
+    implementation("io.coil-kt:coil:2.5.0")
+    implementation("io.coil-kt:coil-svg:2.4.0")
 
     // Lottie
     implementation("com.airbnb.android:lottie:5.2.0")
