@@ -22,6 +22,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", getApiKey("BASE_URL"))
+        buildConfigField("String", "NATIVE_APP_KEY", getApiKey("native.app.key"))
+
+        manifestPlaceholders["KAKAO_REDIRECT_KEY"] = getApiKey("KAKAO_REDIRECT_KEY")
     }
 
     buildTypes {
