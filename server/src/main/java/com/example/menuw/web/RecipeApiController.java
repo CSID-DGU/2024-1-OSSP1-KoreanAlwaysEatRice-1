@@ -15,7 +15,7 @@ import java.util.List;
 public class RecipeApiController {
     private final RecipeApiService recipeApiService;
 
-    @PostMapping("/api/recipe/{ingredientId}")
+    @PostMapping("/api/recipe")
     public ResponseEntity<Mono<List<RecipeDto>>> getRecipeByIngredients(@RequestBody List<Long> ingredientId) {
         return ResponseEntity.ok(recipeApiService.fetchRecipes(recipeApiService.getIngredients(ingredientId)));
     }
