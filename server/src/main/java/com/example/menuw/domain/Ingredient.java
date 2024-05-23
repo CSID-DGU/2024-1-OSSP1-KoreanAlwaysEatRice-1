@@ -8,13 +8,8 @@ import lombok.Setter;
 @Getter @Setter
 public class Ingredient {
     @Id @GeneratedValue
-    @Column(name = "ingredientId")
     private Integer ingredientId;
-
+    private String ingredientType;
     private String ingredientName;
     private String ingredientImageURL;
-
-    @ManyToOne
-    @Column(name = "refrigeratorId")
-    private Refrigerator refrigerator;
 }

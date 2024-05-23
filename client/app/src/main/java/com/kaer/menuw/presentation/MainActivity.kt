@@ -8,7 +8,9 @@ import com.kaer.menuw.presentation.home.HomeFragment
 import com.kaer.menuw.presentation.person.PersonFragment
 import com.kaer.menuw.presentation.refrigerator.RefrigeratorFragment
 import com.kaer.menuw.util.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

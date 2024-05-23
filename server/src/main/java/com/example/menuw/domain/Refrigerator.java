@@ -14,6 +14,6 @@ public class Refrigerator {
     private String menu;
 
     @OneToOne
-    @Column(name = "userId")
+    @JoinColumn(name = "id")
     private User user;
 }

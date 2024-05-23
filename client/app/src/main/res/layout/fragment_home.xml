@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.kaer.menuw.presentation.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,13 +15,297 @@
         android:background="@color/background">
 
         <TextView
+            android:id="@+id/tv_home_title"
+            style="@style/head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="홈 페이지"
+            android:text="@string/home_title"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_calendar"
+            android:layout_width="0dp"
+            android:layout_height="360dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_bright_fill_12_green_line_rect"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_home_calendar_door"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_long_door"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_home_calendar_month"
+                style="@style/head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.currentMonth}"
+                android:textSize="20dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_home_calendar_sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_calendar_month"
+                app:layout_constraintStart_toStartOf="@id/iv_home_calendar_door"/>
+
+            <TextView
+                android:id="@+id/tv_home_calendar_mon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="월"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/tv_home_calendar_sun"
+                app:layout_constraintStart_toEndOf="@id/tv_home_calendar_sun"
+                app:layout_constraintEnd_toStartOf="@id/tv_home_calendar_tues"/>
+
+            <TextView
+                android:id="@+id/tv_home_calendar_tues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="화"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/tv_home_calendar_sun"
+                app:layout_constraintStart_toEndOf="@id/tv_home_calendar_mon"
+                app:layout_constraintEnd_toStartOf="@id/tv_home_calendar_wed"/>
+
+            <TextView
+                android:id="@+id/tv_home_calendar_wed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/tv_home_calendar_sun"
+                app:layout_constraintStart_toEndOf="@id/tv_home_calendar_tues"
+                app:layout_constraintEnd_toStartOf="@id/tv_home_calendar_thurs"/>
+
+            <TextView
+                android:id="@+id/tv_home_calendar_thurs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="목"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/tv_home_calendar_sun"
+                app:layout_constraintStart_toEndOf="@id/tv_home_calendar_wed"
+                app:layout_constraintEnd_toStartOf="@id/tv_home_calendar_fri"/>
+
+            <TextView
+                android:id="@+id/tv_home_calendar_fri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="금"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/tv_home_calendar_sun"
+                app:layout_constraintStart_toEndOf="@id/tv_home_calendar_thurs"
+                app:layout_constraintEnd_toStartOf="@id/tv_home_calendar_sat"/>
+
+            <TextView
+                android:id="@+id/tv_home_calendar_sat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="토"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintTop_toTopOf="@id/tv_home_calendar_sun"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_home_calendar"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                app:dividerColor="@color/green_primary"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_calendar_sun"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_home_calendar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                android:orientation="vertical"
+                app:spanCount="7"
+                android:background="@color/bright"
+                android:overScrollMode="never"
+                android:layout_marginStart="25dp"
+                android:layout_marginVertical="20dp"
+                app:layout_constraintTop_toBottomOf="@id/divider_home_calendar"
+                app:layout_constraintStart_toStartOf="@id/iv_home_calendar_door"
+                app:layout_constraintEnd_toEndOf="@id/divider_home_calendar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_calendar_date"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_recommend"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_bright_fill_12_green_line_rect"
+            app:layout_constraintEnd_toStartOf="@id/layout_weather"
+            app:layout_constraintTop_toBottomOf="@id/layout_calendar"
+            app:layout_constraintBottom_toTopOf="@id/img_home_floor"
+            app:layout_constraintStart_toStartOf="@id/layout_calendar">
+
+            <ImageView
+                android:id="@+id/iv_home_recommend"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_menu"
+                android:layout_marginTop="50dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_home_recommend"
+                style="@style/head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_recommend_title"
+                android:textSize="20dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_home_recommend"/>
+
+            <TextView
+                style="@style/body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_recommend_sub"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:gravity="center_horizontal"
+                app:layout_constraintStart_toStartOf="@id/tv_home_recommend"
+                app:layout_constraintEnd_toEndOf="@id/tv_home_recommend"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_recommend"/>
+
+            <ImageView
+                android:id="@+id/iv_home_recommend_door"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_long_door"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/shape_bright_fill_12_green_line_rect"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="@id/layout_recommend"
+            app:layout_constraintStart_toEndOf="@id/layout_recommend"
+            app:layout_constraintBottom_toBottomOf="@id/layout_recommend"
+            app:layout_constraintEnd_toEndOf="@id/layout_calendar">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_long_door"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_home_weather"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_weather"
+                android:layout_marginTop="50dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_home_weather"
+                style="@style/head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_weather_title"
+                android:textSize="20dp"
+                android:textColor="@color/green_primary"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_home_weather"/>
+
+            <TextView
+                style="@style/body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_weather_sub"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/green_primary"
+                android:gravity="center_horizontal"
+                app:layout_constraintStart_toStartOf="@id/tv_home_weather"
+                app:layout_constraintEnd_toEndOf="@id/tv_home_weather"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_weather"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/img_home_floor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_floor_door"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintStart_toStartOf="@id/layout_calendar"
+            app:layout_constraintEnd_toEndOf="@id/layout_calendar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

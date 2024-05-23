@@ -12,6 +12,7 @@
     <color name="bright">#FFF9F8F0</color>
 
     <color name="red">#FFD00D0D</color>
+    <color name="red_bright">#FFF76D6D</color>
 
     <!--    background-->
     <color name="background">#FFEEEDE8</color>

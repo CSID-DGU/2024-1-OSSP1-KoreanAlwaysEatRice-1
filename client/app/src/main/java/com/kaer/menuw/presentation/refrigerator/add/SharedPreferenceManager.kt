@@ -28,6 +28,12 @@ class SharedPreferenceManager(context: Context) {
         }
     }
 
+    fun removeIngredientItem(itemToRemove: IngredientTotal.IngredientItem) {
+        val currentList = getIngredientList()
+        val updatedList = ArrayList(currentList.filter { it != itemToRemove })
+        storeIngredientIdList(updatedList)
+    }
+
     companion object {
         const val PREFERENCE_NAME = "APP_PREFERENCES"
         const val KEY_NAME = "STORED_INGREDIENT"

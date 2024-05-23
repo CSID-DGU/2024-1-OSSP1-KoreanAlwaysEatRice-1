@@ -190,4 +190,7 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 application.properties
-server/src/main/resources/application.properties
+server\src\main\resources\application.properties
+**/application.properties
+server/build.gradle
+server/src/main/resources
