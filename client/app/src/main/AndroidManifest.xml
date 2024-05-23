@@ -39,10 +39,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.mypage.MyPageActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".presentation.home.refrigerator.recommend.category.MenuCategoryActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
