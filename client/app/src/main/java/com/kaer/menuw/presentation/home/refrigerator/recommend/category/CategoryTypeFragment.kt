@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentCategoryTypeBinding
 import com.kaer.menuw.presentation.home.HomeActivity
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
 import com.kaer.menuw.util.base.BaseFragment
 
 class CategoryTypeFragment :
@@ -21,9 +22,10 @@ class CategoryTypeFragment :
     }
 
     private fun clickSkipBtn() {
-        val intent = Intent(requireActivity(), HomeActivity::class.java)
+//        val intent = Intent(requireActivity(), HomeActivity::class.java)
         binding.btnCategoryTypeNext.setOnClickListener {
-            startActivity(intent)
+//            startActivity(intent)
+            viewModel.setCategoryFragmentPage(RECOMMEND_PAGE)
         }
     }
 }

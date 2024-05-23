@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentCategoryRecipeBinding
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.TYPE_PAGE
 import com.kaer.menuw.util.base.BaseFragment
 
 class CategoryRecipeFragment :
@@ -20,7 +21,7 @@ class CategoryRecipeFragment :
 
     private fun clickSkipBtn() {
         binding.btnCategoryRecipeNext.setOnClickListener {
-            viewModel.setCategoryFragmentPage(1)
+            viewModel.setCategoryFragmentPage(TYPE_PAGE)
         }
     }
 

@@ -33,24 +33,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/progressbar_menu_category"
-            android:layout_width="0dp"
-            android:layout_height="10dp"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/shape_progressbar"
-            android:layout_marginTop="25dp"
-            android:layout_marginHorizontal="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_menu_category_title" />
+<!--        <ProgressBar-->
+<!--            android:id="@+id/progressbar_menu_category"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="10dp"-->
+<!--            style="?android:attr/progressBarStyleHorizontal"-->
+<!--            android:progressDrawable="@drawable/shape_progressbar"-->
+<!--            android:layout_marginTop="25dp"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_menu_category_title" />-->
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcv_menu_category"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/progressbar_menu_category"
+            android:layout_marginTop="45dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_menu_category_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

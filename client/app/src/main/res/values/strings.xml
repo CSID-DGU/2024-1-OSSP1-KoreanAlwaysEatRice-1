@@ -7,8 +7,8 @@
 
 <!--    category-->
     <string name="menu_category_title">선호하는 카테고리</string>
-    <string name="category_recipe_title">선호하는 조리 방식을 골라보세요!</string>
-    <string name="category_type_title">선호하는 요리 종류를 골라보세요!</string>
+    <string name="category_recipe_title">선호하는 조리 방식을 골라보세요! (1/2)</string>
+    <string name="category_type_title">선호하는 요리 종류를 골라보세요! (2/2)</string>
 
 <!--    main page -->
     <string name="main_bnv_refrigerator">냉장고페이지</string>

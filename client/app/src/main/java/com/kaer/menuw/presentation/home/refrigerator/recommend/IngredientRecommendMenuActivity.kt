@@ -1,9 +1,11 @@
 package com.kaer.menuw.presentation.home.refrigerator.recommend
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityIngredientRecommendMenuBinding
+import com.kaer.menuw.presentation.home.HomeActivity
 import com.kaer.menuw.util.base.BaseActivity
 
 class IngredientRecommendMenuActivity :
@@ -32,7 +34,9 @@ class IngredientRecommendMenuActivity :
     }
 
     private fun clickBackBtn() {
+        val intent = Intent(this, HomeActivity::class.java)
         binding.btnIngredientRecommendMenuBack.setOnClickListener {
+            startActivity(intent)
             finish()
         }
     }

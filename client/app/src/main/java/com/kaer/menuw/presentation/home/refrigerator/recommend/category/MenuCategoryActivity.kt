@@ -1,5 +1,6 @@
 package com.kaer.menuw.presentation.home.refrigerator.recommend.category
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -7,6 +8,8 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMenuCategoryBinding
+import com.kaer.menuw.presentation.home.refrigerator.recommend.IngredientRecommendMenuActivity
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.TYPE_PAGE
 import com.kaer.menuw.util.base.BaseActivity
 
@@ -30,8 +33,13 @@ class MenuCategoryActivity :
 
     private fun changeToTypePage() {
         viewModel.currentCategoryPage.observe(this) {
-            if (it == TYPE_PAGE) {
-                navigateTo<CategoryTypeFragment>()
+            when (it) {
+                TYPE_PAGE -> navigateTo<CategoryTypeFragment>()
+                RECOMMEND_PAGE -> {
+                    val intent = Intent(this, IngredientRecommendMenuActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
     }
