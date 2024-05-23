@@ -16,7 +16,11 @@
     </style>
 
     <style name="body">
-        <item name="android:fontFamily">@font/omyupretty</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
+    </style>
+
+    <style name="body2">
+        <item name="fontFamily">@font/omyupretty</item>
     </style>
 
 </resources>
