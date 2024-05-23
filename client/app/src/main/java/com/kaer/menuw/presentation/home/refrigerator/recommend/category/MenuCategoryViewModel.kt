@@ -22,6 +22,10 @@ class MenuCategoryViewModel : ViewModel() {
         CategoryRecipe(R.drawable.ic_category_other, "기타")
     )
 
+    val categoryType: List<String> = listOf(
+        "밥", "반찬", "국/찌개", "후식"
+    )
+
     private val _selectedCategory = MutableLiveData<String>()
     val selectedCategory: LiveData<String>
         get() = _selectedCategory
