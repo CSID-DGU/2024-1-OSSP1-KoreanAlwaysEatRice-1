@@ -1,5 +1,6 @@
 package com.kaer.menuw.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityHomeBinding
 import com.kaer.menuw.presentation.home.likemenu.LikeMenuListFragment
 import com.kaer.menuw.presentation.home.refrigerator.RefrigeratorFragment
+import com.kaer.menuw.presentation.mypage.MyPageActivity
 import com.kaer.menuw.util.base.BaseActivity
 
 class HomeActivity: BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
@@ -20,6 +22,14 @@ class HomeActivity: BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
         initSetTabPage()
         clickTabItem()
+        clickSetting()
+    }
+
+    private fun clickSetting() {
+        val intent = Intent(this, MyPageActivity::class.java)
+        binding.ivHomeSetting.setOnClickListener {
+            startActivity(intent)
+        }
     }
 
     private fun initSetTabPage() {
