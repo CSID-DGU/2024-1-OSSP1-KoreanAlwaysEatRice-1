@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kaer.menuw.R
 import com.kaer.menuw.domain.entity.CategoryRecipe
-import timber.log.Timber
 
 class MenuCategoryViewModel : ViewModel() {
 
@@ -30,40 +29,33 @@ class MenuCategoryViewModel : ViewModel() {
     val selectedCategory: LiveData<String>
         get() = _selectedCategory
 
+    private val _selectedType = MutableLiveData<String>()
+    val selectedType: LiveData<String>
+        get() = _selectedType
+
     fun setCategoryFragmentPage(page: Int) {
         _currentCategoryPage.value = page
     }
 
     fun setSelectedRecipeName(recipeId: Int) {
         when (recipeId) {
-            0 -> {
-//                Timber.d("클릭한 아이템 -> $RECIPE_BOIL")
-                _selectedCategory.value = RECIPE_BOIL
-            }
-            1 -> {
-//                Timber.d("클릭한 아이템 -> $RECIPE_STEAM")
-                _selectedCategory.value = RECIPE_STEAM
-            }
-            2 -> {
-//                Timber.d("클릭한 아이템 -> $RECIPE_BAKED")
-                _selectedCategory.value = RECIPE_BAKED
-            }
-            3 -> {
-//                Timber.d("클릭한 아이템 -> $RECIPE_FRY")
-                _selectedCategory.value = RECIPE_FRY
-            }
-             4-> {
-//                 Timber.d("클릭한 아이템 -> $RECIPE_ROASTED")
-                 _selectedCategory.value = RECIPE_ROASTED
-             }
-             5-> {
-//                 Timber.d("클릭한 아이템 -> $RECIPE_OTHER")
-                 _selectedCategory.value = RECIPE_OTHER
-             }
-            else -> {
-//                Timber.d("클릭한 아이템 -> $RECIPE_NOT_CHOOSE")
-                _selectedCategory.value = RECIPE_NOT_CHOOSE
-            }
+            0 -> _selectedCategory.value = RECIPE_BOIL
+            1 -> _selectedCategory.value = RECIPE_STEAM
+            2 -> _selectedCategory.value = RECIPE_BAKED
+            3 -> _selectedCategory.value = RECIPE_FRY
+            4 -> _selectedCategory.value = RECIPE_ROASTED
+            5 -> _selectedCategory.value = RECIPE_OTHER
+            else -> _selectedCategory.value = RECIPE_NOT_CHOOSE
+        }
+    }
+
+    fun setSelectedTypeName(typeId: Int) {
+        when (typeId) {
+            0 -> _selectedType.value = TYPE_RICE
+            1 -> _selectedType.value = TYPE_SIDE
+            2 -> _selectedType.value = TYPE_SOUP
+            3 -> _selectedType.value = TYPE_DESSERT
+            else -> _selectedType.value = TYPE_NOT_CHOOSE
         }
     }
 
@@ -79,5 +71,11 @@ class MenuCategoryViewModel : ViewModel() {
         const val RECIPE_ROASTED = "볶기"
         const val RECIPE_OTHER = "기타"
         const val RECIPE_NOT_CHOOSE = ""
+
+        const val TYPE_RICE = "밥"
+        const val TYPE_SIDE = "반찬"
+        const val TYPE_SOUP = "국/찌개"
+        const val TYPE_DESSERT = "후식"
+        const val TYPE_NOT_CHOOSE = ""
     }
 }

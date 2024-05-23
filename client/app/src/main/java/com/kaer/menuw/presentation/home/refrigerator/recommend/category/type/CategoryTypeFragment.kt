@@ -9,7 +9,6 @@ import com.kaer.menuw.databinding.FragmentCategoryTypeBinding
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
 import com.kaer.menuw.util.base.BaseFragment
-import timber.log.Timber
 
 class CategoryTypeFragment :
     BaseFragment<FragmentCategoryTypeBinding>(R.layout.fragment_category_type) {
@@ -35,9 +34,9 @@ class CategoryTypeFragment :
 
     private fun initSetCategory() {
         _categoryTypeAdapter = CategoryTypeAdapter().apply {
-            setOnItemClickListener(object : CategoryTypeAdapter.OnItemClickListener{
+            setOnItemClickListener(object : CategoryTypeAdapter.OnItemClickListener {
                 override fun onItemClick(item: String, position: Int) {
-                    Timber.d("클릭한 타입 아이템 -> $position")
+                    viewModel.setSelectedTypeName(position)
                 }
             })
         }
