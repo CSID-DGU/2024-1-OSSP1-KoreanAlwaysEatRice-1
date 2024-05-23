@@ -16,4 +16,5 @@
 
     <!--    background-->
     <color name="background">#FFEEEDE8</color>
+    <color name="background_bright">#FFF6F5F2</color>
 </resources>
