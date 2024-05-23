@@ -3,6 +3,9 @@ package com.kaer.menuw.presentation.home.refrigerator.recommend
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import com.google.android.material.tabs.TabLayout
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMenuListBinding
 import com.kaer.menuw.presentation.home.HomeActivity
@@ -13,23 +16,42 @@ class MenuListActivity :
 
     private val viewModel by viewModels<MenuListViewModel>()
 
-    private var _recommendMenuAdapter: RecommendMenuAdapter? = null
-    private val recommendMenuAdapter
-        get() = requireNotNull(_recommendMenuAdapter)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
         clickBackBtn()
-        initSetRecommendMenuList()
+        initSetTabPage()
+        clickTabItem()
     }
 
-    private fun initSetRecommendMenuList() {
-        _recommendMenuAdapter = RecommendMenuAdapter()
-        binding.rcvIngredientRecommendList.adapter = recommendMenuAdapter
-        viewModel.mockMenuList.observe(this) {
-            recommendMenuAdapter.submitList(it)
+    private fun initSetTabPage() {
+        supportFragmentManager.commit {
+            replace(R.id.fcv_menu_list, MenuRecommendFragment())
+        }
+    }
+
+    private fun clickTabItem() {
+        binding.layoutMenuListTab.addOnTabSelectedListener(object :
+            TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                when (tab.position) {
+                    0 -> replaceFragment(MenuRecommendFragment())
+                    1 -> replaceFragment(MenuNotRecommendFragment())
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+
+
+        })
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.commit {
+            replace(R.id.fcv_menu_list, fragment)
         }
     }
 
