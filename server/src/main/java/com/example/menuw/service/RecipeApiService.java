@@ -1,5 +1,6 @@
 package com.example.menuw.service;
 
+import com.example.menuw.Exception.Exception404;
 import com.example.menuw.dto.MenuDto;
 import com.example.menuw.dto.RecipeDto;
 import com.example.menuw.repository.IngredientRepository;
@@ -18,6 +19,7 @@ public class RecipeApiService {
     private final IngredientRepository ingredientRepository;
     private final WebClient webClient;
     String apiKey = "1f83406b071d4b72928b";
+    String url = "https://openapi.foodsafetykorea.go.kr/api/" + apiKey + "/";
     private RestTemplate restTemplate = new RestTemplate();
 
     public RecipeApiService(WebClient.Builder webClientBuilder, IngredientRepository ingredientRepository) {
@@ -28,9 +30,8 @@ public class RecipeApiService {
 
     public RecipeDto getRecipes(String menuName) { //메뉴명으로 레시피를 호출
         String query = String.format("COOKRCP01/json/0/1000/RCP_NM=%s", menuName);
-
         try {
-            String url = "http://api.domain.com/" + apiKey + "/" + query; // 예시 URL입니다. 실제 URL로 변경해주세요.
+            String url = this.url + query; // 예시 URL입니다. 실제 URL로 변경해주세요.
             String jsonString = restTemplate.getForObject(url, String.class);
 
             List<String> recipeList = new ArrayList<>();
@@ -39,11 +40,18 @@ public class RecipeApiService {
             JSONArray rows = jsonObject.getJSONObject("COOKRCP01").getJSONArray("row");
             for (int i = 0; i < rows.length(); i++) {
                 JSONObject row = rows.getJSONObject(i);
-                String recipe = row.getString("MANUAL01");
-                String recipeImage = row.getString("MANUAL_IMG01");
 
-                recipeList.add(recipe);
-                recipeImageList.add(recipeImage);
+                for (int j = 1; j <= 20; j++) {
+                    String key = String.format("MANUAL%02d", j);
+                    String recipe = row.getString(key);
+                    key = String.format("MANUAL_IMG%02d", j);
+                    String recipeImage = row.getString(key);
+
+                    if (!recipe.isBlank() && !recipeImage.isBlank()) {
+                        recipeList.add(recipe);
+                        recipeImageList.add(recipeImage);
+                    }
+                }
             }
 
             return RecipeDto.builder()
@@ -51,7 +59,7 @@ public class RecipeApiService {
                     .recipeImageList(recipeImageList)
                     .build();
         } catch (Exception e) {
-            return null;
+            throw new Exception404("해당 메뉴를 찾을 수 없습니다");
         }
     }
 
@@ -72,7 +80,7 @@ public class RecipeApiService {
         String query = String.format("COOKRCP01/json/0/1000/RCP_PARTS_DTLS=%s", getIngredients(ingredientIds));
 
         try {
-            String url = "http://api.domain.com/" + apiKey + "/" + query; // 예시 URL입니다. 실제 URL로 변경해주세요.
+            String url = this.url + query; // 예시 URL입니다. 실제 URL로 변경해주세요.
             String jsonString = restTemplate.getForObject(url, String.class);
 
             List<MenuDto> recipes = new ArrayList<>();
