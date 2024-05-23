@@ -51,7 +51,6 @@ android {
 dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.13.2")
-    implementation("androidx.activity:activity:1.8.0")
     kapt("com.github.bumptech.glide:glide:4.13.2")
 
     // Hilt
