@@ -14,6 +14,9 @@
     <string name="menu_recommend_title">재료와 선호하는 타입을 기반으로 추천된 메뉴 리스트를 확인해보세요!</string>
     <string name="menu_not_recommend_title">추천된 메뉴 리스트 이외에 재료를 활용하는 메뉴를 확인해보세요!</string>
 
+<!--    recipe page-->
+    <string name="recipe_page_title">조리법</string>
+
 <!--    main page -->
     <string name="main_bnv_refrigerator">냉장고페이지</string>
     <string name="main_bnv_home">홈</string>
