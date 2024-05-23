@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kaer.menuw.domain.entity.RecommendMenu
 
-class IngredientRecommendMenuViewModel: ViewModel() {
+class MenuListViewModel: ViewModel() {
 
     private val _mockMenuList: MutableLiveData<List<RecommendMenu>> = MutableLiveData(
         mutableListOf(

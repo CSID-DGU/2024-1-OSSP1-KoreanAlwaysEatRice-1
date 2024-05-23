@@ -8,7 +8,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMenuCategoryBinding
-import com.kaer.menuw.presentation.home.refrigerator.recommend.IngredientRecommendMenuActivity
+import com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListActivity
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.TYPE_PAGE
 import com.kaer.menuw.util.base.BaseActivity
@@ -36,7 +36,7 @@ class MenuCategoryActivity :
             when (it) {
                 TYPE_PAGE -> navigateTo<CategoryTypeFragment>()
                 RECOMMEND_PAGE -> {
-                    val intent = Intent(this, IngredientRecommendMenuActivity::class.java)
+                    val intent = Intent(this, MenuListActivity::class.java)
                     startActivity(intent)
                     finish()
                 }

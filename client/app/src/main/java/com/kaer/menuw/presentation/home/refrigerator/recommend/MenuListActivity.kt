@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.kaer.menuw.R
-import com.kaer.menuw.databinding.ActivityIngredientRecommendMenuBinding
+import com.kaer.menuw.databinding.ActivityMenuListBinding
 import com.kaer.menuw.presentation.home.HomeActivity
 import com.kaer.menuw.util.base.BaseActivity
 
-class IngredientRecommendMenuActivity :
-    BaseActivity<ActivityIngredientRecommendMenuBinding>(R.layout.activity_ingredient_recommend_menu) {
+class MenuListActivity :
+    BaseActivity<ActivityMenuListBinding>(R.layout.activity_menu_list) {
 
-    private val viewModel by viewModels<IngredientRecommendMenuViewModel>()
+    private val viewModel by viewModels<MenuListViewModel>()
 
     private var _recommendMenuAdapter: RecommendMenuAdapter? = null
     private val recommendMenuAdapter
