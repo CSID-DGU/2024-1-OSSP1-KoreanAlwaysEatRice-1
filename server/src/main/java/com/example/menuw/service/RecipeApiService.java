@@ -18,9 +18,11 @@ public class RecipeApiService {
     private final WebClient.Builder webClientBuilder;
     private final IngredientRepository ingredientRepository;
     private final WebClient webClient;
+
     String apiKey = "1f83406b071d4b72928b";
     String url = "https://openapi.foodsafetykorea.go.kr/api/" + apiKey + "/";
     private RestTemplate restTemplate = new RestTemplate();
+  
 
     public RecipeApiService(WebClient.Builder webClientBuilder, IngredientRepository ingredientRepository) {
         this.webClientBuilder = webClientBuilder;
@@ -75,7 +77,7 @@ public class RecipeApiService {
         lastIndex = ingredients.lastIndexOf(",");
         return ingredients.substring(0, lastIndex) + ingredients.substring(lastIndex + toRemove.length());
     }
-
+  
     public List<MenuDto> getMenu(List<Long> ingredientIds) { //재료기반으로 레시피를 호출
         String query = String.format("COOKRCP01/json/0/1000/RCP_PARTS_DTLS=%s", getIngredients(ingredientIds));
 
