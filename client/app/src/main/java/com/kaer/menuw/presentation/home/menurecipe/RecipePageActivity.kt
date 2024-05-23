@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityRecipePageBinding
 import com.kaer.menuw.util.base.BaseActivity
+import com.kaer.menuw.util.base.BaseDialog
 import timber.log.Timber
 
 class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activity_recipe_page) {
@@ -41,8 +42,21 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
                     binding.btnRecipePageEvaluate.visibility = View.VISIBLE
                     binding.btnRecipePageEvaluate.isEnabled = true
                 }
+
+                clickEvaluateBtn()
             }
         })
+    }
+
+    private fun clickEvaluateBtn() {
+        binding.btnRecipePageEvaluate.setOnClickListener {
+            BaseDialog.Builder().build(
+                title = "메뉴 평가하기",
+                content = "추천받은 메뉴가 \n" +
+                        "내 선호도에 적합했는지 평가해주세요!",
+                btnAction = {}
+            ).show(supportFragmentManager, BaseDialog.DIALOG)
+        }
     }
 
     private fun setRecipePageProgress() {
