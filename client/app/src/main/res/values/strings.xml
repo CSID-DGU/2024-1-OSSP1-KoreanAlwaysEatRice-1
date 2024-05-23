@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">MENUW</string>
 
+<!--    home page-->
+    <string name="home_tab_refrigerator">냉장고 재료</string>
+    <string name="home_tab_like_menu">좋게 평가한 메뉴</string>
+
 <!--    main page -->
     <string name="main_bnv_refrigerator">냉장고페이지</string>
     <string name="main_bnv_home">홈</string>
