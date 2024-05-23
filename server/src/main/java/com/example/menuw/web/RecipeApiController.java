@@ -1,6 +1,6 @@
 package com.example.menuw.web;
 
-import com.example.menuw.dto.RecipeDto;
+import com.example.menuw.dto.MenuDto;
 import com.example.menuw.service.RecipeApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class RecipeApiController {
     private final RecipeApiService recipeApiService;
 
     @PostMapping("/api/recipe")
-    public ResponseEntity<Mono<List<RecipeDto>>> getRecipeByIngredients(@RequestBody List<Long> ingredientId) {
-        return ResponseEntity.ok(recipeApiService.fetchRecipes(recipeApiService.getIngredients(ingredientId)));
+    public ResponseEntity<List<MenuDto>> getRecipeByIngredients(@RequestBody List<Long> ingredientId) {
+        return ResponseEntity.ok(recipeApiService.getMenu(ingredientId));
     }
 }
