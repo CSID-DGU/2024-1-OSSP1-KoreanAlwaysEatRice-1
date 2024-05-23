@@ -27,21 +27,19 @@ public class RecipeApiService {
     public String getIngredients(List<Long> ingredientIds) { //id를 통해 재료 이름을 찾고 문자열로 연결합니다.
         String ingredients = "";
         int lastIndex;
-        String toRemove = ", ";
+        String toRemove = ",";
 
         for (Long id : ingredientIds) {
-            ingredients += ingredientRepository.findById(id.intValue()).get().getIngredientName() + ", ";
+            ingredients += ingredientRepository.findById(id.intValue()).get().getIngredientName() + ",";
         }
 
-        lastIndex = ingredients.lastIndexOf(", ");
+        lastIndex = ingredients.lastIndexOf(",");
         return ingredients.substring(0, lastIndex) + ingredients.substring(lastIndex + toRemove.length());
     }
-
     public Mono<List<RecipeDto>> fetchRecipes(String ingredients) {
-        System.out.println(ingredients);
         String apiKey = "1f83406b071d4b72928b";
-        String query = String.format("COOKRCP01/json/0/100/RCP_PARTS_DTLS=%s", ingredients);
-
+        String query = String.format("COOKRCP01/json/0/1000/RCP_PARTS_DTLS=%s", ingredients);
+        System.out.println(query);
         return this.webClient.get()
                 .uri(uriBuilder -> uriBuilder.path(apiKey + "/" + query).build())
                 .retrieve()
