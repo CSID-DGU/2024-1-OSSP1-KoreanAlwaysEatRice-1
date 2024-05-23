@@ -22,7 +22,7 @@ class CategoryTypeFragment :
 
     private fun clickSkipBtn() {
         val intent = Intent(requireActivity(), HomeActivity::class.java)
-        binding.btnCategoryTypeSkip.setOnClickListener {
+        binding.btnCategoryTypeNext.setOnClickListener {
             startActivity(intent)
         }
     }

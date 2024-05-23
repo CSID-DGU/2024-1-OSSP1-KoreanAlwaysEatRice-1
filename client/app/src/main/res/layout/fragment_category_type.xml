@@ -25,38 +25,38 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_category_type_skip"
+            android:id="@+id/btn_category_type_next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_gray_bright_fill_5_rect"
-            android:layout_marginStart="15dp"
+            android:background="@drawable/shape_green_fill_5_rect"
+            android:layout_marginHorizontal="15dp"
             android:layout_marginBottom="20dp"
-            android:text="넘어가기"
-            android:textColor="@color/gray_dark"
+            android:text="다음으로"
+            android:textColor="@color/background_bright"
             android:textAppearance="@style/body_bold"
             android:textSize="16dp"
             android:paddingVertical="5dp"
             android:outlineProvider="none"
-            app:layout_constraintEnd_toStartOf="@id/btn_category_type_choice"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_category_type_choice"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/shape_gray_bright_fill_5_rect"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="5dp"
-            android:text="선택하기"
-            android:textAppearance="@style/body_bold"
-            android:textSize="16dp"
-            android:paddingVertical="5dp"
-            android:outlineProvider="none"
-            app:layout_constraintStart_toEndOf="@id/btn_category_type_skip"
-            app:layout_constraintBottom_toBottomOf="@id/btn_category_type_skip"
-            app:layout_constraintTop_toTopOf="@id/btn_category_type_skip" />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/btn_category_type_choice"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="@drawable/shape_gray_bright_fill_5_rect"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginEnd="15dp"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:text="선택하기"-->
+<!--            android:textAppearance="@style/body_bold"-->
+<!--            android:textSize="16dp"-->
+<!--            android:paddingVertical="5dp"-->
+<!--            android:outlineProvider="none"-->
+<!--            app:layout_constraintStart_toEndOf="@id/btn_category_type_skip"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/btn_category_type_skip"-->
+<!--            app:layout_constraintTop_toTopOf="@id/btn_category_type_skip" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
