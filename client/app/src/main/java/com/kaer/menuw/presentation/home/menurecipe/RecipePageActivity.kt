@@ -21,9 +21,16 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        clickBackBtn()
         initSetAdapter()
         setEvaluateBtnEnabled()
         setRecipePageProgress()
+    }
+
+    private fun clickBackBtn() {
+        binding.btnRecipePageBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initSetAdapter() {
