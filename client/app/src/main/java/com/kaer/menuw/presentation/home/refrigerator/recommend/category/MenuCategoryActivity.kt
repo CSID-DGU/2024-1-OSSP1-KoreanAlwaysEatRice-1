@@ -11,6 +11,8 @@ import com.kaer.menuw.databinding.ActivityMenuCategoryBinding
 import com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListActivity
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.TYPE_PAGE
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.recipe.CategoryRecipeFragment
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.type.CategoryTypeFragment
 import com.kaer.menuw.util.base.BaseActivity
 
 class MenuCategoryActivity :

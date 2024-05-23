@@ -91,11 +91,11 @@ class RefrigeratorFragment :
             if (sharedPreferences.getIngredientList().isNotEmpty()) {
                 startActivity(intent)
             } else {
-                    BaseDialog.Builder().build(
-                        title = "저장된 재료가 없어요!",
-                        content = "메뉴를 추천 받기 전에 재료를 먼저 추가해 주세요",
-                        btnAction = {}
-                    ).show(parentFragmentManager, BaseDialog.DIALOG)
+                BaseDialog.Builder().build(
+                    title = "저장된 재료가 없어요!",
+                    content = "메뉴를 추천 받기 전에 재료를 먼저 추가해 주세요",
+                    btnAction = {}
+                ).show(parentFragmentManager, BaseDialog.DIALOG)
             }
         }
     }

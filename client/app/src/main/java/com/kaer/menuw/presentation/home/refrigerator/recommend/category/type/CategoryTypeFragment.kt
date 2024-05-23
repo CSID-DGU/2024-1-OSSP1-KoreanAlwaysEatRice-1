@@ -1,12 +1,11 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend.category
+package com.kaer.menuw.presentation.home.refrigerator.recommend.category.type
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentCategoryTypeBinding
-import com.kaer.menuw.presentation.home.HomeActivity
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
 import com.kaer.menuw.util.base.BaseFragment
 
