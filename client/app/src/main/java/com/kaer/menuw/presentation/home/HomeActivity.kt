@@ -1,16 +1,19 @@
 package com.kaer.menuw.presentation.home
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.google.android.material.tabs.TabLayout
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityHomeBinding
 import com.kaer.menuw.presentation.home.likemenu.LikeMenuListFragment
-import com.kaer.menuw.presentation.refrigerator.RefrigeratorFragment
+import com.kaer.menuw.presentation.home.refrigerator.RefrigeratorFragment
 import com.kaer.menuw.util.base.BaseActivity
 
 class HomeActivity: BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
+
+    private val viewModel by viewModels<HomeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

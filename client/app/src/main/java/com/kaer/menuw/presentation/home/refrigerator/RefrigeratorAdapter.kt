@@ -1,40 +1,35 @@
-package com.kaer.menuw.presentation.refrigerator.add
+package com.kaer.menuw.presentation.home.refrigerator
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kaer.menuw.databinding.ItemIngredientListBinding
+import com.kaer.menuw.databinding.ItemIngredientListAddBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
 import com.kaer.menuw.util.base.BindingAdapter.setCoilImage
 
-class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientItem>) :
-    ListAdapter<IngredientTotal.IngredientItem, IngredientListAdapter.IngredientListViewHolder>(
+class RefrigeratorAdapter :
+    ListAdapter<IngredientTotal.IngredientItem, RefrigeratorAdapter.RefrigeratorViewHolder>(
         ItemDiffCallback<IngredientTotal.IngredientItem>(
-            onItemsTheSame = { oldItem, newItem -> oldItem.ingredientId == newItem.ingredientId },
-            onContentsTheSame = { oldItem, newItem -> oldItem == newItem }
+            onContentsTheSame = { old, new -> old == new },
+            onItemsTheSame = { old, new -> old.ingredientId == new.ingredientId }
         )
     ) {
 
     private var onItemClickListener: ((IngredientTotal.IngredientItem) -> Unit)? = null
+    var editEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
+    var selectedIngredientArray: ArrayList<IngredientTotal.IngredientItem> = ArrayList()
 
-    var selectedIngredientArray = selectedArray
-    private val _addEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
-    val addEnabled: LiveData<Boolean>
-        get() = _addEnabled
-
-    inner class IngredientListViewHolder(
-        val binding: ItemIngredientListBinding
+    inner class RefrigeratorViewHolder(
+        val binding: ItemIngredientListAddBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: IngredientTotal.IngredientItem, onClickListener: View.OnClickListener) {
             with(binding) {
                 item = data
                 ivIngredientImg.setCoilImage(data.ingredientImageUrl)
-                root.isActivated = selectedIngredientArray.contains(data)
                 root.setOnClickListener(onClickListener)
             }
         }
@@ -48,16 +43,11 @@ class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientI
         return position
     }
 
-    private fun setAddEnabled() {
-        _addEnabled.value = selectedIngredientArray.isNotEmpty()
-    }
-
     private fun ingredientSelection(
-        binding: ItemIngredientListBinding,
+        binding: ItemIngredientListAddBinding,
         ingredientItem: IngredientTotal.IngredientItem
     ) {
-        val isIngredientSelected: Boolean =
-            selectedIngredientArray.contains(ingredientItem)
+        val isIngredientSelected: Boolean = selectedIngredientArray.contains(ingredientItem)
 
         if (isIngredientSelected) {
             removeIngredientItem(
@@ -74,26 +64,27 @@ class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientI
     private fun removeIngredientItem(
         ingredientArray: ArrayList<IngredientTotal.IngredientItem>,
         selectedId: Int,
-        binding: ItemIngredientListBinding
+        binding: ItemIngredientListAddBinding
     ) {
         ingredientArray.removeAt(selectedId)
         binding.root.isActivated = false
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RefrigeratorViewHolder {
         val binding =
-            ItemIngredientListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return IngredientListViewHolder(binding)
+            ItemIngredientListAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RefrigeratorViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: IngredientListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RefrigeratorViewHolder, position: Int) {
         holder.apply {
             onBind(
                 currentList[position],
                 View.OnClickListener {
-                    ingredientSelection(binding, currentList[position])
-                    onItemClickListener?.let { it(currentList[position]) }
-                    setAddEnabled()
+                    if (editEnabled.value == true) {
+                        ingredientSelection(binding, currentList[position])
+                        onItemClickListener?.let { it(currentList[position]) }
+                    }
                 }
             )
         }

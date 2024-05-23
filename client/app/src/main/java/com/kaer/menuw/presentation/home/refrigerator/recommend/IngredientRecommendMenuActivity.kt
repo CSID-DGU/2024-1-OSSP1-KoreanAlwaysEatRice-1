@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.refrigerator.recommend
+package com.kaer.menuw.presentation.home.refrigerator.recommend
 
 import android.os.Bundle
 import androidx.activity.viewModels

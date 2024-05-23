@@ -24,7 +24,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".presentation.refrigerator.recommend.IngredientRecommendMenuActivity"
+            android:name=".presentation.home.refrigerator.recommend.IngredientRecommendMenuActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity

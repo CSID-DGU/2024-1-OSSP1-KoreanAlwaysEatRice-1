@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.refrigerator.add
+package com.kaer.menuw.presentation.home.refrigerator.add
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,12 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kaer.menuw.databinding.BottomsheetIngredientBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
-import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.DAIRY_FOOD
-import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.FISH
-import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.GRAIN
-import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.MEAT
-import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.OTHERS
-import com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.DAIRY_FOOD
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.FISH
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.GRAIN
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.MEAT
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.OTHERS
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
 
 class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
