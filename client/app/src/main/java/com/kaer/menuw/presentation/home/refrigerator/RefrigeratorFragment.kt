@@ -10,6 +10,7 @@ import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientBottomShee
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.home.refrigerator.add.SharedPreferenceManager
 import com.kaer.menuw.presentation.home.refrigerator.recommend.IngredientRecommendMenuActivity
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryActivity
 import com.kaer.menuw.util.base.BaseDialog
 import com.kaer.menuw.util.base.BaseFragment
 
@@ -86,7 +87,7 @@ class RefrigeratorFragment :
     }
 
     private fun clickSeeRecommendBtn() {
-        val intent = Intent(requireActivity(), IngredientRecommendMenuActivity::class.java)
+        val intent = Intent(requireActivity(), MenuCategoryActivity::class.java)
         binding.btnRefrigeratorSeeRecommend.setOnClickListener {
             if (sharedPreferences.getIngredientList().isNotEmpty()) {
                 startActivity(intent)
