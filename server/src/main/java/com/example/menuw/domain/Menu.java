@@ -17,4 +17,8 @@ public class Menu {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    public void updateMenuLike(Integer menuLike) {
+        this.menuLike = menuLike;
+    }
 }
