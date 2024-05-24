@@ -82,7 +82,7 @@ public class RecipeApiService {
         String query = String.format("COOKRCP01/json/0/1000/RCP_PARTS_DTLS=%s", getIngredients(ingredientIds));
 
         try {
-            String url = this.url + query; // 예시 URL입니다. 실제 URL로 변경해주세요.
+            String url = this.url + query;
             String jsonString = restTemplate.getForObject(url, String.class);
 
             List<MenuDto> recipes = new ArrayList<>();

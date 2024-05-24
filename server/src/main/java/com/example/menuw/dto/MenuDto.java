@@ -16,8 +16,4 @@ public class MenuDto {
     String serving;
     int cal;
     int na;
-<<<<<<< feature/#24-feat-Response
 }
-=======
-}
->>>>>>> develop
