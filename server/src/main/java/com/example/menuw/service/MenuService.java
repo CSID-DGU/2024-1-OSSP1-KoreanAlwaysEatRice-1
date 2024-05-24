@@ -14,12 +14,12 @@ public class MenuService {
 
     private final MenuRepository menuRepository;
 
-    public Boolean menuLike(MenuRequestDto menuRequestDto) {
+    /*public Boolean menuLike(MenuRequestDto menuRequestDto) {
 
         MenuDto menu = menuRepository.findByMenuName(menuRequestDto.getMenuName());
 
         //menu.updateMenuLike(menuRequestDto.getMenuLike());
 
         return true;
-    }
+    }*/
 }

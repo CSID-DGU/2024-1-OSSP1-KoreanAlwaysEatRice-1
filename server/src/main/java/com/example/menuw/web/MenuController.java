@@ -17,13 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MenuController {
 
-    private final MenuService menuService; //나 이 서비스 쓸거임
+    private final MenuService menuService;
 
-    @PostMapping("/like") //프론트에서 이거를 보고 여기로 찾아온다
+    /*@PostMapping("/like")
     public ResponseEntity<Boolean> menuLike (
-            @RequestBody MenuRequestDto menuRequestDto //프론트에서 주는 데이터를 컨트롤러가 받아서 requestDto에 저장
+            @RequestBody MenuRequestDto menuRequestDto
             ) {
-        return new ResponseEntity<>(menuService.menuLike(menuRequestDto), HttpStatus.OK); //이제 이 서비스단에 있는 함수를 쓸거임
-    } //컨트롤러의 리턴은 프론트로 보내는것
+        return new ResponseEntity<>(menuService.menuLike(menuRequestDto), HttpStatus.OK);
+    } */
 
 }
