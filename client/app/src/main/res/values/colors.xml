@@ -8,6 +8,7 @@
 
     <color name="gray">#FFAAABAE</color>
     <color name="gray_bright">#FFD9D9D9</color>
+    <color name="gray_dark">#FF717273</color>
 
     <color name="bright">#FFF9F8F0</color>
 
@@ -16,4 +17,5 @@
 
     <!--    background-->
     <color name="background">#FFEEEDE8</color>
+    <color name="background_bright">#FFF6F5F2</color>
 </resources>

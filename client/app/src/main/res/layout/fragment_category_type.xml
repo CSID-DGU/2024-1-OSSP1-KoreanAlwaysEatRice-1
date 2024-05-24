@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <TextView
+            android:id="@+id/tv_category_type_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_type_title"
+            android:textAppearance="@style/body_bold"
+            android:textSize="18dp"
+            android:includeFontPadding="false"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_category_type"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="35dp"
+            android:overScrollMode="never"
+            android:foregroundGravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_category_type_title"
+            app:layout_constraintBottom_toTopOf="@id/btn_category_type_next"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_category_type"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_category_type_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_green_fill_5_rect"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="다음으로"
+            android:textColor="@color/background_bright"
+            android:textAppearance="@style/body_bold"
+            android:textSize="16dp"
+            android:paddingVertical="5dp"
+            android:outlineProvider="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

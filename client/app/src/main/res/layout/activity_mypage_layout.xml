@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton"
+            android:layout_width="20dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="127dp"
+            android:background="@drawable/left_arrow"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:text="설정"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/mypage_user_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="23dp"
+                android:background="@drawable/mypage_info_profile"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:text="김미에뉴"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/appCompatButton2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="menuw.google.com"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appCompatButton2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton3"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/mypage_etc_top"
+            android:gravity=""
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="270dp"
+            android:text="공지사항"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton4"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/mypage_etc_no_bottom"
+            android:gravity=""
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="270dp"
+            android:text="문의하기"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton3" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton5"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/mypage_etc_no_bottom"
+            android:gravity=""
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="270dp"
+            android:text="약관 및 정책"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton4" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton6"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/mypage_etc_no_bottom"
+            android:gravity=""
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="270dp"
+            android:text="버전 정보 1.0.0"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton5" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton7"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/mypage_etc_bottom"
+            android:gravity=""
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="270dp"
+            android:text="로그아웃"
+            android:textColor="@color/red"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="25dp"
+            android:text="회원탈퇴"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton7" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

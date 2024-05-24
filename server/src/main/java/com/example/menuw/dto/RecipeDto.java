@@ -4,10 +4,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Builder
 @Getter @Setter
 public class RecipeDto {
-    String recipeName;
-    String recipeIngredients;
-    String imageUrl;
+    private List<String> recipeList;
+    private List<String> recipeImageList;
 }
