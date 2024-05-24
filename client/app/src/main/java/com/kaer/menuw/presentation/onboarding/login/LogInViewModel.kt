@@ -8,9 +8,11 @@ import com.kaer.menuw.util.KakaoLogInCallback
 import com.kakao.sdk.auth.model.OAuthToken
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
 @HiltViewModel
-class LogInViewModel : ViewModel() {
+class LogInViewModel @Inject constructor() : ViewModel() {
 
     private val _isKakaoLogInSuccess = MutableLiveData<Boolean>()
     val isKakaoLogInSuccess: LiveData<Boolean>
@@ -20,7 +22,8 @@ class LogInViewModel : ViewModel() {
         KakaoLogInCallback {
             viewModelScope.launch {
                 oAuthToken.let {
-//                    _isKakaoLogInSuccess.value =
+                    _isKakaoLogInSuccess.value = true
+                    Timber.d("[카카오 로그인] callback")
                 }
             }
         }.setKakaoCallback(oAuthToken, error)

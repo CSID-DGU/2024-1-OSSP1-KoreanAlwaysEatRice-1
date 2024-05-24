@@ -27,10 +27,6 @@
         <item name="fontFamily">@font/omyupretty</item>
     </style>
 
-    <style name="body_bold">
-        <item name="fontFamily">@font/notosans_bold</item>
-    </style>
-
     <style name="body_regular">
         <item name="fontFamily">@font/notosans_regular</item>
     </style>
