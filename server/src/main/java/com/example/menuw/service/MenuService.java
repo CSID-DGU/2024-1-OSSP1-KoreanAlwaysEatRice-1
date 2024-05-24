@@ -1,5 +1,16 @@
 package com.example.menuw.service;
 
+<<<<<<< feature/#24-feat-Response
+import com.example.menuw.repository.MenuRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class MenuService {
+    private final MenuRepository menuRepository;
+
+=======
 import com.example.menuw.domain.Menu;
 import com.example.menuw.dto.MenuRequestDto;
 import com.example.menuw.repository.MenuRepository;
@@ -27,4 +38,5 @@ public class MenuService {
 
         return true;
     }
+>>>>>>> develop
 }

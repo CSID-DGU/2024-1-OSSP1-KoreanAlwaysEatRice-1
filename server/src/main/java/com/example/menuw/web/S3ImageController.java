@@ -6,7 +6,6 @@ import com.example.menuw.service.IngredientService;
 import com.example.menuw.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,10 +20,10 @@ public class S3ImageController {
     private final IngredientService ingredientService;
 
     @GetMapping("/Image")
-    public ResponseEntity<ResponseDto<List<IngredientDto>>> showAllIngredient() {
+    public ResponseDto<List<IngredientDto>> showAllIngredient() {
         List<IngredientDto> ingredientDtos = ingredientService.findAllIngredient();
 
-        return ResponseEntity.ok(ResponseDto.res(HttpStatus.OK, "재료 가져오기를 성공하였습니다.", ingredientDtos));
+        return ResponseDto.res(HttpStatus.OK, "재료 가져오기를 성공하였습니다.", ingredientDtos);
     }
     @PostMapping("/upload")
     public String saveFile(@RequestParam("file") MultipartFile multipartFile) {
