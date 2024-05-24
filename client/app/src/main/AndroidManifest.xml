@@ -21,6 +21,15 @@
 
         <activity
             android:name=".presentation.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".presentation.home.refrigerator.recommend.MenuListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.home.HomeActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -30,11 +39,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.refrigerator.recommend.IngredientRecommendMenuActivity"
+            android:name=".presentation.home.refrigerator.recommend.category.MenuCategoryActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.mypage.MyPage"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.home.menurecipe.RecipePageActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
     </application>

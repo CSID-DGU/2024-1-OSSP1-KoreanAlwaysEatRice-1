@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_bright">
+
+        <ImageView
+            android:id="@+id/btn_recipe_page_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:padding="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_recipe_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recipe_page_title"
+            android:textAppearance="@style/head_20"
+            app:layout_constraintTop_toTopOf="@id/btn_recipe_page_back"
+            app:layout_constraintBottom_toBottomOf="@id/btn_recipe_page_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_recipe_page"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/shape_progressbar"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="35dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_recipe_page_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager_recipe_page"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_recipe_page"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_recipe_page_evaluate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_green_fill_5_rect"
+            android:text="평가하기"
+            android:enabled="false"
+            android:visibility="invisible"
+            android:textAppearance="@style/body_bold"
+            android:textColor="@color/background_bright"
+            android:textSize="18dp"
+            android:includeFontPadding="false"
+            android:paddingVertical="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:outlineProvider="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

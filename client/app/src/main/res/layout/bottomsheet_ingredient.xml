@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel" />
+            type="com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

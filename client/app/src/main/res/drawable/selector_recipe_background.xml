@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/shape_bright_fill_5_green_line_rect" android:state_activated="true" />
+    <item android:drawable="@drawable/shape_gray_bright_fill_5_rect" android:state_activated="false" />
+
+</selector>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_bright">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_ingredient_recommend_menu_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:padding="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_ingredient_recommend_menu_title"
+            style="@style/head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추천 메뉴"
+            android:textSize="20dp"
+            app:layout_constraintTop_toTopOf="@id/btn_ingredient_recommend_menu_back"
+            app:layout_constraintBottom_toBottomOf="@id/btn_ingredient_recommend_menu_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/layout_menu_list_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/shape_home_tab"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorColor="@color/green_primary"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/green_primary"
+            app:tabTextColor="@color/gray"
+            app:tabTextAppearance="@style/head_16"
+            app:layout_constraintTop_toBottomOf="@id/tv_ingredient_recommend_menu_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="추천 메뉴" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="다른 메뉴" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_menu_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_menu_list_tab"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout="@layout/fragment_menu_recommend"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

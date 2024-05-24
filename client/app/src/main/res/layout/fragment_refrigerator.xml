@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.kaer.menuw.presentation.refrigerator.add.AddIngredientViewModel" />
+            type="com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,27 +18,18 @@
         android:background="@color/background">
 
         <TextView
-            android:id="@+id/tv_refrigerator_title_text"
-            style="@style/head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/refrigerator_title_text"
-            android:textSize="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
             android:id="@+id/tv_refrigerator_edit"
             style="@style/body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.deleteBtnVisible ? @string/refrigerator_edit_cancel : @string/refrigerator_edit}"
-            android:textSize="25dp"
-            android:layout_marginEnd="25dp"
+            android:textSize="18dp"
+            android:includeFontPadding="false"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_refrigerator_title_text"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tv_refrigerator_background"
@@ -58,7 +49,7 @@
             android:id="@+id/rcv_refrigerator_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
@@ -66,7 +57,7 @@
             app:spanCount="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_refrigerator_title_text"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/btn_refrigerator_see_recommend"
             tools:listitem="@layout/item_ingredient_list_add"/>
 

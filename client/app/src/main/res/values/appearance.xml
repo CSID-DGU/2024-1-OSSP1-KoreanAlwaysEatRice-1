@@ -5,8 +5,26 @@
         <item name="android:fontFamily">@font/jalnan2ttf</item>
     </style>
 
+    <style name="head_20">
+        <item name="android:fontFamily">@font/jalnan2ttf</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="head_16">
+        <item name="android:fontFamily">@font/jalnan2ttf</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
     <style name="body">
-        <item name="android:fontFamily">@font/omyupretty</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
+    </style>
+
+    <style name="body_bold">
+        <item name="android:fontFamily">@font/notosans_bold</item>
+    </style>
+
+    <style name="body2">
+        <item name="fontFamily">@font/omyupretty</item>
     </style>
 
 </resources>
