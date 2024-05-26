@@ -14,7 +14,10 @@ import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.MEAT
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.OTHERS
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private val viewModel by activityViewModels<AddIngredientViewModel>()
@@ -53,6 +56,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun initSetAdapter() {
+        viewModel.getIngredientList()
         setTypeAdapter()
         changeListAdapter()
     }
@@ -74,8 +78,11 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         }
 
         binding.rcvAddIngredientType.adapter = ingredientTypeAdapter
-        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
-            ingredientTypeAdapter.submitList(it)
+//        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
+//            ingredientTypeAdapter.submitList(it)
+//        }
+        viewModel.ingredientList.observe(viewLifecycleOwner) {
+            Timber.d("아이템 리스트 -> $it")
         }
         makeListAdapter()
     }
@@ -92,7 +99,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private fun changeListAdapter() {
         viewModel.selectedTypeId.observe(viewLifecycleOwner) {
-            ingredientListAdapter.submitList(viewModel.mockIngredientList.value?.get(it)?.ingredientListItem)
+//            ingredientListAdapter.submitList(viewModel.mockIngredientList.value?.get(it)?.ingredientListItem)
         }
         selectedIngredientList()
     }
