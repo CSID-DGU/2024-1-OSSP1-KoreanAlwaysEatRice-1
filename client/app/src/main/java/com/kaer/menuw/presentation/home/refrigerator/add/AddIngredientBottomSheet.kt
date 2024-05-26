@@ -12,10 +12,9 @@ import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.FISH
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.GRAIN
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.MEAT
-import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.OTHERS
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.SEASONING
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class AddIngredientBottomSheet : BottomSheetDialogFragment() {
@@ -71,18 +70,16 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
                         GRAIN -> viewModel.clickTypeId(2)
                         MEAT -> viewModel.clickTypeId(3)
                         FISH -> viewModel.clickTypeId(4)
-                        OTHERS -> viewModel.clickTypeId(5)
+                        SEASONING -> viewModel.clickTypeId(5)
+                        else -> viewModel.clickTypeId(0)
                     }
                 }
             })
         }
 
         binding.rcvAddIngredientType.adapter = ingredientTypeAdapter
-//        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
-//            ingredientTypeAdapter.submitList(it)
-//        }
         viewModel.ingredientList.observe(viewLifecycleOwner) {
-            Timber.d("아이템 리스트 -> $it")
+            ingredientTypeAdapter.submitList(it)
         }
         makeListAdapter()
     }
@@ -99,7 +96,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private fun changeListAdapter() {
         viewModel.selectedTypeId.observe(viewLifecycleOwner) {
-//            ingredientListAdapter.submitList(viewModel.mockIngredientList.value?.get(it)?.ingredientListItem)
+            ingredientListAdapter.submitList(viewModel.ingredientList.value?.get(it)?.ingredientListItem)
         }
         selectedIngredientList()
     }

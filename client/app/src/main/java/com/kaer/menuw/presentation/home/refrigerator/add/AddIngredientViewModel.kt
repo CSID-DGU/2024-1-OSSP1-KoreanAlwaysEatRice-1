@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kaer.menuw.domain.entity.Ingredient
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.domain.usecase.GetIngredientUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddIngredientViewModel @Inject constructor(
-    private val getIngredientUseCase: GetIngredientUseCase
+    private val getIngredientUseCase: GetIngredientUseCase,
+//    private val getTestUseCase: GetTestUseCase,
 ) : ViewModel() {
 
 //    private val _mockIngredientList: MutableLiveData<List<IngredientTotal>> = MutableLiveData(
@@ -131,8 +131,10 @@ class AddIngredientViewModel @Inject constructor(
 //    val mockIngredientList: LiveData<List<IngredientTotal>>
 //        get() = _mockIngredientList
 
-    private val _ingredientList = MutableLiveData<List<Ingredient>>()
-    val ingredientList: LiveData<List<Ingredient>>
+    private val ingredientTypeList = ArrayList<IngredientTotal>()
+
+    private val _ingredientList = MutableLiveData<ArrayList<IngredientTotal>>()
+    val ingredientList: LiveData<ArrayList<IngredientTotal>>
         get() = _ingredientList
 
     private val _backgroundTextVisible: MutableLiveData<Boolean> = MutableLiveData()
@@ -143,11 +145,13 @@ class AddIngredientViewModel @Inject constructor(
     val selectedTypeId: LiveData<Int>
         get() = _selectedTypeId
 
-    private val _selectedIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> = MutableLiveData()
+    private val _selectedIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> =
+        MutableLiveData()
     val selectedIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
         get() = _selectedIngredientArray
 
-    private val _updateStoredIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> = MutableLiveData()
+    private val _updateStoredIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> =
+        MutableLiveData()
     val updateStoredIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
         get() = _updateStoredIngredientArray
 
@@ -164,13 +168,32 @@ class AddIngredientViewModel @Inject constructor(
         get() = _deleteEnabled
 
     fun getIngredientList() {
-        Timber.d("아이템 리스트 viewmodel -> 테스트")
+        val vegList = ArrayList<IngredientTotal.IngredientItem>()
+        val darList = ArrayList<IngredientTotal.IngredientItem>()
+        val graList = ArrayList<IngredientTotal.IngredientItem>()
+        val meaList = ArrayList<IngredientTotal.IngredientItem>()
+        val fishList = ArrayList<IngredientTotal.IngredientItem>()
+        val seaList = ArrayList<IngredientTotal.IngredientItem>()
         viewModelScope.launch {
-            getIngredientUseCase().onSuccess {  ingredients ->
-                Timber.d("아이템 리스트 viewmodel 성공 -> $ingredients")
-                _ingredientList.value = ingredients
-            }.onFailure {
-                Timber.d("아이템 리스트 viewmodel 실패 -> $it")
+            getIngredientUseCase().onSuccess { ingredients ->
+                for (i in ingredients.indices) {
+                    when (ingredients[i].ingredientType) {
+                        VEGETABLE -> {vegList.add(IngredientTotal.IngredientItem(ingredients[i].ingredientId, ingredients[i].ingredientName, ingredients[i].ingredientImageURL))}
+                        DAIRY_FOOD -> {darList.add(IngredientTotal.IngredientItem(ingredients[i].ingredientId, ingredients[i].ingredientName, ingredients[i].ingredientImageURL))}
+                        GRAIN -> {graList.add(IngredientTotal.IngredientItem(ingredients[i].ingredientId, ingredients[i].ingredientName, ingredients[i].ingredientImageURL))}
+                        MEAT -> {meaList.add(IngredientTotal.IngredientItem(ingredients[i].ingredientId, ingredients[i].ingredientName, ingredients[i].ingredientImageURL))}
+                        FISH -> {fishList.add(IngredientTotal.IngredientItem(ingredients[i].ingredientId, ingredients[i].ingredientName, ingredients[i].ingredientImageURL))}
+                        SEASONING -> {seaList.add(IngredientTotal.IngredientItem(ingredients[i].ingredientId, ingredients[i].ingredientName, ingredients[i].ingredientImageURL))}
+                    }
+                }
+                ingredientTypeList.add(IngredientTotal(VEGETABLE, vegList))
+                ingredientTypeList.add(IngredientTotal(DAIRY_FOOD, darList))
+                ingredientTypeList.add(IngredientTotal(GRAIN, graList))
+                ingredientTypeList.add(IngredientTotal(MEAT, meaList))
+                ingredientTypeList.add(IngredientTotal(FISH, fishList))
+                ingredientTypeList.add(IngredientTotal(SEASONING, seaList))
+
+                _ingredientList.value = ingredientTypeList
             }
         }
     }
@@ -207,10 +230,10 @@ class AddIngredientViewModel @Inject constructor(
     companion object {
         const val VEGETABLE = "채소"
         const val DAIRY_FOOD = "유제품"
-        const val GRAIN = "곡류"
+        const val GRAIN = "곡물"
         const val MEAT = "육류"
         const val FISH = "생선"
-        const val OTHERS = "기타"
+        const val SEASONING = "조미료"
     }
 
 }

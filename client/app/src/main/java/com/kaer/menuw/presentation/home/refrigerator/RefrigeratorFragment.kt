@@ -105,6 +105,7 @@ class RefrigeratorFragment :
     private fun clickAddIngredientBtn() {
 
         binding.btnRefrigeratorAddIngredient.setOnClickListener {
+            viewModel.clickTypeId(0)
             AddIngredientBottomSheet().show(parentFragmentManager, BOTTOM_SHEET)
         }
     }
