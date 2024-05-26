@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface IngredientService {
 
-    @GET("Image")
+    @GET("/Image")
     suspend fun getIngredient(): ResponseGetIngredientDto
 }

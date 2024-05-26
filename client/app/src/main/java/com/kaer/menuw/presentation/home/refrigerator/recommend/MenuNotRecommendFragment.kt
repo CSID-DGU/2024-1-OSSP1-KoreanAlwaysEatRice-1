@@ -6,7 +6,9 @@ import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentMenuNotRecommendBinding
 import com.kaer.menuw.util.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuNotRecommendFragment: BaseFragment<FragmentMenuNotRecommendBinding>(R.layout.fragment_menu_not_recommend) {
 
     private val viewModel by activityViewModels<MenuListViewModel>()

@@ -4,7 +4,9 @@ import android.os.Bundle
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMypageLayoutBinding
 import com.kaer.menuw.util.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPage : BaseActivity<ActivityMypageLayoutBinding>(R.layout.activity_mypage_layout) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

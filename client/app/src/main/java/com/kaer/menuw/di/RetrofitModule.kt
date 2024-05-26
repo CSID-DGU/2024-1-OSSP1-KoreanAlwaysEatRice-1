@@ -27,31 +27,35 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    @MenuwRetrofit
+//    @MenuwRetrofit
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        @MenuwRetrofit tokenInterceptor: Interceptor,
+//        loggingInterceptor: HttpLoggingInterceptor,
+//        @MenuwRetrofit interceptor: Interceptor,
+        interceptor: Interceptor
     ): OkHttpClient =
         OkHttpClient.Builder().apply {
-            addInterceptor(loggingInterceptor)
-            addInterceptor(tokenInterceptor)
+            addInterceptor(interceptor)
+//            addInterceptor(tokenInterceptor)
         }.build()
 
     @Provides
     @Singleton
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+    fun provideLoggingInterceptor(): Interceptor {
+//        val loggingInterceptor = HttpLoggingInterceptor { message ->
+//            when {
+//                message.isJsonObject() ->
+//                    Log.d("retrofit", JSONObject(message).toString(4))
+//
+//                message.isJsonArray() ->
+//                    Log.d("retrofit", JSONArray(message).toString(4))
+//
+//                else -> {
+//                    Log.d("retrofit", "CONNECTION INFO -> $message")
+//                }
+//            }
+//        }
         val loggingInterceptor = HttpLoggingInterceptor { message ->
-            when {
-                message.isJsonObject() ->
-                    Log.d("retrofit", JSONObject(message).toString(4))
-
-                message.isJsonArray() ->
-                    Log.d("retrofit", JSONArray(message).toString(4))
-
-                else -> {
-                    Log.d("retrofit", "CONNECTION INFO -> $message")
-                }
-            }
+            Log.d("retrofit message", message)
         }
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return loggingInterceptor
@@ -60,10 +64,18 @@ object RetrofitModule {
     @Singleton
     @Provides
     @MenuwRetrofit
-    fun provideMenuwRetrofit(@MenuwRetrofit okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder()
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+    fun provideMenuwRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        val contentType = "application/json".toMediaType()
+        val json = Json { ignoreUnknownKeys = true }
+        return Retrofit.Builder()
             .baseUrl(MENUW_BASE_URL)
+            .addConverterFactory(json.asConverterFactory(contentType))
             .client(okHttpClient)
             .build()
+    }
+//        Retrofit.Builder()
+//            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+//            .baseUrl(MENUW_BASE_URL)
+//            .client(okHttpClient)
+//            .build()
 }

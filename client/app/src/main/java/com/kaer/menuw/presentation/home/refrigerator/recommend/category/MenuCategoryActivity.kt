@@ -14,7 +14,9 @@ import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCate
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.recipe.CategoryRecipeFragment
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.type.CategoryTypeFragment
 import com.kaer.menuw.util.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuCategoryActivity :
     BaseActivity<ActivityMenuCategoryBinding>(R.layout.activity_menu_category) {
 

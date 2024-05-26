@@ -10,7 +10,9 @@ import com.kaer.menuw.domain.entity.CategoryRecipe
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.TYPE_PAGE
 import com.kaer.menuw.util.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CategoryRecipeFragment :
     BaseFragment<FragmentCategoryRecipeBinding>(R.layout.fragment_category_recipe) {
 

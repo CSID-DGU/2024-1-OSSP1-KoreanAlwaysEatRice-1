@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentLikeMenuListBinding
 import com.kaer.menuw.util.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LikeMenuListFragment: BaseFragment<FragmentLikeMenuListBinding>(R.layout.fragment_like_menu_list) {
 
     override fun onCreateView(

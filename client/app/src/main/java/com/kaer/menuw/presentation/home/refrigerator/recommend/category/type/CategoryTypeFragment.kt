@@ -9,7 +9,9 @@ import com.kaer.menuw.databinding.FragmentCategoryTypeBinding
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
 import com.kaer.menuw.util.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CategoryTypeFragment :
     BaseFragment<FragmentCategoryTypeBinding>(R.layout.fragment_category_type) {
 

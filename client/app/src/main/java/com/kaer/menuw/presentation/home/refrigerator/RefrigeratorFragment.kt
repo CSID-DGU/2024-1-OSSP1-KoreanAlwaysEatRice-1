@@ -12,7 +12,9 @@ import com.kaer.menuw.presentation.home.refrigerator.add.SharedPreferenceManager
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryActivity
 import com.kaer.menuw.util.base.BaseDialog
 import com.kaer.menuw.util.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RefrigeratorFragment :
     BaseFragment<FragmentRefrigeratorBinding>(R.layout.fragment_refrigerator) {
 

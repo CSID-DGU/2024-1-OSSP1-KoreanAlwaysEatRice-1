@@ -8,8 +8,10 @@ import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityRecipePageBinding
 import com.kaer.menuw.util.base.BaseActivity
 import com.kaer.menuw.util.base.BaseDialog
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activity_recipe_page) {
 
     private val viewModel by viewModels<RecipePageViewModel>()

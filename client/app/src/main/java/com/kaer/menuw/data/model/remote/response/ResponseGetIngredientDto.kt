@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ResponseGetIngredientDto (
     @SerialName("status")
-    val status: Int,
+    val status: String,
     @SerialName("message")
     val message: String,
     @SerialName("data")

@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kaer.menuw.R
 import com.kaer.menuw.domain.entity.CategoryRecipe
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MenuCategoryViewModel : ViewModel() {
+@HiltViewModel
+class MenuCategoryViewModel @Inject constructor() : ViewModel() {
 
     private val _currentCategoryPage = MutableLiveData<Int>(RECIPE_PAGE)
     val currentCategoryPage: LiveData<Int>

@@ -10,7 +10,9 @@ import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMenuListBinding
 import com.kaer.menuw.presentation.home.HomeActivity
 import com.kaer.menuw.util.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuListActivity :
     BaseActivity<ActivityMenuListBinding>(R.layout.activity_menu_list) {
 

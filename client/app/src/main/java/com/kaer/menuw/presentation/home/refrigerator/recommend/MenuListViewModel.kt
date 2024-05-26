@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kaer.menuw.domain.entity.RecommendMenu
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MenuListViewModel: ViewModel() {
+@HiltViewModel
+class MenuListViewModel @Inject constructor(): ViewModel() {
 
     private val _mockMenuList: MutableLiveData<List<RecommendMenu>> = MutableLiveData(
         mutableListOf(
