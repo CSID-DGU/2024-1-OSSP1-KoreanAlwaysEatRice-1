@@ -11,7 +11,9 @@ import com.kaer.menuw.domain.entity.RecommendMenu
 import com.kaer.menuw.presentation.home.menurecipe.RecipePageActivity
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.type.CategoryTypeAdapter
 import com.kaer.menuw.util.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuRecommendFragment: BaseFragment<FragmentMenuRecommendBinding>(R.layout.fragment_menu_recommend) {
 
     private val viewModel by activityViewModels<MenuListViewModel>()

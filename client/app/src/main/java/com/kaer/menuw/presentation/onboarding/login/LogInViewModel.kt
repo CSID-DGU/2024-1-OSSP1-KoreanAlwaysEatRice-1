@@ -23,7 +23,7 @@ class LogInViewModel @Inject constructor() : ViewModel() {
             viewModelScope.launch {
                 oAuthToken.let {
                     _isKakaoLogInSuccess.value = true
-                    Timber.d("[카카오 로그인] callback")
+                    Timber.d("[카카오 로그인] token -> ${oAuthToken?.accessToken}")
                 }
             }
         }.setKakaoCallback(oAuthToken, error)

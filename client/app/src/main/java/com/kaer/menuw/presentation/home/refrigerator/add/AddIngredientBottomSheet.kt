@@ -12,9 +12,11 @@ import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.FISH
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.GRAIN
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.MEAT
-import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.OTHERS
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.SEASONING
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private val viewModel by activityViewModels<AddIngredientViewModel>()
@@ -53,6 +55,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun initSetAdapter() {
+        viewModel.getIngredientList()
         setTypeAdapter()
         changeListAdapter()
     }
@@ -67,14 +70,15 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
                         GRAIN -> viewModel.clickTypeId(2)
                         MEAT -> viewModel.clickTypeId(3)
                         FISH -> viewModel.clickTypeId(4)
-                        OTHERS -> viewModel.clickTypeId(5)
+                        SEASONING -> viewModel.clickTypeId(5)
+                        else -> viewModel.clickTypeId(0)
                     }
                 }
             })
         }
 
         binding.rcvAddIngredientType.adapter = ingredientTypeAdapter
-        viewModel.mockIngredientList.observe(viewLifecycleOwner) {
+        viewModel.ingredientList.observe(viewLifecycleOwner) {
             ingredientTypeAdapter.submitList(it)
         }
         makeListAdapter()
@@ -92,7 +96,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private fun changeListAdapter() {
         viewModel.selectedTypeId.observe(viewLifecycleOwner) {
-            ingredientListAdapter.submitList(viewModel.mockIngredientList.value?.get(it)?.ingredientListItem)
+            ingredientListAdapter.submitList(viewModel.ingredientList.value?.get(it)?.ingredientListItem)
         }
         selectedIngredientList()
     }

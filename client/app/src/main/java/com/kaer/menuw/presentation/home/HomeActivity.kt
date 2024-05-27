@@ -12,7 +12,9 @@ import com.kaer.menuw.presentation.home.likemenu.LikeMenuListFragment
 import com.kaer.menuw.presentation.home.refrigerator.RefrigeratorFragment
 import com.kaer.menuw.presentation.mypage.MyPage
 import com.kaer.menuw.util.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
     private val viewModel by viewModels<HomeViewModel>()

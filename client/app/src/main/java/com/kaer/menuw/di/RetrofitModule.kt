@@ -1,7 +1,6 @@
 package com.kaer.menuw.di
 
 import android.util.Log
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.kaer.menuw.BuildConfig
 import com.kaer.menuw.util.isJsonArray
 import com.kaer.menuw.util.isJsonObject
@@ -11,36 +10,36 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
-    private const val MENUW_BASE_URL = BuildConfig.BASE_URL
+    private const val BASE_URL = BuildConfig.BASE_URL
+    private val json = Json { ignoreUnknownKeys = true }
+    private const val APPLICATION_JSON = "application/json"
 
     @Provides
     @Singleton
-    @MenuwRetrofit
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        @MenuwRetrofit tokenInterceptor: Interceptor,
+        interceptor: Interceptor,
     ): OkHttpClient =
-        OkHttpClient.Builder().apply {
-            addInterceptor(loggingInterceptor)
-            addInterceptor(tokenInterceptor)
-        }.build()
+        OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build()
+
 
     @Provides
     @Singleton
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val loggingInterceptor = HttpLoggingInterceptor { message ->
+    fun provideLoggingInterceptor(): Interceptor {
+        val interceptor = HttpLoggingInterceptor { message ->
             when {
                 message.isJsonObject() ->
                     Log.d("retrofit", JSONObject(message).toString(4))
@@ -53,17 +52,18 @@ object RetrofitModule {
                 }
             }
         }
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        return loggingInterceptor
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return interceptor
     }
 
     @Singleton
     @Provides
     @MenuwRetrofit
-    fun provideMenuwRetrofit(@MenuwRetrofit okHttpClient: OkHttpClient): Retrofit =
+    fun provideMENUWRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-            .baseUrl(MENUW_BASE_URL)
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
+//            .addConverterFactory(json.asConverterFactory(APPLICATION_JSON.toMediaType()))
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 }
