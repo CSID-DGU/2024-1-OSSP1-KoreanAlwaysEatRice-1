@@ -22,10 +22,11 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel.postRecipeList("저염 된장으로 맛을 낸 황태해장국")
+//
+//        viewModel.postRecipeList("저염 된장으로 맛을 낸 황태해장국")
 
         clickBackBtn()
+        initGetRecipeList()
         initSetAdapter()
         setEvaluateBtnEnabled()
         setRecipePageProgress()
@@ -34,6 +35,16 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
     private fun clickBackBtn() {
         binding.btnRecipePageBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun initGetRecipeList() {
+        viewModel.postRecipeList("저염 된장으로 맛을 낸 황태해장국")
+        viewModel.recipeList.observe(this) {
+            viewModel.mapRecipeItemList(it)
+        }
+        viewModel.recipeItemList.observe(this) {
+            Timber.d("[메뉴 조리법 아이템 리스트] -> $it")
         }
     }
 

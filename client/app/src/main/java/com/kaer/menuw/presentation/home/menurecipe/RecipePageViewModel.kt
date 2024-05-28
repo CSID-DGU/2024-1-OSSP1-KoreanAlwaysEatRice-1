@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kaer.menuw.domain.entity.RecipeList
+import com.kaer.menuw.domain.entity.RecipeListItem
 import com.kaer.menuw.domain.usecase.PostMenuRecipeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -24,17 +25,27 @@ class RecipePageViewModel @Inject constructor(
     val recipeList: LiveData<RecipeList>
         get() = _recipeList
 
+    private val _recipeItemList = MutableLiveData<ArrayList<RecipeListItem>>()
+    val recipeItemList: LiveData<ArrayList<RecipeListItem>>
+        get() = _recipeItemList
+
     fun setProgressPercent(current: Int, total: Int) {
         _progressPercent.value = (current*100/total)
     }
 
     fun postRecipeList(menuName: String) {
-        Timber.d("[메뉴 조리법 리스트] -> 테스트")
         viewModelScope.launch {
             postMenuRecipeUseCase(menuName).onSuccess {
                 _recipeList.value = it
-                Timber.d("[메뉴 조리법 리스트] -> $it")
             }
         }
+    }
+
+    fun mapRecipeItemList(recipeList: RecipeList) {
+        val tempItemList = ArrayList<RecipeListItem>()
+        for (i in 0 until recipeList.recipeList.size) {
+            tempItemList.add(RecipeListItem(recipeList.recipeList[i], recipeList.recipeImageList[i]))
+        }
+        _recipeItemList.value = tempItemList
     }
 }

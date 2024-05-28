@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemRecipeOrderBinding
-import com.kaer.menuw.domain.entity.RecipeOrder
+import com.kaer.menuw.domain.entity.RecipeListItem
 
 class RecipePageAdapter: RecyclerView.Adapter<RecipePageAdapter.RecipePageViewHolder>() {
 
-    val itemList: List<RecipeOrder> = listOf(
-        RecipeOrder("", "1.~~~~한다"),
-        RecipeOrder("", "2.~~~~한다"),
-        RecipeOrder("", "3.~~~~한다"),
-        RecipeOrder("", "4.~~~~한다"),
+    val itemList: List<RecipeListItem> = listOf(
+        RecipeListItem("", "1.~~~~한다"),
+        RecipeListItem("", "2.~~~~한다"),
+        RecipeListItem("", "3.~~~~한다"),
+        RecipeListItem("", "4.~~~~한다"),
     )
 
     override fun getItemCount(): Int {
@@ -32,8 +32,8 @@ class RecipePageAdapter: RecyclerView.Adapter<RecipePageAdapter.RecipePageViewHo
     inner class RecipePageViewHolder(
         private val binding: ItemRecipeOrderBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: RecipeOrder) {
-            binding.tvItemRecipeOrderExplain.text = data.recipeListOrder
+        fun onBind(data: RecipeListItem) {
+            binding.tvItemRecipeOrderExplain.text = data.recipeOrder
         }
     }
 }
