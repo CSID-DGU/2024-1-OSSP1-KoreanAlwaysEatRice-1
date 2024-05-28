@@ -22,12 +22,10 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//
-//        viewModel.postRecipeList("저염 된장으로 맛을 낸 황태해장국")
 
         clickBackBtn()
-        initGetRecipeList()
         initSetAdapter()
+        initGetRecipeList()
         setEvaluateBtnEnabled()
         setRecipePageProgress()
     }
@@ -45,6 +43,7 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
         }
         viewModel.recipeItemList.observe(this) {
             Timber.d("[메뉴 조리법 아이템 리스트] -> $it")
+            recipePageAdapter.submitList(it)
         }
     }
 
@@ -58,9 +57,9 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                viewModel.setProgressPercent(position+1, recipePageAdapter.itemList.size)
+                viewModel.setProgressPercent(position+1, recipePageAdapter.currentList.size)
 
-                if (position == recipePageAdapter.itemList.size - 1) {
+                if (position == recipePageAdapter.currentList.size - 1) {
                     binding.btnRecipePageEvaluate.visibility = View.VISIBLE
                     binding.btnRecipePageEvaluate.isEnabled = true
                 }
