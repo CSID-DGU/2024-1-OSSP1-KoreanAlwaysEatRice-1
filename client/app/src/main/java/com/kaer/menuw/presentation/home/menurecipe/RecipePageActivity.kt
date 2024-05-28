@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activity_recipe_page) {
+class RecipePageActivity : BaseActivity<ActivityRecipePageBinding>(R.layout.activity_recipe_page) {
 
     private val viewModel by viewModels<RecipePageViewModel>()
 
@@ -43,7 +43,6 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
             viewModel.mapRecipeItemList(it)
         }
         viewModel.recipeItemList.observe(this) {
-            Timber.d("[메뉴 조리법 아이템 리스트] -> $it")
             recipePageAdapter.submitList(it)
         }
     }
@@ -58,7 +57,7 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                viewModel.setProgressPercent(position+1, recipePageAdapter.currentList.size)
+                viewModel.setProgressPercent(position + 1, recipePageAdapter.currentList.size)
 
                 if (position == recipePageAdapter.currentList.size - 1) {
                     binding.btnRecipePageEvaluate.visibility = View.VISIBLE

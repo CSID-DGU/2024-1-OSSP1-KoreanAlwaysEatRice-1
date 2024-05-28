@@ -11,10 +11,10 @@ import com.kaer.menuw.presentation.home.menurecipe.RecipePageActivity
 import com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListViewModel.Companion.CHOOSE_MENU
 import com.kaer.menuw.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
-class MenuRecommendFragment: BaseFragment<FragmentMenuRecommendBinding>(R.layout.fragment_menu_recommend) {
+class MenuRecommendFragment :
+    BaseFragment<FragmentMenuRecommendBinding>(R.layout.fragment_menu_recommend) {
 
     private val viewModel by activityViewModels<MenuListViewModel>()
 
@@ -33,7 +33,6 @@ class MenuRecommendFragment: BaseFragment<FragmentMenuRecommendBinding>(R.layout
         _recommendMenuAdapter = RecommendMenuAdapter().apply {
             setOnItemClickListener(object : RecommendMenuAdapter.OnItemClickListener {
                 override fun onItemClick(item: RecommendMenu, position: Int) {
-                    Timber.d("[클릭한 메뉴] -> ${item.menuName}")
                     intent.putExtra(CHOOSE_MENU, item.menuName)
                     startActivity(intent)
                 }
