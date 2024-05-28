@@ -23,6 +23,8 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel.postRecipeList("저염 된장으로 맛을 낸 황태해장국")
+
         clickBackBtn()
         initSetAdapter()
         setEvaluateBtnEnabled()
