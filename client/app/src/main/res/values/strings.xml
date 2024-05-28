@@ -1,28 +1,28 @@
 <resources>
     <string name="app_name">MENUW</string>
 
-<!--    home page-->
+    <!--    home page-->
     <string name="home_tab_refrigerator">냉장고 재료</string>
     <string name="home_tab_like_menu">좋게 평가한 메뉴</string>
 
-<!--    category-->
+    <!--    category-->
     <string name="menu_category_title">선호하는 카테고리</string>
     <string name="category_recipe_title">선호하는 조리 방식을 골라보세요! (1/2)</string>
     <string name="category_type_title">선호하는 요리 종류를 골라보세요! (2/2)</string>
 
-<!--    recommend menu-->
+    <!--    recommend menu-->
     <string name="menu_recommend_title">재료와 선호하는 타입을 기반으로 추천된 메뉴 리스트를 확인해보세요!</string>
     <string name="menu_not_recommend_title">추천된 메뉴 리스트 이외에 재료를 활용하는 메뉴를 확인해보세요!</string>
 
-<!--    recipe page-->
+    <!--    recipe page-->
     <string name="recipe_page_title">조리법</string>
 
-<!--    main page -->
+    <!--    main page -->
     <string name="main_bnv_refrigerator">냉장고페이지</string>
     <string name="main_bnv_home">홈</string>
     <string name="main_bnv_person">마이페이지</string>
 
-<!--    refrigerator page -->
+    <!--    refrigerator page -->
     <string name="refrigerator_title_text">냉장고 페이지</string>
     <string name="refrigerator_see_recommend">추천 레시피 보기</string>
     <string name="refrigerator_add_ingredient">재료 추가하기</string>
@@ -32,17 +32,17 @@
     <string name="refrigerator_edit_cancel">취소</string>
     <string name="refrigerator_delete">삭제하기</string>
 
-<!--    home page-->
+    <!--    home page-->
     <string name="home_recommend_title">추천 레시피 보기</string>
     <string name="home_recommend_sub">사용자의 선호하는\n레시피를 추천해요!</string>
     <string name="home_weather_title">추천 메뉴 보기</string>
     <string name="home_weather_sub">오늘의 날씨를 기반으로\n레시피를 추천해요!</string>
     <string name="home_title">홈 페이지</string>
 
-<!--    person page-->
+    <!--    person page-->
     <string name="person_title">개인 페이지</string>
 
-<!--    update dialog-->
+    <!--    update dialog-->
     <string name="dialog_update_content">해당 기능은 업데이트 예정이에요!</string>
     <string name="dialog_update_title">해당 기능은 업데이트 예정이에요!</string>
     <string name="dialog_update_btn_text">확인</string>
