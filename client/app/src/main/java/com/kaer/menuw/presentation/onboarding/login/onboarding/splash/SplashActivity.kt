@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.splash
+package com.kaer.menuw.presentation.onboarding.login.onboarding.splash
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
