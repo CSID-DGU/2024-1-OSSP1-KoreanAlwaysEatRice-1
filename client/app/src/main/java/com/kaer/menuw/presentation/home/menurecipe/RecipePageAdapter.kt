@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemRecipeOrderBinding
 import com.kaer.menuw.domain.entity.RecipeListItem
 import com.kaer.menuw.util.ItemDiffCallback
+import com.kaer.menuw.util.base.BindingAdapter.setImage
 
 class RecipePageAdapter: ListAdapter<RecipeListItem, RecipePageAdapter.RecipePageViewHolder>(
     ItemDiffCallback<RecipeListItem>(
@@ -20,6 +21,7 @@ class RecipePageAdapter: ListAdapter<RecipeListItem, RecipePageAdapter.RecipePag
     ): RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RecipeListItem) {
             binding.tvItemRecipeOrderExplain.text = data.recipeOrder
+            binding.ivItemRecipeOrderImg.setImage(data.recipeImg)
         }
     }
 
