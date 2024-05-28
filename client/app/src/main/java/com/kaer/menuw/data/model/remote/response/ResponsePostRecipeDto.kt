@@ -1,5 +1,6 @@
 package com.kaer.menuw.data.model.remote.response
 
+import com.kaer.menuw.domain.entity.RecipeList
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,13 +11,15 @@ data class ResponsePostRecipeDto (
     @SerialName("message")
     val message: String,
     @SerialName("data")
-    val data: RecipeList,
+    val data: RecipeListData,
 ) {
     @Serializable
-    data class RecipeList(
+    data class RecipeListData(
         @SerialName("recipeList")
         val recipeList: List<String>,
         @SerialName("recipeImageList")
         val recipeImageList: List<String>
     )
+
+    fun toRecipeList() = RecipeList(data.recipeList, data.recipeImageList)
 }
