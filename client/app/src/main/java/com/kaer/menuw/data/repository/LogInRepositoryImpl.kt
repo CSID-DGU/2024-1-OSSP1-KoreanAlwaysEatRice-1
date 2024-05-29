@@ -6,8 +6,9 @@ import com.kaer.menuw.domain.repository.LogInRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-class LogInRepositoryImpl @Inject constructor(private val logInDataSource: LogInDataSource) :
-    LogInRepository {
+class LogInRepositoryImpl @Inject constructor(
+    private val logInDataSource: LogInDataSource,
+) : LogInRepository {
 
     override suspend fun postLogIn(contentType: String, authorization: String): Result<Boolean> =
         runCatching {
