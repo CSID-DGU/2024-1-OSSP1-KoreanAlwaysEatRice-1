@@ -23,7 +23,7 @@ public class KakaoAuthService {
         KakaoUserInfoResponse userInfo = kakaoUserInfo.getUserInfo(accessToken);
         Optional<User> user = userRepository.findById(userInfo.getId().intValue());
 
-        if (!user.isPresent()) { //회원가입
+        if (user.isEmpty()) { //회원가입
             UserDto userdto = UserDto.builder()
                     .id(userInfo.getId().intValue())
                     .email(userInfo.getKakao_account().toString())

@@ -2,7 +2,6 @@ package com.example.menuw.dto;
 
 import com.example.menuw.domain.User;
 import lombok.Builder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Builder
 public class UserDto {
