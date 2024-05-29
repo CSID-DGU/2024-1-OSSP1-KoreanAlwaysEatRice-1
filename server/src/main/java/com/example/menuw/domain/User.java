@@ -1,5 +1,6 @@
 package com.example.menuw.domain;
 
+import com.example.menuw.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,16 +22,13 @@ public class User implements UserDetails {
     @Id @GeneratedValue
     private Integer id;
 
+    public String email;
     public String nickname;
     public String profile_image;
     public String thumbnail_image;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Refrigerator refrigerator;
-
-    //Jwt 전용 설정
-    @Column(length = 100, nullable = false, unique = true)
-    private String keyCode; //로그인 식별키
 
     @ElementCollection(fetch = FetchType.EAGER) //roles 컬렉션
     private List<String> roles = new ArrayList<>();
@@ -44,7 +42,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return keyCode;
+        return email;
     }
 
     @Override
@@ -70,5 +68,15 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public static User toUser(UserDto userDto) {
+        return User.builder()
+                .id(userDto.id)
+                .email(userDto.email)
+                .thumbnail_image(userDto.thumbnail_image)
+                .profile_image(userDto.profile_image)
+                .nickname(userDto.nickname)
+                .build();
     }
 }

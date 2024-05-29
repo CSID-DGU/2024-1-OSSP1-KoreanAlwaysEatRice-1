@@ -1,4 +1,4 @@
-package com.example.menuw.dto;
+package com.example.menuw.dto.ResponseDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

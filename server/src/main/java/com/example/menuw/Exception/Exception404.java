@@ -1,6 +1,6 @@
 package com.example.menuw.Exception;
 
-import com.example.menuw.dto.ResponseDto;
+import com.example.menuw.dto.ResponseDto.ResponseDto;
 import org.springframework.http.HttpStatus;
 
 public class Exception404 extends RuntimeException {

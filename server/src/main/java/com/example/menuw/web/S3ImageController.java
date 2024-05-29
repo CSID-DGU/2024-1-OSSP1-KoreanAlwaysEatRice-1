@@ -1,7 +1,7 @@
 package com.example.menuw.web;
 
 import com.example.menuw.dto.IngredientDto;
-import com.example.menuw.dto.ResponseDto;
+import com.example.menuw.dto.ResponseDto.ResponseDto;
 import com.example.menuw.service.IngredientService;
 import com.example.menuw.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
