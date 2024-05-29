@@ -13,9 +13,10 @@ public class KakaoUserInfo {//토큰을 이용해 사용자 정보를 가져오�
     private static final String USER_INFO_URI = "https://kapi.kakao.com/v2/user/me";
 
     public KakaoUserInfoResponse getUserInfo(String token) {
+        System.out.println("token = " + token);
         Flux<KakaoUserInfoResponse> response = webClient.get()
                 .uri(USER_INFO_URI)
-                .header("Authorization", "Bearer " + token)
+                .header("Authorization", token)
                 .retrieve()
                 .bodyToFlux(KakaoUserInfoResponse.class);
         return response.blockFirst();

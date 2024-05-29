@@ -2,7 +2,7 @@ package com.example.menuw.web;
 
 import com.example.menuw.dto.MenuDto;
 import com.example.menuw.dto.RecipeDto;
-import com.example.menuw.dto.ResponseDto;
+import com.example.menuw.dto.ResponseDto.ResponseDto;
 import com.example.menuw.dto.requestDto.MenuRequestDto;
 import com.example.menuw.service.RecipeApiService;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecipeApiController {
     private final RecipeApiService recipeApiService;
-
-    @PostMapping("/api/recipe")
-    public ResponseEntity<List<MenuDto>> getMenuByIngredients(@RequestBody List<Long> ingredientId) {
-        return ResponseEntity.ok(recipeApiService.getMenu(ingredientId));
-    }
 
     @PostMapping("/menu/recipe")
     public ResponseDto<RecipeDto> getRecipeByMenuName(@RequestBody MenuRequestDto menuRequestDto) {
