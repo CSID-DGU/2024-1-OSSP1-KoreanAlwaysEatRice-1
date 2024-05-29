@@ -3,18 +3,18 @@ package com.kaer.menuw.presentation.home.refrigerator.recommend
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentMenuRecommendBinding
 import com.kaer.menuw.domain.entity.RecommendMenu
 import com.kaer.menuw.presentation.home.menurecipe.RecipePageActivity
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.type.CategoryTypeAdapter
+import com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListViewModel.Companion.CHOOSE_MENU
 import com.kaer.menuw.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuRecommendFragment: BaseFragment<FragmentMenuRecommendBinding>(R.layout.fragment_menu_recommend) {
+class MenuRecommendFragment :
+    BaseFragment<FragmentMenuRecommendBinding>(R.layout.fragment_menu_recommend) {
 
     private val viewModel by activityViewModels<MenuListViewModel>()
 
@@ -33,6 +33,7 @@ class MenuRecommendFragment: BaseFragment<FragmentMenuRecommendBinding>(R.layout
         _recommendMenuAdapter = RecommendMenuAdapter().apply {
             setOnItemClickListener(object : RecommendMenuAdapter.OnItemClickListener {
                 override fun onItemClick(item: RecommendMenu, position: Int) {
+                    intent.putExtra(CHOOSE_MENU, item.menuName)
                     startActivity(intent)
                 }
             })

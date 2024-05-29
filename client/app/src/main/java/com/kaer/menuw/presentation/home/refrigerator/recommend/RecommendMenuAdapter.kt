@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemRecommendMenuBinding
 import com.kaer.menuw.domain.entity.RecommendMenu
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.type.CategoryTypeAdapter
 import com.kaer.menuw.util.ItemDiffCallback
 import com.kaer.menuw.util.base.BindingAdapter.setImage
 

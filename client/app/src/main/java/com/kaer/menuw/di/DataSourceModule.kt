@@ -1,7 +1,9 @@
 package com.kaer.menuw.di
 
 import com.kaer.menuw.data.datasource.IngredientDataSource
+import com.kaer.menuw.data.datasource.MenuDataSource
 import com.kaer.menuw.data.datasource.impl.IngredientDataSourceImpl
+import com.kaer.menuw.data.datasource.impl.MenuDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,4 +17,8 @@ abstract class DataSourceModule {
     @Singleton
     @Binds
     abstract fun providesIngredientDataSource(dataSourceImpl: IngredientDataSourceImpl): IngredientDataSource
+
+    @Singleton
+    @Binds
+    abstract fun providesMenuDataSource(dataSourceImpl: MenuDataSourceImpl): MenuDataSource
 }

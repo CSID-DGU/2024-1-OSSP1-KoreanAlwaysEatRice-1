@@ -47,4 +47,8 @@ class MenuListViewModel @Inject constructor(): ViewModel() {
 
     val mockMenuList: LiveData<List<RecommendMenu>>
         get() = _mockMenuList
+
+    companion object {
+        const val CHOOSE_MENU = "CHOOSE_MENU"
+    }
 }

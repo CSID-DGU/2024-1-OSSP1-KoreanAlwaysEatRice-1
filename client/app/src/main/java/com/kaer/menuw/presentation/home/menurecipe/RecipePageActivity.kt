@@ -6,13 +6,14 @@ import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityRecipePageBinding
+import com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListViewModel.Companion.CHOOSE_MENU
 import com.kaer.menuw.util.base.BaseActivity
 import com.kaer.menuw.util.base.BaseDialog
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activity_recipe_page) {
+class RecipePageActivity : BaseActivity<ActivityRecipePageBinding>(R.layout.activity_recipe_page) {
 
     private val viewModel by viewModels<RecipePageViewModel>()
 
@@ -25,6 +26,7 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
 
         clickBackBtn()
         initSetAdapter()
+        initGetRecipeList()
         setEvaluateBtnEnabled()
         setRecipePageProgress()
     }
@@ -32,6 +34,16 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
     private fun clickBackBtn() {
         binding.btnRecipePageBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun initGetRecipeList() {
+        intent.getStringExtra(CHOOSE_MENU)?.let { viewModel.postRecipeList(it) }
+        viewModel.recipeList.observe(this) {
+            viewModel.mapRecipeItemList(it)
+        }
+        viewModel.recipeItemList.observe(this) {
+            recipePageAdapter.submitList(it)
         }
     }
 
@@ -45,9 +57,9 @@ class RecipePageActivity: BaseActivity<ActivityRecipePageBinding>(R.layout.activ
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                viewModel.setProgressPercent(position+1, recipePageAdapter.itemList.size)
+                viewModel.setProgressPercent(position + 1, recipePageAdapter.currentList.size)
 
-                if (position == recipePageAdapter.itemList.size - 1) {
+                if (position == recipePageAdapter.currentList.size - 1) {
                     binding.btnRecipePageEvaluate.visibility = View.VISIBLE
                     binding.btnRecipePageEvaluate.isEnabled = true
                 }
