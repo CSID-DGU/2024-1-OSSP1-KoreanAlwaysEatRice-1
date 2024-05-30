@@ -1,5 +1,7 @@
 package com.example.menuw.dto;
 
+import com.example.menuw.domain.Ingredient;
+import com.example.menuw.domain.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,7 +39,6 @@ public class MenuDto {
         this.menuImage = menuImage;
         this.ingredients = ingredients;
     }
-
 
     public void updateMenuLike(Integer menuLike) {
         this.menuLike = menuLike;
