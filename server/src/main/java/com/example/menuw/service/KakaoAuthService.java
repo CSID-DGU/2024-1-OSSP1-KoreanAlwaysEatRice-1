@@ -3,6 +3,7 @@ package com.example.menuw.service;
 import com.example.menuw.domain.User;
 import com.example.menuw.dto.KakaoDto.KakaoProfile;
 import com.example.menuw.dto.KakaoDto.KakaoUserInfoResponse;
+import com.example.menuw.dto.ResponseDto.MyPageUserInfoDto;
 import com.example.menuw.dto.ResponseDto.TokenDto;
 import com.example.menuw.dto.UserDto;
 import com.example.menuw.repository.UserRepository;
@@ -43,13 +44,13 @@ public class KakaoAuthService {
     }
 
     @Transactional(readOnly = true)
-    public KakaoProfile getUserInfo(String accessToken) {
+    public MyPageUserInfoDto getUserInfo(String accessToken) {
         KakaoUserInfoResponse userInfo = kakaoUserInfo.getUserInfo(accessToken);
 
-        return KakaoProfile.builder()
+        return MyPageUserInfoDto.builder()
+                .userImageUrl(userInfo.getProperties().getProfile_image())
+                .userName(userInfo.getKakao_account().getEmail())
                 .userNickname(userInfo.getProperties().getNickname())
-                .userName(userInfo.getKakao_account().getProfile().getUserName())
-                .profile_image_url(userInfo.getProperties().getProfile_image())
                 .build();
     }
 }
