@@ -18,18 +18,14 @@ import java.util.*;
 @RequiredArgsConstructor
 public class RecipeApiController {
     private final RecipeApiService recipeApiService;
-    /*
-        @PostMapping("/api/recipe")
-        public ResponseEntity<List<MenuDto>> getMenuByIngredients(@RequestBody List<Integer> ingredientId,@RequestBody String recipe,@RequestBody String menuType ) {
-            System.out.println("getMenuByIngredients" + ingredientId + " " + recipe + " " + menuType);
-            return ResponseEntity.ok().body(recipeApiService.getMenu(ingredientId,recipe, menuType));
-        }*/
+
     @PostMapping("/menu/list")
     public ResponseEntity<List<MenuDto>> createRecipe(@RequestBody RecipeRequestDto recipeRequest) {
         // 처리 결과에 따라 응답 반환
         return ResponseEntity.ok().body(recipeApiService.getMenu(recipeRequest.getIngredientList(),
                 recipeRequest.getMenuType(), recipeRequest.getRecipe()));
     }
+
 
     @PostMapping("/menu/recipe")
     public ResponseDto<RecipeDto> getRecipeByMenuName(@RequestBody RecipeRequestDto recipeRequestDto) {
