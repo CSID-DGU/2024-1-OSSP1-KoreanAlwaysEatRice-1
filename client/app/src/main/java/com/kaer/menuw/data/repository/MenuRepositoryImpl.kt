@@ -4,6 +4,7 @@ import com.kaer.menuw.data.datasource.MenuDataSource
 import com.kaer.menuw.domain.entity.LikeMenu
 import com.kaer.menuw.domain.entity.RecipeList
 import com.kaer.menuw.domain.repository.MenuRepository
+import timber.log.Timber
 import javax.inject.Inject
 
 class MenuRepositoryImpl @Inject constructor(private val menuDataSource: MenuDataSource) :
