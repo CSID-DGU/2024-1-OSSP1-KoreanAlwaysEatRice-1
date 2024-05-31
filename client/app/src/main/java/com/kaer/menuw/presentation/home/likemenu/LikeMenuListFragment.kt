@@ -20,6 +20,7 @@ class LikeMenuListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
 
         initSetAdapter()
         initSetLikeMenuList()
@@ -27,7 +28,7 @@ class LikeMenuListFragment :
 
     private fun initSetAdapter() {
         _likeMenuListAdapter = LikeMenuListAdapter()
-        binding.rcvMenuLike.adapter = likeMenuListAdapter
+        binding.rcvLikeMenuList.adapter = likeMenuListAdapter
     }
 
     private fun initSetLikeMenuList() {

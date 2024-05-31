@@ -19,10 +19,15 @@ class LikeMenuListViewModel @Inject constructor(private val getLikeMenuListUseCa
     val likeMenuList: LiveData<List<LikeMenu>>
         get() = _likeMenuList
 
+    private val _isListEmpty = MutableLiveData<Boolean>()
+    val isListEmpty: LiveData<Boolean>
+        get() = _isListEmpty
+
     fun getLikeMenuList() {
         viewModelScope.launch {
             getLikeMenuListUseCase().onSuccess {
-              _likeMenuList.value = it
+                _likeMenuList.value = it
+                _isListEmpty.value = it.isEmpty()
                 Timber.d("[좋게 평가한 메뉴 리스트] -> $it")
             }
         }
