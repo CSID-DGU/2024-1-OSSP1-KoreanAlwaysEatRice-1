@@ -1,4 +1,4 @@
-package com.example.menuw.dto;
+package com.example.menuw.dto.KakaoDto;
 
 import lombok.Getter;
 

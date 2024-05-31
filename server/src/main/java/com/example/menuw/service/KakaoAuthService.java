@@ -1,7 +1,8 @@
 package com.example.menuw.service;
 
 import com.example.menuw.domain.User;
-import com.example.menuw.dto.KakaoUserInfoResponse;
+import com.example.menuw.dto.KakaoDto.KakaoProfile;
+import com.example.menuw.dto.KakaoDto.KakaoUserInfoResponse;
 import com.example.menuw.dto.ResponseDto.TokenDto;
 import com.example.menuw.dto.UserDto;
 import com.example.menuw.repository.UserRepository;
@@ -38,6 +39,17 @@ public class KakaoAuthService {
         return TokenDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(jwtTokenProvider.createToken(userInfo.getId().toString()))
+                .build();
+    }
+
+    @Transactional(readOnly = true)
+    public KakaoProfile getUserInfo(String accessToken) {
+        KakaoUserInfoResponse userInfo = kakaoUserInfo.getUserInfo(accessToken);
+
+        return KakaoProfile.builder()
+                .userNickname(userInfo.getProperties().getNickname())
+                .userName(userInfo.getKakao_account().getProfile().getUserName())
+                .profile_image_url(userInfo.getProperties().getProfile_image())
                 .build();
     }
 }

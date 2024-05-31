@@ -1,6 +1,6 @@
 package com.example.menuw.service;
 
-import com.example.menuw.dto.KakaoUserInfoResponse;
+import com.example.menuw.dto.KakaoDto.KakaoUserInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
