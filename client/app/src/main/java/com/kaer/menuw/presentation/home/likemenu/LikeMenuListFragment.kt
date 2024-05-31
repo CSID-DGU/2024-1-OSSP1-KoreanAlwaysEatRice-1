@@ -15,11 +15,26 @@ class LikeMenuListFragment: BaseFragment<FragmentLikeMenuListBinding>(R.layout.f
 
     private val viewModel by viewModels<LikeMenuListViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    private var _likeMenuListAdapter: LikeMenuListAdapter? = null
+    private val likeMenuListAdapter
+        get() = requireNotNull(_likeMenuListAdapter)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initSetAdapter()
+        initSetLikeMenuList()
+    }
+
+    private fun initSetAdapter() {
+        _likeMenuListAdapter = LikeMenuListAdapter()
+        binding.rcvMenuLike.adapter = likeMenuListAdapter
+    }
+
+    private fun initSetLikeMenuList() {
+        viewModel.getLikeMenuList()
+        viewModel.likeMenuList.observe(viewLifecycleOwner) {
+            likeMenuListAdapter.submitList(it)
+        }
     }
 }
