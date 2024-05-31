@@ -18,6 +18,11 @@ public class Menu {
     private String menuImageURL;
     private String ingredients;
 
+    private String recipe;
+    private String menuType;
+    private int cal;
+    private int na;
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
