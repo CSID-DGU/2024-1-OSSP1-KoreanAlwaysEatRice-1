@@ -1,6 +1,8 @@
 package com.example.menuw.service;
 
+import com.example.menuw.dto.IngredientDto;
 import com.example.menuw.dto.MenuDto;
+import com.example.menuw.dto.MenuSimpleDto;
 import com.example.menuw.dto.requestDto.MenuRequestDto;
 import com.example.menuw.dto.ResponseDto.ResponseDto;
 import com.example.menuw.repository.MenuRepository;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -31,11 +34,8 @@ public class MenuService {
         }
     }
 
-
-    public List<MenuDto> getLikedMenuList() {
-        List<MenuDto> likedMenuList = menuRepository.findAllLikedMenuList();
-        return likedMenuList;
+    public List<MenuSimpleDto> getLikedMenuList() {
+        return menuRepository.findAllLikedMenuList();
     }
-
 
 }
