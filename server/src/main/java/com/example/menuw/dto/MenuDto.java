@@ -1,6 +1,11 @@
 package com.example.menuw.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import com.example.menuw.domain.Ingredient;
+import com.example.menuw.domain.Menu;
 
 @Data
 @Builder

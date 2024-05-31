@@ -1,6 +1,7 @@
 package com.example.menuw.web;
 
 import com.example.menuw.dto.MenuDto;
+import com.example.menuw.dto.MenuSimpleDto;
 import com.example.menuw.dto.requestDto.MenuRequestDto;
 import com.example.menuw.dto.ResponseDto.ResponseDto;
 import com.example.menuw.service.MenuService;
@@ -31,10 +32,9 @@ public class MenuController {
     }
 
     @GetMapping("/like/list")
-    public ResponseDto<List<MenuDto>> getLikedMenus() {
-        List<MenuDto> response = menuService.getLikedMenuList();
+    public ResponseDto<List<MenuSimpleDto>> getLikedMenus() {
+        List<MenuSimpleDto> response = menuService.getLikedMenuList();
         return ResponseDto.res(HttpStatus.OK, "좋게 평가한 레시피 불러오기에 성공하였습니다.", response);
     }
-
 
 }
