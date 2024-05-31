@@ -2,6 +2,7 @@ package com.kaer.menuw.data.datasource.impl
 
 import com.kaer.menuw.data.datasource.MenuDataSource
 import com.kaer.menuw.data.model.remote.request.RequestPostRecipeDto
+import com.kaer.menuw.data.model.remote.response.ResponseGetLikeMenuListDto
 import com.kaer.menuw.data.model.remote.response.ResponsePostRecipeDto
 import com.kaer.menuw.data.service.MenuService
 import javax.inject.Inject
@@ -12,4 +13,7 @@ class MenuDataSourceImpl @Inject constructor(private val apiService: MenuService
         apiService.postMenuRecipe(
             RequestPostRecipeDto(menuName)
         )
+
+    override suspend fun getLikeMenuList(): ResponseGetLikeMenuListDto =
+        apiService.getLikeMenuList()
 }

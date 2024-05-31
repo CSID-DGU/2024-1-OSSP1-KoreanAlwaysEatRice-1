@@ -1,17 +1,17 @@
 package com.kaer.menuw.data.model.remote.response
 
-import android.view.Menu
+import com.kaer.menuw.domain.entity.LikeMenu
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseGetLikeMenuListDto (
+data class ResponseGetLikeMenuListDto(
     @SerialName("status")
     val status: String,
     @SerialName("message")
     val message: String,
     @SerialName("data")
-    val data: MenuItem
+    val data: List<MenuItem>
 ) {
     @Serializable
     data class MenuItem(
@@ -24,4 +24,8 @@ data class ResponseGetLikeMenuListDto (
         @SerialName("ingredients")
         val ingredients: String
     )
+
+    fun toMenuItem() = data.map { menu ->
+        LikeMenu(menu.menuId, menu.menuName, menu.menuImageUrl, menu.ingredients)
+    }
 }
