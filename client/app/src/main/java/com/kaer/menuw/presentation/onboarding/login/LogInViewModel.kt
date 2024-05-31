@@ -9,6 +9,7 @@ import com.kaer.menuw.util.KakaoLogInCallback
 import com.kakao.sdk.auth.model.OAuthToken
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,6 +28,7 @@ class LogInViewModel @Inject constructor(
                     "application/json",
                     "Bearer ${oAuthToken?.accessToken}"
                 ).isSuccess
+                Timber.d("[카카오 로그인] token -> ${oAuthToken?.accessToken}")
             }
         }.setKakaoCallback(oAuthToken, error)
     }

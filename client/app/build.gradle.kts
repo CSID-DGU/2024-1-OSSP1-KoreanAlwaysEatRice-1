@@ -134,6 +134,9 @@ dependencies {
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
+
+    // dataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }
 
 fun getApiKey(propertyKey: String): String {
