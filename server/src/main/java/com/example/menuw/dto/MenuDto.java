@@ -33,6 +33,7 @@ public class MenuDto {
         this.menuId = menuId;
         this.menuName = menuName;
         this.menuImageURL = menuImageURL;
+
         this.ingredients = ingredients;
     }
     public void updateMenuLike(Integer menuLike) {
