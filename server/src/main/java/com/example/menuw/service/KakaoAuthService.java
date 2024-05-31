@@ -1,7 +1,6 @@
 package com.example.menuw.service;
 
 import com.example.menuw.domain.User;
-import com.example.menuw.dto.KakaoDto.KakaoProfile;
 import com.example.menuw.dto.KakaoDto.KakaoUserInfoResponse;
 import com.example.menuw.dto.ResponseDto.MyPageUserInfoDto;
 import com.example.menuw.dto.ResponseDto.TokenDto;
