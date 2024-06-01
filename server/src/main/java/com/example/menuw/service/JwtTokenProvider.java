@@ -52,6 +52,10 @@ public class JwtTokenProvider {
 
     //토큰에서 회원 정보 추출
     public String getUserPK(String token) {
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
@@ -68,5 +72,10 @@ public class JwtTokenProvider {
     //Request의 Header에서 token 값 가져오기
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("X-AUTH-TOKEN");
+    }
+
+    public Long getExpiration(String jwtToken) {
+        Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+        return claims.getBody().getExpiration().getTime();
     }
 }

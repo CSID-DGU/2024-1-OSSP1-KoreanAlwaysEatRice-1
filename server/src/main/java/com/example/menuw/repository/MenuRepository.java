@@ -8,14 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import org.springframework.data.jpa.repository.Query;
 
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
     @Query("SELECT new com.example.menuw.dto.MenuDto(menuLike, menuName, menuId, ingredients, menuImageURL) " + "FROM Menu WHERE menuName = :menuName")
     MenuDto findByMenuName(@Param("menuName") String menuName);
 
-    @Query("SELECT new com.example.menuw.dto.MenuSimpleDto(menuId, menuName, menuImageURL, ingredients, recipe, menuType, cal, na) " + "FROM Menu WHERE menuLike = 2")
+    @Query("SELECT new com.example.menuw.dto.MenuSimpleDto(menuId, menuName, menuImageURL, ingredients) FROM Menu WHERE menuLike = 2")
     List<MenuSimpleDto> findAllLikedMenuList();
-
 }
