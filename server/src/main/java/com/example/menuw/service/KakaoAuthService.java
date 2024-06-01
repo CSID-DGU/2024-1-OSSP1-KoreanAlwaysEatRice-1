@@ -1,6 +1,7 @@
 package com.example.menuw.service;
 
 import com.example.menuw.domain.User;
+import com.example.menuw.dto.KakaoDto.KakaoUnlinkResponse;
 import com.example.menuw.dto.KakaoDto.KakaoUserInfoResponse;
 import com.example.menuw.dto.ResponseDto.MyPageUserInfoDto;
 import com.example.menuw.dto.ResponseDto.TokenDto;
@@ -11,6 +12,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +25,8 @@ public class KakaoAuthService {
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final RedisTemplate<String, Object> redisTemplate;
+    private final String USER_UNLINK_URL = "https://kapi.kakao.com/v1/user/unlink";
+    private final WebClient webClient;
 
     @Transactional(readOnly = true) //카카오 로그인을 위해 회원가입 여부 확인, 회원이면 JWT 토큰 발급
     public TokenDto isSignedUp(String accessToken){
@@ -80,5 +85,16 @@ public class KakaoAuthService {
                 .accessToken(accessToken)
                 .refreshToken(authentication.getName())
                 .build();
+    }
+
+    public Long unlink(String accessToken) {
+        Flux<Long> id = webClient.post()
+                .uri(USER_UNLINK_URL)
+                .header("Authorization", accessToken)
+                .retrieve()
+                .bodyToFlux(KakaoUnlinkResponse.class)
+                .map(KakaoUnlinkResponse::getId);
+
+        return id.blockFirst();
     }
 }
