@@ -19,8 +19,8 @@ public class MenuController {
     private final MenuService menuService;
 
     @PatchMapping("/like")
-    public ResponseDto<Object> menuLike(@RequestBody MenuRequestDto menuRequestDto) {
-        menuService.decMenu(menuRequestDto);
+    public ResponseDto<Object> menuLike(@RequestHeader("Authorization") String accessToken, @RequestBody MenuRequestDto menuRequestDto) {
+        menuService.decMenu(menuRequestDto, accessToken);
         return ResponseDto.res(HttpStatus.OK, "레시피 저장에 성공하였습니다.", Collections.emptyMap());
     }
 

@@ -1,5 +1,6 @@
 package com.example.menuw.dto;
 
+import com.example.menuw.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class MenuDto {
     private double na;
     private double similarity;  //유사도
     private boolean recommend; // 추천
+    private User user;
 
     private Integer menuLike;
 
