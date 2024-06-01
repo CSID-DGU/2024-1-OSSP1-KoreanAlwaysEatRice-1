@@ -22,13 +22,8 @@ public class MenuController {
 
     @PatchMapping("/like")
     public ResponseDto<Object> menuLike(@RequestBody MenuRequestDto menuRequestDto) {
-        int dec = menuService.decMenu(menuRequestDto);
-        if (dec==2) {
-            return ResponseDto.res(HttpStatus.OK, "레시피 저장에 성공하였습니다.", Collections.emptyMap());
-        }
-        else {
-            return ResponseDto.res(HttpStatus.NOT_FOUND, "메뉴를 찾을 수 없습니다.", Collections.emptyMap());
-        }
+        menuService.decMenu(menuRequestDto);
+        return ResponseDto.res(HttpStatus.OK, "레시피 저장에 성공하였습니다.", Collections.emptyMap());
     }
 
     @GetMapping("/like/list")
@@ -36,5 +31,4 @@ public class MenuController {
         List<MenuSimpleDto> response = menuService.getLikedMenuList();
         return ResponseDto.res(HttpStatus.OK, "좋게 평가한 레시피 불러오기에 성공하였습니다.", response);
     }
-
 }

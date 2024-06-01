@@ -1,19 +1,14 @@
 package com.example.menuw.service;
 
-import com.example.menuw.dto.IngredientDto;
+import com.example.menuw.domain.Menu;
 import com.example.menuw.dto.MenuDto;
 import com.example.menuw.dto.MenuSimpleDto;
 import com.example.menuw.dto.requestDto.MenuRequestDto;
-import com.example.menuw.dto.ResponseDto.ResponseDto;
 import com.example.menuw.repository.MenuRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -21,17 +16,17 @@ import java.util.stream.Collectors;
 public class MenuService {
 
     private final MenuRepository menuRepository;
+    private final RecipeApiService recipeApiService;
 
-    public int decMenu(MenuRequestDto menuRequestDto) {
-        MenuDto menu = menuRepository.findByMenuName(menuRequestDto.getMenuName());
+    public void decMenu(MenuRequestDto menuRequestDto) {
+        MenuDto menuDto = menuRepository.findByMenuName(menuRequestDto.getMenuName());
 
-        if (menu != null) {
-            menu.updateMenuLike(menuRequestDto.getMenuLike());
-            return 2;
+        if (menuDto == null) { //DB에 없으면 새로 생성
+            menuDto = recipeApiService.useMenuAPIByMenuName(menuRequestDto.getMenuName());
         }
-        else {
-            return 1;
-        }
+        menuDto.setMenuLike(menuRequestDto.getMenuLike());
+
+        menuRepository.save(MenuDto.toEntity(menuDto));
     }
 
     public List<MenuSimpleDto> getLikedMenuList() {

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.example.menuw.domain.Ingredient;
 import com.example.menuw.domain.Menu;
 
 @Data
@@ -27,7 +26,7 @@ public class MenuDto {
 
     private Integer menuLike;
 
-    public MenuDto(Integer menuLike, String menuName, int menuId, String ingredients, String recipeImage) {
+    public MenuDto(int menuLike, String menuName, int menuId, String ingredients, String recipeImage) {
         this.menuLike = menuLike;
         this.menuName = menuName;
         this.menuId = menuId;
@@ -38,10 +37,24 @@ public class MenuDto {
         this.menuId = menuId;
         this.menuName = menuName;
         this.menuImageURL = menuImageURL;
-
         this.ingredients = ingredients;
     }
+
     public void updateMenuLike(Integer menuLike) {
         this.menuLike = menuLike;
+    }
+
+    public static Menu toEntity(MenuDto menuDto) {
+        return Menu.builder()
+                .menuId(menuDto.getMenuId())
+                .menuLike(menuDto.getMenuLike())
+                .menuName(menuDto.getMenuName())
+                .menuImageURL(menuDto.getMenuImageURL())
+                .ingredients(menuDto.getIngredients())
+                .recipe(menuDto.getRecipe())
+                .menuType(menuDto.getMenuType())
+                .cal(menuDto.getCal())
+                .na(menuDto.getNa())
+                .build();
     }
 }

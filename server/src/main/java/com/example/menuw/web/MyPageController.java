@@ -25,5 +25,4 @@ public class MyPageController {
         TokenDto tokenDto = kakaoAuthService.logout(accessToken);
         return ResponseDto.res(HttpStatus.OK, "로그아웃 성공", tokenDto);
     }
-
 }
