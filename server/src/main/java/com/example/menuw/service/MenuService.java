@@ -1,6 +1,5 @@
 package com.example.menuw.service;
 
-import com.example.menuw.domain.Menu;
 import com.example.menuw.dto.MenuDto;
 import com.example.menuw.dto.MenuSimpleDto;
 import com.example.menuw.dto.requestDto.MenuRequestDto;
