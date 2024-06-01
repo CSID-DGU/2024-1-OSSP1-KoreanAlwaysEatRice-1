@@ -68,12 +68,11 @@ public class KakaoAuthService {
         }
 
         Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
-
+        
         //Redis에서 User id로 저장된 refresh Token이 있는지 여부를 확인 후 삭제
         if (redisTemplate.opsForValue().get("RT:" + authentication.getName()) != null) {
             redisTemplate.delete("RT:" + authentication.getName());
         }
-
         Long expiration = jwtTokenProvider.getExpiration(accessToken);
         redisTemplate.opsForValue().set(accessToken, "logout", expiration, TimeUnit.MILLISECONDS);
 
