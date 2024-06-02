@@ -38,6 +38,37 @@ public class RecipeApiService {
         this.webClient = webClientBuilder.baseUrl("https://openapi.foodsafetykorea.go.kr/api/").build();
     }
 
+    public MenuDto useMenuAPIByMenuName(String menuName) { //메뉴명으로 API 호출
+        String query = String.format("COOKRCP01/json/0/1000/RCP_NM=%s", menuName);
+        try {
+            String url = this.url + query; // 예시 URL입니다. 실제 URL로 변경해주세요.
+            String jsonString = restTemplate.getForObject(url, String.class);
+
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray rows = jsonObject.getJSONObject("COOKRCP01").getJSONArray("row");
+            MenuDto menuDto = null;
+
+            for (int i = 0; i < rows.length(); i++) {
+                JSONObject row = rows.getJSONObject(i);
+
+                menuDto = MenuDto.builder()
+                        .menuName(row.getString("RCP_NM"))
+                        .menuId(Integer.parseInt(row.getString("RCP_SEQ")))
+                        .ingredients(row.getString("RCP_PARTS_DTLS"))
+                        .menuImageURL(row.getString("ATT_FILE_NO_MK"))
+                        .cal(Double.parseDouble((String)row.get("INFO_ENG")))
+                        .na(Double.parseDouble((String)row.get("INFO_NA")))
+                        .recipe(row.get("RCP_WAY2").toString())
+                        .menuType(row.get("RCP_PAT2").toString())
+                        .build();
+            }
+            return menuDto;
+
+        } catch (Exception e) {
+            throw new Exception404("해당 메뉴를 찾을 수 없습니다");
+        }
+    }
+
     // 레시피 정보를 벡터로 변환하는 함수
     private double[] recipeToVector(Map<String, Object> recipe) {
         double avgCal = 700.0;  // 평균 칼로리 값
@@ -195,14 +226,6 @@ public class RecipeApiService {
                                     .recommend(recommend)
                                     .menuType(row.get("RCP_PAT2").toString())
                                     .build();
-                        /*      recipes 테스트
-                        log.info("MenuName = {}", menuDto.getMenuName());
-                        log.info("recipe = {}",menuDto.getRecipe());
-                        log.info("menuType = {}", menuDto.getMenuType());
-                        log.info("similarity = {}", similarity);
-                        log.info("recipeVector = {}", recipeVector);
-                        log.info("recommend = {}", recommend);
-                            */
                             recipes.add(menuDto);
                         } catch (Exception e) {
                             log.error("오류다!!!!!!!");

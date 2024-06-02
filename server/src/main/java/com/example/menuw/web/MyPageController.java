@@ -26,11 +26,10 @@ public class MyPageController {
         TokenDto tokenDto = kakaoAuthService.logout(accessToken);
         return ResponseDto.res(HttpStatus.OK, "로그아웃 성공", tokenDto);
     }
-
+  
     @DeleteMapping("/withdrawal")
     public ResponseDto<?> withdrawal(@RequestHeader("Authorization") String accessToken) {
         Long id = kakaoAuthService.unlink(accessToken);
         return ResponseDto.res(HttpStatus.OK, "회원 탈퇴에 성공하였습니다.", Collections.emptyMap());
     }
-
 }
