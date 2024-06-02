@@ -32,7 +32,7 @@ public class KakaoAuthService {
     @Value("${oauth.kakao.admin-key}")
     private String adminKey;
 
-    @Transactional(readOnly = true) //카카오 로그인을 위해 회원가입 여부 확인, 회원이면 JWT 토큰 발급
+    @Transactional//카카오 로그인을 위해 회원가입 여부 확인, 회원이면 JWT 토큰 발급
     public TokenDto isSignedUp(String accessToken){
         KakaoUserInfoResponse userInfo = kakaoUserInfo.getUserInfo(accessToken);
         Optional<User> user = userRepository.findById(userInfo.getId());

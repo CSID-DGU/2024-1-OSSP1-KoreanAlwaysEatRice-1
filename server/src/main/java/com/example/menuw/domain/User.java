@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements UserDetails {
-    @Id @GeneratedValue
+    @Id @Column
     private Long id;
 
     public String email;
