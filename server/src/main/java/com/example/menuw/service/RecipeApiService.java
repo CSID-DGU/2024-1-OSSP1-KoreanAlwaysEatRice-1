@@ -22,8 +22,8 @@ public class RecipeApiService {
     private final WebClient webClient;
     // 사용자 프로파일 설정 (임시) - 실제 사용 시에는 사용자 데이터 기반으로 설정
     private final Map<String, Object> userProfile = new HashMap<>() {{
-        put("cal", 220.0);
-        put("na", 99.0);
+        put("cal", 220);
+        put("na", 99);
         put("조리방식", "찌기");      //찌기,굽기,볶기,기타
         put("요리종류", "후식");      //반찬,국&찌개,후식,일품
     }};
@@ -56,8 +56,8 @@ public class RecipeApiService {
                         .menuId(Integer.parseInt(row.getString("RCP_SEQ")))
                         .ingredients(row.getString("RCP_PARTS_DTLS"))
                         .menuImageURL(row.getString("ATT_FILE_NO_MK"))
-                        .cal(Double.parseDouble((String)row.get("INFO_ENG")))
-                        .na(Double.parseDouble((String)row.get("INFO_NA")))
+                        .cal((int) Double.parseDouble((String)row.get("INFO_ENG")))
+                        .na((int) Double.parseDouble((String)row.get("INFO_NA")))
                         .recipe(row.get("RCP_WAY2").toString())
                         .menuType(row.get("RCP_PAT2").toString())
                         .build();
@@ -71,8 +71,8 @@ public class RecipeApiService {
 
     // 레시피 정보를 벡터로 변환하는 함수
     private double[] recipeToVector(Map<String, Object> recipe) {
-        double avgCal = 700.0;  // 평균 칼로리 값
-        double avgNa = 700.0;  // 평균 나트륨 값
+        int avgCal = 700;  // 평균 칼로리 값
+        int avgNa = 700;  // 평균 나트륨 값
 
         Map<String, double[]> wayMap = new HashMap<>() {{
             put("찌기", new double[]{1, 0, 0, 0, 0, 0});
@@ -91,8 +91,8 @@ public class RecipeApiService {
             put("밥", new double[]{0.4, 0.4, 0.4, 0.4, 1, 0.4});
             put("기타", new double[]{0.4, 0.4, 0.4, 0.4, 0.4, 1});
         }};
-        double cal = Double.parseDouble(recipe.getOrDefault("cal", "0").toString()) / avgCal;
-        double na = Double.parseDouble(recipe.getOrDefault("na", "0").toString()) / avgNa;
+        int cal = (int) (Double.parseDouble(recipe.getOrDefault("cal", "0").toString()) / avgCal);
+        int na = (int) (Double.parseDouble(recipe.getOrDefault("na", "0").toString()) / avgNa);
         double[] wayVector = wayMap.getOrDefault(recipe.get("조리방식"), new double[]{0, 0, 0, 0, 0, 0});
         double[] patVector = patMap.getOrDefault(recipe.get("요리종류"), new double[]{0, 0, 0, 0, 0, 0});
 
@@ -107,7 +107,6 @@ public class RecipeApiService {
         double dotProduct = 0.0;
         double norm1 = 0.0;
         double norm2 = 0.0;
-        System.out.println("vector1 = " + Arrays.toString(vector1) + " vector2 = " + Arrays.toString(vector2));
         for (int i = 0; i < vector1.length; i++) {
             dotProduct += vector1[i] * vector2[i];
             norm1 += Math.pow(vector1[i], 2);
@@ -166,7 +165,6 @@ public class RecipeApiService {
     public String getIngredients2(Integer ingredientIds) {    //list가 아닌 인트를 인자로 받는 경우
 
         //ingredientRepository.findById(ingredientIds.intValue()).get().getIngredientName();
-        System.out.println("결과 = " + ingredientRepository.findById(ingredientIds.intValue()).get().getIngredientName());
         return ingredientRepository.findById(ingredientIds.intValue()).get().getIngredientName();
     }
 
@@ -195,9 +193,9 @@ public class RecipeApiService {
                         try {
                             JSONObject row = rows.getJSONObject(i);
                             String calorieString = (String) row.get("INFO_ENG"); // 문자열 가져오기
-                            double cal = Double.parseDouble(calorieString);
+                            int cal = (int) Double.parseDouble(calorieString);
                             String naString = (String) row.get("INFO_NA"); // 문자열 가져오기
-                            double na = Double.parseDouble(naString);
+                            int na = (int) Double.parseDouble(naString);
                             Map<String, Object> recipeInfo = new HashMap<>();
                             //레시피 인포에 4가지 정보 추가
 
@@ -219,8 +217,8 @@ public class RecipeApiService {
                                     .serving(row.getString("INFO_WGT"))
                                     .ingredients(row.getString("RCP_PARTS_DTLS"))
                                     .menuImageURL(row.getString("ATT_FILE_NO_MK"))
-                                    .cal(Double.parseDouble(row.get("INFO_ENG").toString()))
-                                    .na(Double.parseDouble(row.get("INFO_NA").toString()))
+                                    .cal((int) Double.parseDouble(row.get("INFO_ENG").toString()))
+                                    .na((int) Double.parseDouble(row.get("INFO_NA").toString()))
                                     .recipe(row.get("RCP_WAY2").toString())
                                     .similarity(similarity)
                                     .recommend(recommend)
