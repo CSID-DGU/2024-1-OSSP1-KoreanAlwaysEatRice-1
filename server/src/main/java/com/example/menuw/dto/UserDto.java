@@ -12,12 +12,12 @@ public class UserDto {
     public String profile_image;
     public String thumbnail_image;
 
-    public static User toDomain(UserDto userDto) {
-        return User.builder()
-                .id(userDto.id)
-                .nickname(userDto.nickname)
-                .profile_image(userDto.profile_image)
-                .thumbnail_image(userDto.thumbnail_image)
+    public static UserDto toDto(User user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .nickname(user.getNickname())
+                .profile_image(user.getProfile_image())
+                .thumbnail_image(user.getThumbnail_image())
                 .build();
     }
 }

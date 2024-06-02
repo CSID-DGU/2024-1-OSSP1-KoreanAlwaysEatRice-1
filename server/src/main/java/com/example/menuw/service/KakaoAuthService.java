@@ -42,7 +42,7 @@ public class KakaoAuthService {
                     .thumbnail_image(userInfo.getProperties().getThumbnail_image())
                     .build();
 
-            userRepository.save(UserDto.toDomain(userdto));
+            userRepository.save(User.toUser(userdto));
         }
 
         TokenDto tokenDto = TokenDto.builder()
@@ -57,12 +57,13 @@ public class KakaoAuthService {
 
     @Transactional(readOnly = true)
     public MyPageUserInfoDto getUserInfo(String accessToken) {
-        KakaoUserInfoResponse userInfo = kakaoUserInfo.getUserInfo(accessToken);
+        int id = Integer.parseInt(jwtTokenProvider.getUserPK(accessToken));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
         return MyPageUserInfoDto.builder()
-                .userImageUrl(userInfo.getProperties().getProfile_image())
-                .userName(userInfo.getKakao_account().getEmail())
-                .userNickname(userInfo.getProperties().getNickname())
+                .userImageUrl(user.getProfile_image())
+                .userName(user.getUsername())
+                .userNickname(user.getNickname())
                 .build();
     }
 
@@ -88,6 +89,9 @@ public class KakaoAuthService {
     }
 
     public Long unlink(String accessToken) {
+        int userId = Integer.parseInt(jwtTokenProvider.getUserPK(accessToken));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
         Flux<Long> id = webClient.post()
                 .uri(USER_UNLINK_URL)
                 .header("Authorization", accessToken)
