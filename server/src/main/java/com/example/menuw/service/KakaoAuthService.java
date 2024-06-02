@@ -8,6 +8,7 @@ import com.example.menuw.dto.ResponseDto.TokenDto;
 import com.example.menuw.dto.UserDto;
 import com.example.menuw.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class KakaoAuthService {
     private final RedisTemplate<String, Object> redisTemplate;
     private final String USER_UNLINK_URL = "https://kapi.kakao.com/v1/user/unlink";
     private final WebClient webClient;
+
+    @Value("${oauth.kakao.admin-key}")
+    private String adminKey;
 
     @Transactional(readOnly = true) //카카오 로그인을 위해 회원가입 여부 확인, 회원이면 JWT 토큰 발급
     public TokenDto isSignedUp(String accessToken){
@@ -90,11 +94,12 @@ public class KakaoAuthService {
 
     public Long unlink(String accessToken) {
         int userId = Integer.parseInt(jwtTokenProvider.getUserPK(accessToken));
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
         Flux<Long> id = webClient.post()
                 .uri(USER_UNLINK_URL)
-                .header("Authorization", accessToken)
+                .header("Authorization", "KakaoAK " + adminKey)
+                .bodyValue("target_id_type=user_id&target_id=" + userId)
                 .retrieve()
                 .bodyToFlux(KakaoUnlinkResponse.class)
                 .map(KakaoUnlinkResponse::getId);
