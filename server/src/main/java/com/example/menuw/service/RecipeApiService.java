@@ -22,10 +22,10 @@ public class RecipeApiService {
     private final WebClient webClient;
     // 사용자 프로파일 설정 (임시) - 실제 사용 시에는 사용자 데이터 기반으로 설정
     private final Map<String, Object> userProfile = new HashMap<>() {{
-        put("cal", 220);
-        put("na", 99);
-        put("조리방식", "찌기");      //찌기,굽기,볶기,기타
-        put("요리종류", "후식");      //반찬,국&찌개,후식,일품
+        put("cal", 700);
+        put("na", 700);
+        put("조리방식", "");      //찌기,굽기,볶기,기타
+        put("요리종류", "");      //반찬,국&찌개,후식,일품
     }};
     String apiKey = "1f83406b071d4b72928b";
     String url = "https://openapi.foodsafetykorea.go.kr/api/" + apiKey + "/";
@@ -91,10 +91,11 @@ public class RecipeApiService {
             put("밥", new double[]{0.4, 0.4, 0.4, 0.4, 1, 0.4});
             put("기타", new double[]{0.4, 0.4, 0.4, 0.4, 0.4, 1});
         }};
-        int cal = (int) (Double.parseDouble(recipe.getOrDefault("cal", "0").toString()) / avgCal);
-        int na = (int) (Double.parseDouble(recipe.getOrDefault("na", "0").toString()) / avgNa);
-        double[] wayVector = wayMap.getOrDefault(recipe.get("조리방식"), new double[]{0, 0, 0, 0, 0, 0});
-        double[] patVector = patMap.getOrDefault(recipe.get("요리종류"), new double[]{0, 0, 0, 0, 0, 0});
+        // 유사도 측정을 위해 이 이부분만 double형 사용
+        Double cal = (Double.parseDouble(recipe.getOrDefault("cal", "0").toString()) / avgCal);
+        Double na = (Double.parseDouble(recipe.getOrDefault("na", "0").toString()) / avgNa);
+        double[] wayVector = wayMap.getOrDefault(recipe.get("조리방식"), new double[]{0.5, 0.5, 0.5, 0.5, 0.5, 0.5});
+        double[] patVector = patMap.getOrDefault(recipe.get("요리종류"), new double[]{0.5, 0.5, 0.5, 0.5, 0.5, 0.5});
 
         return DoubleStream.concat(
                 DoubleStream.of(cal, na),
@@ -199,12 +200,13 @@ public class RecipeApiService {
                             Map<String, Object> recipeInfo = new HashMap<>();
                             //레시피 인포에 4가지 정보 추가
 
-                            recipeInfo.put("cal", cal);
-                            recipeInfo.put("na", na);
+                            recipeInfo.put("cal",cal);
+                            recipeInfo.put("na",na);
                             recipeInfo.put("조리방식", row.get("RCP_WAY2"));
                             recipeInfo.put("요리종류", row.get("RCP_PAT2"));
-                            double[] recipeVector = recipeToVector(recipeInfo);
+                            var recipeVector = recipeToVector(recipeInfo);
                             double similarity = cosineSimilarity(userVector, recipeVector); //유사도 계산
+
                             if (menuType.equals(row.get("RCP_WAY2"))) //클라에서 카테고리 받은 경우 유사도 증가
                                 similarity += 0.25;
                             if (recipe.equals(row.get("RCP_PAT2")))  //클라에서 카테고리 받은 경우 유사도 증가
@@ -225,6 +227,7 @@ public class RecipeApiService {
                                     .menuType(row.get("RCP_PAT2").toString())
                                     .build();
                             recipes.add(menuDto);
+
                         } catch (Exception e) {
                             log.error("오류다!!!!!!!");
                             e.printStackTrace();
