@@ -23,7 +23,7 @@ public class MenuService {
     private final JwtTokenProvider jwtTokenProvider;
 
     public void decMenu(MenuRequestDto menuRequestDto, String refreshToken) {
-        Optional<User> user = userRepository.findById(Integer.parseInt(jwtTokenProvider.getUserPK(refreshToken)));
+        Optional<User> user = userRepository.findById(Long.parseLong(jwtTokenProvider.getUserPK(refreshToken)));
         MenuDto menuDto = menuRepository.findByMenuName(menuRequestDto.getMenuName());
 
         if (menuDto == null) { //DB에 없으면 새로 생성
