@@ -28,7 +28,7 @@ public class KakaoAuthService {
     private final RedisTemplate<String, Object> redisTemplate;
     private final String USER_UNLINK_URL = "https://kapi.kakao.com/v1/user/unlink";
     private final WebClient webClient;
-
+  
     @Value("${oauth.kakao.admin-key}")
     private String adminKey;
 
