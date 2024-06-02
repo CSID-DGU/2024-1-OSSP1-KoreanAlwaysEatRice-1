@@ -52,6 +52,10 @@ public class JwtTokenProvider {
 
     //토큰에서 회원 정보 추출
     public String getUserPK(String token) {
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
