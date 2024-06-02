@@ -33,7 +33,7 @@ public class JwtTokenProvider {
     }
 
     //토큰 생성
-    public String createToken(String userPK) {
+    public String createAccessToken(String userPK) {
         Claims claims = Jwts.claims().setSubject(userPK); //JWT payload에 저장되는 정보 단위
         Date now = new Date();
         return Jwts.builder()
@@ -41,6 +41,14 @@ public class JwtTokenProvider {
                 .setIssuedAt(now) //토큰 발행 시간 정보
                 .setExpiration(new Date(now.getTime() + (30 * 60 * 1000L))) //토큰 유효시각 설정(30분)
                 .signWith(SignatureAlgorithm.HS256, secretKey) //암호화 알고리즘과, secret 값
+                .compact();
+    }
+
+    public String createRefreshToken(){
+        Date now = new Date();
+        return Jwts.builder()
+                .setExpiration(new Date(now.getTime() + (1000 * 60 * 60 * 24 * 14)))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 

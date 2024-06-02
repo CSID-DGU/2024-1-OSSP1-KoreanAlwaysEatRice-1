@@ -5,7 +5,7 @@ import lombok.Builder;
 
 @Builder
 public class UserDto {
-    public int id;
+    public Long id;
 
     public String email;
     public String nickname;
