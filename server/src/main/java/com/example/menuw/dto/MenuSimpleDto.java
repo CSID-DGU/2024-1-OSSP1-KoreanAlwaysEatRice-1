@@ -10,12 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MenuSimpleDto {
-    private int menuId;
+    private Integer menuId;
     private String menuName;
     private String menuImageURL;
     private String ingredients;
-    private String recipe;
-    private String menuType;
-    private int cal;
-    private int na;
 }

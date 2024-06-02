@@ -192,5 +192,4 @@ fabric.properties
 application.properties
 server\src\main\resources\application.properties
 **/application.properties
-server/build.gradle
 server/src/main/resources
