@@ -1,24 +1,34 @@
 package com.example.menuw.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Menu {
-    @Id @GeneratedValue
+    @Id @Column
     private Integer menuId;
+    @Column
     private Integer menuLike;
+    @Column
     private String menuName;
+    @Column
     private String menuImageURL;
+    @Column
     private String ingredients;
+    @Column
+    private String recipe;
+    @Column
+    private String menuType;
+    @Column
+    private double cal;
+    @Column
+    private double na;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
-
-    public void updateMenuLike(Integer menuLike) {
-        this.menuLike = menuLike;
-    }
 }

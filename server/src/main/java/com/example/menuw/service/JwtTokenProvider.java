@@ -33,7 +33,7 @@ public class JwtTokenProvider {
     }
 
     //토큰 생성
-    public String createToken(String userPK) {
+    public String createAccessToken(String userPK) {
         Claims claims = Jwts.claims().setSubject(userPK); //JWT payload에 저장되는 정보 단위
         Date now = new Date();
         return Jwts.builder()
@@ -41,6 +41,14 @@ public class JwtTokenProvider {
                 .setIssuedAt(now) //토큰 발행 시간 정보
                 .setExpiration(new Date(now.getTime() + (30 * 60 * 1000L))) //토큰 유효시각 설정(30분)
                 .signWith(SignatureAlgorithm.HS256, secretKey) //암호화 알고리즘과, secret 값
+                .compact();
+    }
+
+    public String createRefreshToken(){
+        Date now = new Date();
+        return Jwts.builder()
+                .setExpiration(new Date(now.getTime() + (1000 * 60 * 60 * 24 * 14)))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
@@ -52,6 +60,10 @@ public class JwtTokenProvider {
 
     //토큰에서 회원 정보 추출
     public String getUserPK(String token) {
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
@@ -68,5 +80,10 @@ public class JwtTokenProvider {
     //Request의 Header에서 token 값 가져오기
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("X-AUTH-TOKEN");
+    }
+
+    public Long getExpiration(String jwtToken) {
+        Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+        return claims.getBody().getExpiration().getTime();
     }
 }
