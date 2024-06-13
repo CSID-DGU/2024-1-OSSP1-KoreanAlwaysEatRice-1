@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements UserDetails {
-    @Id @GeneratedValue
-    private Integer id;
+    @Id @Column
+    private Long id;
 
     public String email;
     public String nickname;

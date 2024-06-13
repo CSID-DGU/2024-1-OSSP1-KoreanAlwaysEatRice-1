@@ -20,8 +20,8 @@ public class MenuDto {
     private String recipeImage;
     private String menuType;    //요리종류
     private String serving;
-    private double cal;
-    private double na;
+    private int cal;
+    private int na;
     private double similarity;  //유사도
     private boolean recommend; // 추천
     private User user;

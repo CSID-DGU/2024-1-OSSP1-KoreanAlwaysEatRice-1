@@ -32,14 +32,13 @@ public class KakaoAuthService {
     @Value("${oauth.kakao.admin-key}")
     private String adminKey;
 
-    @Transactional(readOnly = true) //카카오 로그인을 위해 회원가입 여부 확인, 회원이면 JWT 토큰 발급
+    @Transactional//카카오 로그인을 위해 회원가입 여부 확인, 회원이면 JWT 토큰 발급
     public TokenDto isSignedUp(String accessToken){
         KakaoUserInfoResponse userInfo = kakaoUserInfo.getUserInfo(accessToken);
-        Optional<User> user = userRepository.findById(userInfo.getId().intValue());
-
+        Optional<User> user = userRepository.findById(userInfo.getId());
         if (user.isEmpty()) { //회원가입
             UserDto userdto = UserDto.builder()
-                    .id(userInfo.getId().intValue())
+                    .id(userInfo.getId())
                     .email(userInfo.getKakao_account().toString())
                     .nickname(userInfo.getProperties().getNickname())
                     .profile_image(userInfo.getProperties().getProfile_image())
@@ -50,18 +49,18 @@ public class KakaoAuthService {
         }
 
         TokenDto tokenDto = TokenDto.builder()
-                .accessToken(accessToken)
-                .refreshToken(jwtTokenProvider.createToken(userInfo.getId().toString()))
+                .accessToken(jwtTokenProvider.createAccessToken(userInfo.getId().toString()))
+                .refreshToken(jwtTokenProvider.createRefreshToken())
                 .build();
 
-        redisTemplate.opsForValue().set("RT:"+userInfo.getId().intValue(), tokenDto.getRefreshToken(), jwtTokenProvider.getExpiration(accessToken), TimeUnit.MILLISECONDS);
+        //redisTemplate.opsForValue().set("RT:"+userInfo.getId().intValue(), tokenDto.getRefreshToken(), jwtTokenProvider.getExpiration(tokenDto.getAccessToken()), TimeUnit.MILLISECONDS);
 
         return tokenDto;
     }
 
     @Transactional(readOnly = true)
     public MyPageUserInfoDto getUserInfo(String accessToken) {
-        int id = Integer.parseInt(jwtTokenProvider.getUserPK(accessToken));
+        Long id = Long.parseLong(jwtTokenProvider.getUserPK(accessToken));
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
         return MyPageUserInfoDto.builder()
@@ -93,7 +92,7 @@ public class KakaoAuthService {
     }
 
     public Long unlink(String accessToken) {
-        int userId = Integer.parseInt(jwtTokenProvider.getUserPK(accessToken));
+        Long userId = Long.parseLong(jwtTokenProvider.getUserPK(accessToken));
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
         Flux<Long> id = webClient.post()
