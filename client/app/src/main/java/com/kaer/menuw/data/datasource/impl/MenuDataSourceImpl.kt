@@ -1,9 +1,11 @@
 package com.kaer.menuw.data.datasource.impl
 
 import com.kaer.menuw.data.datasource.MenuDataSource
+import com.kaer.menuw.data.model.remote.request.RequestPatchMenuLikeDto
 import com.kaer.menuw.data.model.remote.request.RequestPostRecipeDto
 import com.kaer.menuw.data.model.remote.request.RequestPostRecommendMenuListDto
 import com.kaer.menuw.data.model.remote.response.ResponseGetLikeMenuListDto
+import com.kaer.menuw.data.model.remote.response.ResponsePatchMenuLikeDto
 import com.kaer.menuw.data.model.remote.response.ResponsePostRecipeDto
 import com.kaer.menuw.data.model.remote.response.ResponsePostRecommendMenuListDto
 import com.kaer.menuw.data.service.MenuService
@@ -25,5 +27,16 @@ class MenuDataSourceImpl @Inject constructor(private val apiService: MenuService
         ingredientList: ArrayList<Int>
     ): List<ResponsePostRecommendMenuListDto> = apiService.postRecommendMenuList(
         RequestPostRecommendMenuListDto(recipe, menuType, ingredientList)
+    )
+
+    override suspend fun patchMenuLike(
+        contentType: String,
+        authorization: String,
+        menuName: String,
+        menuLike: Int
+    ): ResponsePatchMenuLikeDto = apiService.patchMenuLike(
+        contentType,
+        authorization,
+        RequestPatchMenuLikeDto(menuName, menuLike)
     )
 }

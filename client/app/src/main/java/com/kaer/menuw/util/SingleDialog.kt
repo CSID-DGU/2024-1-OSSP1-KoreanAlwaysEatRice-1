@@ -6,20 +6,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kaer.menuw.R
-import com.kaer.menuw.databinding.DialogUpdateBinding
+import com.kaer.menuw.databinding.DialogSingleBinding
 import com.kaer.menuw.util.base.BaseDialog
 
-class UpdateDialog: BaseDialog() {
+class SingleDialog : BaseDialog() {
 
-    private val binding: DialogUpdateBinding
-        get() = requireNotNull(_binding as DialogUpdateBinding)
+    private val binding: DialogSingleBinding
+        get() = requireNotNull(_binding as DialogSingleBinding)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DialogUpdateBinding.inflate(inflater, container, false)
+        _binding = DialogSingleBinding.inflate(inflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return binding.root
     }
@@ -32,7 +32,17 @@ class UpdateDialog: BaseDialog() {
         binding.tvDialogUpdateContent.text = content
     }
 
-    override fun setBtnClick(action: () -> Unit) {
+    override fun setDoBtnText() {
+        binding.tvDialogUpdateBtn.text = doBtnText
+    }
+
+    override fun setCancelBtnText() {
+    }
+
+    override fun setDoBtnClick(action: () -> Unit) {
         binding.tvDialogUpdateBtn.setOnClickListener { action() }
+    }
+
+    override fun setCancelBtnClick(action: () -> Unit) {
     }
 }

@@ -4,38 +4,55 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
-import com.kaer.menuw.util.UpdateDialog
+import com.kaer.menuw.util.DoubleDialog
+import com.kaer.menuw.util.SingleDialog
 
 abstract class BaseDialog : DialogFragment() {
 
     protected var _binding: ViewBinding? = null
     protected var title: String? = null
     protected var content: String? = null
-    protected lateinit var btnAction: () -> Unit
+    protected var doBtnText: String? = null
+    protected var cancelBtnText: String? = null
+    protected lateinit var doBtnAction: () -> Unit
+    protected lateinit var cancelBtnAction: () -> Unit
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setTitle()
         setContent()
-        setBtnClick { btnAction(); dismiss() }
+        setDoBtnText()
+        setCancelBtnText()
+        setDoBtnClick { doBtnAction(); dismiss() }
+        setCancelBtnClick { cancelBtnAction(); dismiss() }
     }
 
     abstract fun setTitle()
     abstract fun setContent()
-    abstract fun setBtnClick(action: () -> Unit)
+    abstract fun setDoBtnText()
+    abstract fun setCancelBtnText()
+    abstract fun setDoBtnClick(action: () -> Unit)
+    abstract fun setCancelBtnClick(action: () -> Unit)
 
     class Builder() {
         fun build(
+            type: DialogType,
             title: String,
             content: String,
-            btnAction: () -> Unit
+            doBtnText: String,
+            cancelBtnText: String,
+            doBtnAction: () -> Unit,
+            cancelBtnAction: () -> Unit
         ): BaseDialog {
-            val dialog = UpdateDialog()
-            return dialog.apply {
+//            val dialog = SingleDialog()
+            return type.getInstance().apply {
                 this.title = title
                 this.content = content
-                this.btnAction = btnAction
+                this.doBtnText = doBtnText
+                this.cancelBtnText = cancelBtnText
+                this.doBtnAction = doBtnAction
+                this.cancelBtnAction = cancelBtnAction
             }
         }
     }
@@ -47,5 +64,17 @@ abstract class BaseDialog : DialogFragment() {
 
     companion object {
         const val DIALOG = "DIALOG"
+    }
+
+    enum class DialogType {
+        SINGLE {
+            override fun getInstance(): BaseDialog = SingleDialog()
+        },
+        DOUBLE {
+            override fun getInstance(): BaseDialog = DoubleDialog()
+        },
+        ;
+
+        abstract fun getInstance(): BaseDialog
     }
 }

@@ -5,6 +5,7 @@ import com.kaer.menuw.domain.entity.LikeMenu
 import com.kaer.menuw.domain.entity.RecipeList
 import com.kaer.menuw.domain.entity.RecommendMenu
 import com.kaer.menuw.domain.repository.MenuRepository
+import timber.log.Timber
 import javax.inject.Inject
 
 class MenuRepositoryImpl @Inject constructor(private val menuDataSource: MenuDataSource) :
@@ -26,4 +27,22 @@ class MenuRepositoryImpl @Inject constructor(private val menuDataSource: MenuDat
         menuDataSource.postRecommendMenuList(recipe, menuType, ingredientList)
             .map { it.toMenuList() }
     }
+
+    override suspend fun patchMenuLike(
+        contentType: String,
+        authorization: String,
+        menuName: String,
+        menuLike: Int
+    ): Result<Boolean> = runCatching {
+        menuDataSource.patchMenuLike(contentType, authorization, menuName, menuLike)
+    }.fold(
+        onSuccess = {
+            Timber.d("레시피 저장에 성공")
+            Result.success(true)
+        },
+        onFailure = {
+            Timber.d("레시피 저장에 실패 -> ${it.message}")
+            Result.failure(it)
+        }
+    )
 }
