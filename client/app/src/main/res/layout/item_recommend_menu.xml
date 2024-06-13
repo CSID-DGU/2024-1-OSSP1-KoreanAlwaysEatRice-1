@@ -46,33 +46,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="파전" />
 
-        <TextView
-            android:id="@+id/tv_item_recommend_menu_ingredient"
-            style="@style/body"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{item.ingredients}"
-            android:textSize="16dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:ellipsize="end"
-            android:lines="1"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_recommend_menu_name"
-            app:layout_constraintBottom_toBottomOf="@id/iv_item_recommend_menu"
-            app:layout_constraintStart_toStartOf="@id/tv_item_recommend_menu_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="밀가루, 파, ..."/>
-
-<!--        <androidx.appcompat.widget.AppCompatImageView-->
-<!--            android:id="@+id/iv_item_recommend_next"-->
-<!--            android:layout_width="wrap_content"-->
+<!--        <TextView-->
+<!--            android:id="@+id/tv_item_recommend_menu_ingredient"-->
+<!--            style="@style/body"-->
+<!--            android:layout_width="0dp"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="30dp"-->
-<!--            android:src="@drawable/ic_arrow_next"-->
-<!--            app:layout_constraintTop_toTopOf="@id/iv_item_recommend_menu"-->
+<!--            android:text="@{item.ingredients}"-->
+<!--            android:textSize="16dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:ellipsize="end"-->
+<!--            android:lines="1"-->
+<!--            android:includeFontPadding="false"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_item_recommend_menu_name"-->
 <!--            app:layout_constraintBottom_toBottomOf="@id/iv_item_recommend_menu"-->
-<!--            app:layout_constraintEnd_toEndOf="parent" />-->
+<!--            app:layout_constraintStart_toStartOf="@id/tv_item_recommend_menu_name"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            tools:text="밀가루, 파, ..."/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

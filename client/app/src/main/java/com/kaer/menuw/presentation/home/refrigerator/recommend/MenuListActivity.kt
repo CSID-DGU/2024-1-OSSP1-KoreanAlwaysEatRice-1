@@ -9,8 +9,11 @@ import com.google.android.material.tabs.TabLayout
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMenuListBinding
 import com.kaer.menuw.presentation.home.HomeActivity
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryActivity.Companion.RECOMMEND_REQUEST_INTENT
+import com.kaer.menuw.presentation.home.refrigerator.recommend.category.model.RecommendRequestIntent
 import com.kaer.menuw.util.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MenuListActivity :
@@ -25,8 +28,17 @@ class MenuListActivity :
         clickBackBtn()
         initSetTabPage()
         clickTabItem()
+        initPostRecommendMenuList()
+    }
 
-//        viewModel.postRecommendMenuList()
+    private fun initPostRecommendMenuList() {
+        Timber.d("request intent test -> ${intent.getParcelableExtra<RecommendRequestIntent>(RECOMMEND_REQUEST_INTENT)}")
+        val intentData = intent.getParcelableExtra<RecommendRequestIntent>(RECOMMEND_REQUEST_INTENT)
+        intentData?.let {
+            viewModel.postRecommendMenuList(
+                it.recipe, it.menuType, it.ingredientList
+            )
+        }
     }
 
     private fun initSetTabPage() {
