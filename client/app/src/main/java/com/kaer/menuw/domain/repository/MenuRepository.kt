@@ -15,4 +15,6 @@ interface MenuRepository {
         menuType: String,
         ingredientList: ArrayList<Int>
     ): Result<List<RecommendMenu>>
+
+    suspend fun patchMenuLike(contentType: String, authorization: String, menuName: String, menuLike: Int): Result<Boolean>
 }

@@ -26,4 +26,20 @@ class MenuRepositoryImpl @Inject constructor(private val menuDataSource: MenuDat
         menuDataSource.postRecommendMenuList(recipe, menuType, ingredientList)
             .map { it.toMenuList() }
     }
+
+    override suspend fun patchMenuLike(
+        contentType: String,
+        authorization: String,
+        menuName: String,
+        menuLike: Int
+    ): Result<Boolean> = runCatching {
+        menuDataSource.patchMenuLike(contentType, authorization, menuName, menuLike)
+    }.fold(
+        onSuccess = {
+            Result.success(true)
+        },
+        onFailure = {
+            Result.failure(it)
+        }
+    )
 }
