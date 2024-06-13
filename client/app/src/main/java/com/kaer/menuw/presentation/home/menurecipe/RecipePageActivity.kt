@@ -80,9 +80,19 @@ class RecipePageActivity : BaseActivity<ActivityRecipePageBinding>(R.layout.acti
                 cancelBtnText = "별로였다",
                 doBtnAction = {
                     viewModel.patchMenuLike(2)
+                    viewModel.isMenuLikeValid.observe(this) {
+                        if (it) {
+                            finish()
+                        }
+                    }
                 },
                 cancelBtnAction = {
                     viewModel.patchMenuLike(1)
+                    viewModel.isMenuLikeValid.observe(this) {
+                        if (it) {
+                            finish()
+                        }
+                    }
                 }
             ).show(supportFragmentManager, BaseDialog.DIALOG)
         }
