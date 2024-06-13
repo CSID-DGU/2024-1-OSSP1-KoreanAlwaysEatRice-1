@@ -14,5 +14,5 @@ interface MenuDataSource {
         recipe: String,
         menuType: String,
         ingredientList: ArrayList<Int>
-    ): ResponsePostRecommendMenuListDto
+    ): List<ResponsePostRecommendMenuListDto>
 }

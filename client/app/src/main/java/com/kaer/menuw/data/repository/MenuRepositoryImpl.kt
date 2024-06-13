@@ -23,6 +23,7 @@ class MenuRepositoryImpl @Inject constructor(private val menuDataSource: MenuDat
         menuType: String,
         ingredientList: ArrayList<Int>
     ): Result<List<RecommendMenu>> = runCatching {
-        menuDataSource.postRecommendMenuList(recipe, menuType, ingredientList).toMenuList()
+        menuDataSource.postRecommendMenuList(recipe, menuType, ingredientList)
+            .map { it.toMenuList() }
     }
 }

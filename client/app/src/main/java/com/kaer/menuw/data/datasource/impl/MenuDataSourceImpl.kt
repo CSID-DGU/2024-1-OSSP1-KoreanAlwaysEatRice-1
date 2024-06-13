@@ -23,7 +23,7 @@ class MenuDataSourceImpl @Inject constructor(private val apiService: MenuService
         recipe: String,
         menuType: String,
         ingredientList: ArrayList<Int>
-    ): ResponsePostRecommendMenuListDto = apiService.postRecommendMenuList(
+    ): List<ResponsePostRecommendMenuListDto> = apiService.postRecommendMenuList(
         RequestPostRecommendMenuListDto(recipe, menuType, ingredientList)
     )
 }

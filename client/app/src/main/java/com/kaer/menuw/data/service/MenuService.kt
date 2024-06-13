@@ -18,5 +18,5 @@ interface MenuService {
     suspend fun getLikeMenuList(): ResponseGetLikeMenuListDto
 
     @POST("/menu/list")
-    suspend fun postRecommendMenuList(@Body request: RequestPostRecommendMenuListDto): ResponsePostRecommendMenuListDto
+    suspend fun postRecommendMenuList(@Body request: RequestPostRecommendMenuListDto): List<ResponsePostRecommendMenuListDto>
 }

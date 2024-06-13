@@ -5,8 +5,8 @@ data class RecommendMenu (
     val menuName: String,
     val menuImgUrl: String,
     val ingredients: String,
-    val cal: Int,
-    val na: Int,
+    val cal: Double,
+    val na: Double,
     val similarity: Double,
     val recommend: Boolean
 )
