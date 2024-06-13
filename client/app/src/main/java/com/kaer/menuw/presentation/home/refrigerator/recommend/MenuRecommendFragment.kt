@@ -11,6 +11,7 @@ import com.kaer.menuw.presentation.home.menurecipe.RecipePageActivity
 import com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListViewModel.Companion.CHOOSE_MENU
 import com.kaer.menuw.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MenuRecommendFragment :
@@ -40,6 +41,7 @@ class MenuRecommendFragment :
         }
         binding.rcvMenuRecommend.adapter = recommendMenuAdapter
         viewModel.recommendMenuList.observe(viewLifecycleOwner) {
+            Timber.d("recommendMenuList -> $it")
             recommendMenuAdapter.submitList(it)
         }
     }
