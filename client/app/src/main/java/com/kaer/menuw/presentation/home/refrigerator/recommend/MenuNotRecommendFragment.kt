@@ -39,7 +39,7 @@ class MenuNotRecommendFragment :
             })
         }
         binding.rcvMenuNotRecommend.adapter = recommendMenuAdapter
-        viewModel.recommendMenuList.observe(viewLifecycleOwner) {
+        viewModel.notRecommendMenuList.observe(viewLifecycleOwner) {
             Timber.d("notRecommendMenuList -> $it")
             recommendMenuAdapter.submitList(it)
         }
