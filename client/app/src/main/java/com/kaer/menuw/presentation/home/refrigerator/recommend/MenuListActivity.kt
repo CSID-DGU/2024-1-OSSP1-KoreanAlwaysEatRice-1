@@ -25,6 +25,8 @@ class MenuListActivity :
         clickBackBtn()
         initSetTabPage()
         clickTabItem()
+
+//        viewModel.postRecommendMenuList()
     }
 
     private fun initSetTabPage() {

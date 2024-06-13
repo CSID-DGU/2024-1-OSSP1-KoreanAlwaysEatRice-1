@@ -155,6 +155,10 @@ class AddIngredientViewModel @Inject constructor(
     val updateStoredIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
         get() = _updateStoredIngredientArray
 
+    private val _selectedIngredientIdArray: MutableLiveData<ArrayList<Int>> = MutableLiveData()
+    val selectedIngredientIdArray: LiveData<ArrayList<Int>>
+        get() = _selectedIngredientIdArray
+
     private val _addBtnEnabled: MutableLiveData<Boolean> = MutableLiveData()
     val addBtnEnabled: LiveData<Boolean>
         get() = _addBtnEnabled
@@ -221,6 +225,14 @@ class AddIngredientViewModel @Inject constructor(
 
     fun updateStoredList(storedList: ArrayList<IngredientTotal.IngredientItem>) {
         _updateStoredIngredientArray.value = storedList
+    }
+
+    fun setIngredientIdList(selectedArray: ArrayList<IngredientTotal.IngredientItem>) {
+        val idArray = ArrayList<Int>()
+        for (i in 0 until  selectedArray.size) {
+            idArray.add(selectedArray[i].ingredientId)
+        }
+        _selectedIngredientIdArray.value = idArray
     }
 
     fun setAddBtnEnabled(enabled: Boolean) {

@@ -13,6 +13,8 @@ import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCate
 import com.kaer.menuw.util.base.BaseDialog
 import com.kaer.menuw.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import java.io.Serializable
 
 @AndroidEntryPoint
 class RefrigeratorFragment :
@@ -91,7 +93,12 @@ class RefrigeratorFragment :
         val intent = Intent(requireActivity(), MenuCategoryActivity::class.java)
         binding.btnRefrigeratorSeeRecommend.setOnClickListener {
             if (sharedPreferences.getIngredientList().isNotEmpty()) {
-                startActivity(intent)
+                viewModel.setIngredientIdList(sharedPreferences.getIngredientList())
+                viewModel.selectedIngredientIdArray.observe(viewLifecycleOwner) {
+                    Timber.d("선택한 메뉴 아이디 전 -> $it")
+                    intent.putExtra(INGREDIENT_ID_LIST, it as Serializable)
+                    startActivity(intent)
+                }
             } else {
                 BaseDialog.Builder().build(
                     title = "저장된 재료가 없어요!",
@@ -117,5 +124,6 @@ class RefrigeratorFragment :
 
     companion object {
         private const val BOTTOM_SHEET = "BOTTOM_SHEET"
+        const val INGREDIENT_ID_LIST = "INGREDIENT_ID_LIST"
     }
 }
