@@ -76,10 +76,14 @@ class RecipePageActivity : BaseActivity<ActivityRecipePageBinding>(R.layout.acti
                 title = "메뉴 평가하기",
                 content = "추천받은 메뉴가 \n" +
                         "내 선호도에 적합했는지 평가해주세요!",
-                doBtnText = "확인",
-                cancelBtnText = "취소",
-                doBtnAction = {},
-                cancelBtnAction = {}
+                doBtnText = "좋았다",
+                cancelBtnText = "별로였다",
+                doBtnAction = {
+                    viewModel.patchMenuLike(2)
+                },
+                cancelBtnAction = {
+                    viewModel.patchMenuLike(1)
+                }
             ).show(supportFragmentManager, BaseDialog.DIALOG)
         }
     }
