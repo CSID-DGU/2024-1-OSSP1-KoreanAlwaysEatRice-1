@@ -72,10 +72,14 @@ class RecipePageActivity : BaseActivity<ActivityRecipePageBinding>(R.layout.acti
     private fun clickEvaluateBtn() {
         binding.btnRecipePageEvaluate.setOnClickListener {
             BaseDialog.Builder().build(
+                type = BaseDialog.DialogType.DOUBLE,
                 title = "메뉴 평가하기",
                 content = "추천받은 메뉴가 \n" +
                         "내 선호도에 적합했는지 평가해주세요!",
-                btnAction = {}
+                doBtnText = "확인",
+                cancelBtnText = "취소",
+                doBtnAction = {},
+                cancelBtnAction = {}
             ).show(supportFragmentManager, BaseDialog.DIALOG)
         }
     }
