@@ -1,6 +1,9 @@
 package com.kaer.menuw.domain.entity
 
-data class Token (
-    val accessToken: String,
-    val refreshToken: String
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Token(
+    val accessToken: String? = null,
+    val refreshToken: String? = null
 )
