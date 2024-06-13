@@ -38,7 +38,7 @@ class MenuNotRecommendFragment :
             })
         }
         binding.rcvMenuNotRecommend.adapter = recommendMenuAdapter
-        viewModel.mockMenuList.observe(viewLifecycleOwner) {
+        viewModel.recommendMenuList.observe(viewLifecycleOwner) {
             recommendMenuAdapter.submitList(it)
         }
     }
