@@ -3,8 +3,8 @@ package com.kaer.menuw.data.repository
 import com.kaer.menuw.data.datasource.MenuDataSource
 import com.kaer.menuw.domain.entity.LikeMenu
 import com.kaer.menuw.domain.entity.RecipeList
+import com.kaer.menuw.domain.entity.RecommendMenu
 import com.kaer.menuw.domain.repository.MenuRepository
-import timber.log.Timber
 import javax.inject.Inject
 
 class MenuRepositoryImpl @Inject constructor(private val menuDataSource: MenuDataSource) :
@@ -16,5 +16,14 @@ class MenuRepositoryImpl @Inject constructor(private val menuDataSource: MenuDat
 
     override suspend fun getLikeMenuList(): Result<List<LikeMenu>> = runCatching {
         menuDataSource.getLikeMenuList().toMenuItem()
+    }
+
+    override suspend fun postRecommendMenuList(
+        recipe: String,
+        menuType: String,
+        ingredientList: ArrayList<Int>
+    ): Result<List<RecommendMenu>> = runCatching {
+        menuDataSource.postRecommendMenuList(recipe, menuType, ingredientList)
+            .map { it.toMenuList() }
     }
 }

@@ -28,13 +28,21 @@ class MenuCategoryViewModel @Inject constructor() : ViewModel() {
         "밥", "반찬", "국/찌개", "후식"
     )
 
-    private val _selectedCategory = MutableLiveData<String>()
+    private val _selectedCategory = MutableLiveData<String>(RECIPE_NOT_CHOOSE)
     val selectedCategory: LiveData<String>
         get() = _selectedCategory
 
-    private val _selectedType = MutableLiveData<String>()
+    private val _selectedType = MutableLiveData<String>(TYPE_NOT_CHOOSE)
     val selectedType: LiveData<String>
         get() = _selectedType
+
+    private val _selectedIngredientId = MutableLiveData<ArrayList<Int>>()
+    val selectedIngredientId: LiveData<ArrayList<Int>>
+        get() = _selectedIngredientId
+
+    fun setSelectedIngredientIdList(selectedArray: ArrayList<Int>) {
+        _selectedIngredientId.value = selectedArray
+    }
 
     fun setCategoryFragmentPage(page: Int) {
         _currentCategoryPage.value = page
