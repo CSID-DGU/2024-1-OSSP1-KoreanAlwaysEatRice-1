@@ -21,6 +21,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.viewModel = viewModel
+
+        viewModel.getUserInfo()
 
         initSetTabPage()
         clickTabItem()

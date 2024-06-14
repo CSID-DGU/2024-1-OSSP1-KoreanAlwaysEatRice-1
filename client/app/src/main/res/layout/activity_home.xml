@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.kaer.menuw.presentation.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +18,7 @@
             android:id="@+id/tv_home_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="미엔유님의 냉장고"
+            android:text="@{viewModel.userName + `님의 냉장고`}"
             android:textAppearance="@style/head_20"
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
