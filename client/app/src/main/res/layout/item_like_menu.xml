@@ -16,16 +16,6 @@
         android:layout_marginVertical="5dp"
         android:layout_marginHorizontal="15dp">
 
-        <ImageView
-            android:id="@+id/iv_item_like_menu"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginVertical="15dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <TextView
             android:id="@+id/tv_item_like_menu_name"
             style="@style/body_bold"
@@ -41,28 +31,12 @@
             android:textColor="@color/green_primary"
             app:layout_goneMarginStart="10dp"
             android:layout_marginEnd="20dp"
-            app:layout_constraintTop_toTopOf="@id/iv_item_like_menu"
-            app:layout_constraintStart_toEndOf="@id/iv_item_like_menu"
+            android:layout_marginVertical="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="파전" />
-
-        <TextView
-            android:id="@+id/tv_item_like_menu_ingredient"
-            style="@style/body"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{item.ingredients}"
-            android:textSize="16dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:ellipsize="end"
-            android:lines="1"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_like_menu_name"
-            app:layout_constraintBottom_toBottomOf="@id/iv_item_like_menu"
-            app:layout_constraintStart_toStartOf="@id/tv_item_like_menu_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="밀가루, 파, ..."/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
