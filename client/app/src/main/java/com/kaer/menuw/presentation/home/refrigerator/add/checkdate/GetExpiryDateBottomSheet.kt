@@ -50,9 +50,10 @@ class GetExpiryDateBottomSheet : BottomSheetDialogFragment() {
             if (currentIndex >= ingredients.size) {
                 viewModel.setExpiryDate(expiryDate)
                 dismiss()
-            }
-            binding.btnExpiryDate.setOnClickListener {
-                if (currentIndex < ingredients.size) {
+            } else {
+                binding.tvExpiryDateIngredient.text = ingredients[currentIndex].ingredientName
+                binding.btnExpiryDate.setOnClickListener {
+                    Timber.d("테스트 클릭 재료명 -> ${ingredients[currentIndex].ingredientName}")
                     val selectedDate =
                         "${binding.datepickerExpiryDate.year} - ${binding.datepickerExpiryDate.month + 1} - ${binding.datepickerExpiryDate.dayOfMonth}"
                     expiryDate.add(selectedDate)
