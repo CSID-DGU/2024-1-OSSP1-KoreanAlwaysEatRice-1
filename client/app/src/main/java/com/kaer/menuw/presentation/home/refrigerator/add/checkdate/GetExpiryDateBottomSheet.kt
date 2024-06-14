@@ -47,6 +47,7 @@ class GetExpiryDateBottomSheet : BottomSheetDialogFragment() {
         viewModel.selectedIngredientArray.observe(viewLifecycleOwner) { ingredients ->
             val expiryDate = viewModel.getDatesFromRefrigerator(sharedPreferences.getIngredientList(), ingredients)
             var currentIndex = expiryDate.size
+            val tempIndex = currentIndex
 
             if (currentIndex >= ingredients.size) {
                 viewModel.setExpiryDate(expiryDate)
@@ -54,18 +55,21 @@ class GetExpiryDateBottomSheet : BottomSheetDialogFragment() {
             } else {
                 binding.tvExpiryDateIngredient.text = ingredients[currentIndex].ingredientName
                 binding.btnExpiryDate.setOnClickListener {
-                    Timber.d("테스트 클릭 재료명 -> ${ingredients[currentIndex].ingredientName}")
-                    binding.tvExpiryDateIngredient.text = ingredients[currentIndex].ingredientName
-                    val selectedDate =
-                        "${binding.datepickerExpiryDate.year} - ${binding.datepickerExpiryDate.month + 1} - ${binding.datepickerExpiryDate.dayOfMonth}"
+
+                    val selectedDate = "${binding.datepickerExpiryDate.year} - ${binding.datepickerExpiryDate.month + 1} - ${binding.datepickerExpiryDate.dayOfMonth}"
                     expiryDate.add(selectedDate)
                     Timber.d("테스트 클릭 expiry-> $expiryDate")
+
+                    currentIndex++
+
+                    if (currentIndex < ingredients.size) {
+                        binding.tvExpiryDateIngredient.text = ingredients[currentIndex].ingredientName
+                    }
 
                     if (expiryDate.size == ingredients.size) {
                         viewModel.setExpiryDate(expiryDate)
                         dismiss()
                     }
-                    currentIndex++
                 }
             }
         }
