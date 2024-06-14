@@ -29,7 +29,7 @@ class LikeMenuListViewModel @Inject constructor(private val getLikeMenuListUseCa
                 _likeMenuList.value = it
                 _isListEmpty.value = it.isEmpty()
                 Timber.d("[좋게 평가한 메뉴 리스트] -> $it")
-            }
+            }.onFailure { Timber.d("[좋게 평가한 메뉴 리스트] 실패 -> ${it.message}") }
         }
     }
 }
