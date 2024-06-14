@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kaer.menuw.databinding.BottomsheetGetExpiryDateBinding
+import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.home.refrigerator.add.SharedPreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import kotlin.math.exp
 
 @AndroidEntryPoint
 class GetExpiryDateBottomSheet : BottomSheetDialogFragment() {
@@ -42,9 +44,13 @@ class GetExpiryDateBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun setExpiryDate() {
-        val expiryDate = ArrayList<String>()
-        var currentIndex = 0
         viewModel.selectedIngredientArray.observe(viewLifecycleOwner) { ingredients ->
+            val expiryDate = viewModel.getDatesFromRefrigerator(sharedPreferences.getIngredientList(), ingredients)
+            var currentIndex = expiryDate.size
+            if (currentIndex >= ingredients.size) {
+                viewModel.setExpiryDate(expiryDate)
+                dismiss()
+            }
             binding.btnExpiryDate.setOnClickListener {
                 if (currentIndex < ingredients.size) {
                     val selectedDate =

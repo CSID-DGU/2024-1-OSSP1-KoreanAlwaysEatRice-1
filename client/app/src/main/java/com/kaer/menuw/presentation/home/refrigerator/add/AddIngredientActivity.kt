@@ -109,9 +109,9 @@ class AddIngredientActivity :
     private fun clickAddBtn() {
         val intent = Intent(this, HomeActivity::class.java)
         binding.btnAddIngredientAdd.setOnClickListener {
-            GetExpiryDateBottomSheet().show(supportFragmentManager, BOTTOM_SHEET)
 
             viewModel.selectedIngredientArray.observe(this) { ingredients ->
+                GetExpiryDateBottomSheet().show(supportFragmentManager, BOTTOM_SHEET)
                 viewModel.expiryDate.observe(this) { dates ->
                     sharedPreferences.storeIngredientIdList(
                         viewModel.changeIngredientToRefrigerator(
