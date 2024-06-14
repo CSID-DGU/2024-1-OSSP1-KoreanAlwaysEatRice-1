@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMypageBinding
 import com.kaer.menuw.util.base.BaseActivity
-import com.kaer.menuw.util.base.BindingAdapter.setImage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,8 +21,8 @@ class MyPageActivity : BaseActivity<ActivityMypageBinding>(R.layout.activity_myp
 
     private fun initUserInfo() {
         viewModel.getUserInfo()
-        viewModel.userInfo.observe(this) {
-            binding.tvMypageUserNickname.text = it.userNickName
+        viewModel.userName.observe(this) {
+            binding.tvMypageUserNickname.text = it
         }
     }
 
