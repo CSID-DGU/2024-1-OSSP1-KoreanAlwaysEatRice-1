@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kaer.menuw.databinding.ItemIngredientListAddBinding
+import com.kaer.menuw.databinding.ItemIngredientRefrigeratorBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
 import com.kaer.menuw.util.base.BindingAdapter.setCoilImage
@@ -24,7 +24,7 @@ class RefrigeratorAdapter :
     var selectedIngredientArray: ArrayList<IngredientTotal.IngredientItem> = ArrayList()
 
     inner class RefrigeratorViewHolder(
-        val binding: ItemIngredientListAddBinding
+        val binding: ItemIngredientRefrigeratorBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: IngredientTotal.IngredientItem, onClickListener: View.OnClickListener) {
             with(binding) {
@@ -44,7 +44,7 @@ class RefrigeratorAdapter :
     }
 
     private fun ingredientSelection(
-        binding: ItemIngredientListAddBinding,
+        binding: ItemIngredientRefrigeratorBinding,
         ingredientItem: IngredientTotal.IngredientItem
     ) {
         val isIngredientSelected: Boolean = selectedIngredientArray.contains(ingredientItem)
@@ -64,7 +64,7 @@ class RefrigeratorAdapter :
     private fun removeIngredientItem(
         ingredientArray: ArrayList<IngredientTotal.IngredientItem>,
         selectedId: Int,
-        binding: ItemIngredientListAddBinding
+        binding: ItemIngredientRefrigeratorBinding
     ) {
         ingredientArray.removeAt(selectedId)
         binding.root.isActivated = false
@@ -72,7 +72,11 @@ class RefrigeratorAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RefrigeratorViewHolder {
         val binding =
-            ItemIngredientListAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemIngredientRefrigeratorBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         return RefrigeratorViewHolder(binding)
     }
 
