@@ -2,13 +2,13 @@ package com.kaer.menuw.data.repository
 
 import com.kaer.menuw.data.datasource.InfoDataSource
 import com.kaer.menuw.domain.repository.InfoRepository
-import com.kaer.menuw.domain.repository.UserRepository
+import com.kaer.menuw.domain.repository.StoredUserRepository
 import timber.log.Timber
 import javax.inject.Inject
 
 class InfoRepositoryImpl @Inject constructor(
     private val infoDataSource: InfoDataSource,
-    private val userRepository: UserRepository
+    private val userRepository: StoredUserRepository
 ) :
     InfoRepository {
 

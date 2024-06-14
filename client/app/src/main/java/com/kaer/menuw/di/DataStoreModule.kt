@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.kaer.menuw.data.datasource.TokenDataSource
-import com.kaer.menuw.data.datasource.UserDataSource
+import com.kaer.menuw.data.datasource.StoredUserDataSource
 import com.kaer.menuw.domain.entity.Token
 import com.kaer.menuw.domain.entity.UserInfo
 import dagger.Module
@@ -40,7 +40,7 @@ object DataStoreModule {
     @Provides
     fun provideUserProtoDataStore(
         @ApplicationContext appContext: Context,
-        userDataSource: UserDataSource
+        userDataSource: StoredUserDataSource
     ): DataStore<UserInfo> {
         return DataStoreFactory.create(
             produceFile = {
