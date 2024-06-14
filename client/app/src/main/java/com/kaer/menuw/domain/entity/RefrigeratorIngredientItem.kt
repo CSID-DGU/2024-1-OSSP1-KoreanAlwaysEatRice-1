@@ -7,5 +7,5 @@ data class RefrigeratorIngredientItem (
     val ingredientId: Int,
     val ingredientName: String,
     val ingredientImageUrl: String,
-    val expiryDate: LocalDate
+    val expiryDate: String
 )

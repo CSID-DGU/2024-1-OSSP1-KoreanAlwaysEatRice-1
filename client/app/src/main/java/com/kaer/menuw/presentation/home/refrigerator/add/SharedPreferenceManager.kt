@@ -14,13 +14,13 @@ class SharedPreferenceManager(context: Context) {
     fun storeIngredientIdList(idList: ArrayList<RefrigeratorIngredientItem>) {
         val idListJson = Gson().toJson(idList)
         with (sharedPreferences.edit()) {
-            putString(KEY_NAME, idListJson)
+            putString(REFRIGERATOR_KEY_NAME, idListJson)
             apply()
         }
     }
 
     fun getIngredientList(): ArrayList<RefrigeratorIngredientItem> {
-        val idListJson = sharedPreferences.getString(KEY_NAME, null)
+        val idListJson = sharedPreferences.getString(REFRIGERATOR_KEY_NAME, null)
         return if (idListJson != null) {
             val type = object : TypeToken<ArrayList<RefrigeratorIngredientItem>>() {}.type
             Gson().fromJson(idListJson, type)
@@ -38,5 +38,6 @@ class SharedPreferenceManager(context: Context) {
     companion object {
         const val PREFERENCE_NAME = "APP_PREFERENCES"
         const val KEY_NAME = "STORED_INGREDIENT"
+        const val REFRIGERATOR_KEY_NAME = "STORED_REFRIGERATOR"
     }
 }

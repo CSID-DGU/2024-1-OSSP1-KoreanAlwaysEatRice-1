@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -127,7 +128,7 @@ class AddIngredientViewModel @Inject constructor(
     }
 
     fun changeIngredientToRefrigerator(originalArray: ArrayList<IngredientTotal.IngredientItem>): ArrayList<RefrigeratorIngredientItem> {
-        val date = LocalDate.now()
+        val date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         val temp = ArrayList<RefrigeratorIngredientItem>()
         for (i in 0 until  originalArray.size) {
             temp.add(RefrigeratorIngredientItem(originalArray[i].ingredientId, originalArray[i].ingredientName, originalArray[i].ingredientImageUrl, date))
