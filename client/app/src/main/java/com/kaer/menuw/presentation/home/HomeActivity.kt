@@ -10,7 +10,7 @@ import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityHomeBinding
 import com.kaer.menuw.presentation.home.likemenu.LikeMenuListFragment
 import com.kaer.menuw.presentation.home.refrigerator.RefrigeratorFragment
-import com.kaer.menuw.presentation.mypage.MyPage
+import com.kaer.menuw.presentation.mypage.MyPageActivity
 import com.kaer.menuw.util.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +28,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     }
 
     private fun clickSetting() {
-        val intent = Intent(this, MyPage::class.java)
+        val intent = Intent(this, MyPageActivity::class.java)
         binding.ivHomeSetting.setOnClickListener {
             startActivity(intent)
         }
