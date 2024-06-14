@@ -15,7 +15,6 @@ import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.SEASONING
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class AddIngredientBottomSheet : BottomSheetDialogFragment() {
@@ -121,13 +120,11 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     private fun clickAddBtn() {
         binding.btnAddIngredientAdd.setOnClickListener {
             viewModel.selectedIngredientArray.observe(viewLifecycleOwner) { ingredientList ->
-//                viewModel.changeIngredientToRefrigerator(ingredientList)
-//                viewModel.refrigeratorIngredientArray.observe(viewLifecycleOwner) { refrigeratorList ->
-//                    sharedPreferences.storeIngredientIdList(refrigeratorList)
-//                }
-                sharedPreferences.storeIngredientIdList(viewModel.changeIngredientToRefrigerator(ingredientList))
-                Timber.d("저장된 재료 테스트 바텀시트 -> ${viewModel.changeIngredientToRefrigerator(ingredientList)} // ${sharedPreferences.getIngredientList()}")
-//                sharedPreferences.storeIngredientIdList(it)
+                sharedPreferences.storeIngredientIdList(
+                    viewModel.changeIngredientToRefrigerator(
+                        ingredientList
+                    )
+                )
                 viewModel.updateStoredList(ingredientList)
             }
             dismiss()

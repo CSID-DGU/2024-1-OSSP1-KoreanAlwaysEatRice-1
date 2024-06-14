@@ -133,7 +133,6 @@ class AddIngredientViewModel @Inject constructor(
         for (i in 0 until  originalArray.size) {
             temp.add(RefrigeratorIngredientItem(originalArray[i].ingredientId, originalArray[i].ingredientName, originalArray[i].ingredientImageUrl, date))
         }
-//        _refrigeratorIngredientArray.value = temp
         return temp
     }
 

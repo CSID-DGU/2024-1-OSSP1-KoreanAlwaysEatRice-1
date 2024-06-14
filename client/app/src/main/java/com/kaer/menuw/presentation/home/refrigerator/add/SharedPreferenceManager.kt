@@ -4,16 +4,16 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.domain.entity.RefrigeratorIngredientItem
 
 class SharedPreferenceManager(context: Context) {
 
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+    private val sharedPreferences: SharedPreferences =
+        context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
     fun storeIngredientIdList(idList: ArrayList<RefrigeratorIngredientItem>) {
         val idListJson = Gson().toJson(idList)
-        with (sharedPreferences.edit()) {
+        with(sharedPreferences.edit()) {
             putString(REFRIGERATOR_KEY_NAME, idListJson)
             apply()
         }
@@ -37,7 +37,6 @@ class SharedPreferenceManager(context: Context) {
 
     companion object {
         const val PREFERENCE_NAME = "APP_PREFERENCES"
-        const val KEY_NAME = "STORED_INGREDIENT"
         const val REFRIGERATOR_KEY_NAME = "STORED_REFRIGERATOR"
     }
 }
