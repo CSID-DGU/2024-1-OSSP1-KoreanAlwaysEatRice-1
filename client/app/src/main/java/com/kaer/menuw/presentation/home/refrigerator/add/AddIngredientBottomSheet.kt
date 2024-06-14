@@ -80,6 +80,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         binding.rcvAddIngredientType.adapter = ingredientTypeAdapter
         viewModel.ingredientList.observe(viewLifecycleOwner) {
             ingredientTypeAdapter.submitList(it)
+            ingredientListAdapter.submitList(it[0].ingredientListItem)
         }
         makeListAdapter()
     }
