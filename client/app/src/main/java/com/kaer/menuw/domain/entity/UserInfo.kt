@@ -1,6 +1,9 @@
 package com.kaer.menuw.domain.entity
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class UserInfo (
-    val userNickName: String,
-    val userImageUrl: String
+    val userNickName: String? = null,
+    val userImageUrl: String? = null
 )

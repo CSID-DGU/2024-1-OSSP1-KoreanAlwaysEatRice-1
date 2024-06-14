@@ -5,7 +5,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.kaer.menuw.data.datasource.TokenDataSource
+import com.kaer.menuw.data.datasource.UserDataSource
 import com.kaer.menuw.domain.entity.Token
+import com.kaer.menuw.domain.entity.UserInfo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +20,7 @@ import javax.inject.Singleton
 object DataStoreModule {
 
     private const val DATA_STORE_FILE_NAME = "token_prefs.pb"
+    private const val USER_INFO_STORE_FILE_NAME = "user_info_prefs.pb"
 
     @Singleton
     @Provides
@@ -30,6 +33,20 @@ object DataStoreModule {
                 appContext.dataStoreFile(DATA_STORE_FILE_NAME)
             },
             serializer = tokenDataSource
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserProtoDataStore(
+        @ApplicationContext appContext: Context,
+        userDataSource: UserDataSource
+    ): DataStore<UserInfo> {
+        return DataStoreFactory.create(
+            produceFile = {
+                appContext.dataStoreFile(USER_INFO_STORE_FILE_NAME)
+            },
+            serializer = userDataSource
         )
     }
 }
