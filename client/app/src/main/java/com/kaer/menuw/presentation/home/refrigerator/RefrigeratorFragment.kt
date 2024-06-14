@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentRefrigeratorBinding
-import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientBottomSheet
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientActivity
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.home.refrigerator.add.SharedPreferenceManager
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryActivity
@@ -116,10 +116,13 @@ class RefrigeratorFragment :
     }
 
     private fun clickAddIngredientBtn() {
+        val intent = Intent(requireActivity(), AddIngredientActivity::class.java)
 
         binding.btnRefrigeratorAddIngredient.setOnClickListener {
             viewModel.clickTypeId(0)
-            AddIngredientBottomSheet().show(parentFragmentManager, BOTTOM_SHEET)
+//            AddIngredientActivity().show(parentFragmentManager, BOTTOM_SHEET)
+            activity?.finishAffinity()
+            startActivity(intent)
         }
     }
 
