@@ -4,5 +4,5 @@ import com.kaer.menuw.domain.entity.UserInfo
 
 interface InfoRepository {
 
-    suspend fun getUserInfo(contentType: String, authorization: String): Result<UserInfo>
+    suspend fun getUserInfo(contentType: String, authorization: String): Result<Boolean>
 }
