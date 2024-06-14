@@ -38,10 +38,10 @@ class AddIngredientViewModel @Inject constructor(
     val selectedIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
         get() = _selectedIngredientArray
 
-    private val _updateStoredIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> =
-        MutableLiveData()
-    val updateStoredIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
-        get() = _updateStoredIngredientArray
+//    private val _updateStoredIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> =
+//        MutableLiveData()
+//    val updateStoredIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
+//        get() = _updateStoredIngredientArray
 
     private val _refrigeratorIngredientArray: MutableLiveData<ArrayList<RefrigeratorIngredientItem>> = MutableLiveData()
     val refrigeratorIngredientArray: LiveData<ArrayList<RefrigeratorIngredientItem>>
@@ -115,9 +115,9 @@ class AddIngredientViewModel @Inject constructor(
         _selectedIngredientArray.value = selectedArray
     }
 
-    fun updateStoredList(storedList: ArrayList<IngredientTotal.IngredientItem>) {
-        _updateStoredIngredientArray.value = storedList
-    }
+//    fun updateStoredList(storedList: ArrayList<IngredientTotal.IngredientItem>) {
+//        _updateStoredIngredientArray.value = storedList
+//    }
 
     fun setIngredientIdList(selectedArray: ArrayList<RefrigeratorIngredientItem>) {
         val idArray = ArrayList<Int>()

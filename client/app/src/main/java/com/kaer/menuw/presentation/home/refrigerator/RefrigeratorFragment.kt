@@ -46,16 +46,16 @@ class RefrigeratorFragment :
         Timber.d("저장된 재료 테스트1 -> ${sharedPreferences.getIngredientList()}")
         viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
 
-        updateRefrigerator()
+//        updateRefrigerator()
     }
 
-    private fun updateRefrigerator() {
-        viewModel.updateStoredIngredientArray.observe(viewLifecycleOwner) {
-            Timber.d("저장된 재료 테스트2 -> ${sharedPreferences.getIngredientList()}")
-            refrigeratorAdapter.submitList(viewModel.changeIngredientToRefrigerator(it))
-            viewModel.setBackgroundTextVisible(it.isEmpty())
-        }
-    }
+//    private fun updateRefrigerator() {
+//        viewModel.updateStoredIngredientArray.observe(viewLifecycleOwner) {
+//            Timber.d("저장된 재료 테스트2 -> ${sharedPreferences.getIngredientList()}")
+//            refrigeratorAdapter.submitList(viewModel.changeIngredientToRefrigerator(it))
+//            viewModel.setBackgroundTextVisible(it.isEmpty())
+//        }
+//    }
 
     private fun clickEditBtn() {
         binding.tvRefrigeratorEdit.setOnClickListener {

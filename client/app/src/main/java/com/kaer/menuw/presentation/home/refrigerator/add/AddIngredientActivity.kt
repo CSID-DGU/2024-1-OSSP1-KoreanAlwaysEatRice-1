@@ -113,7 +113,7 @@ class AddIngredientActivity :
                         ingredientList
                     )
                 )
-                viewModel.updateStoredList(ingredientList)
+//                viewModel.updateStoredList(ingredientList)
             }
             startActivity(intent)
             finish()
