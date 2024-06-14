@@ -12,31 +12,29 @@
         android:layout_height="match_parent"
         android:background="@color/background">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton"
-            android:layout_width="20dp"
-            android:layout_height="24dp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_mypage_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="42dp"
-            android:layout_marginEnd="127dp"
-            android:background="@drawable/left_arrow"
-            app:layout_constraintEnd_toStartOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:src="@drawable/left_arrow"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_mypage_title"
+            style="@style/head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
-            android:text="설정"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:text="@string/mypage_setting"
+            android:textSize="23dp"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/btn_mypage_back" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -47,22 +45,22 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/mypage_user_info"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
+            app:layout_constraintTop_toBottomOf="@id/tv_mypage_title">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/appCompatButton2"
+            <ImageView
+                android:id="@+id/iv_mypage_user_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="23dp"
                 android:background="@drawable/mypage_info_profile"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_mypage_user_nickname"
+                style="@style/body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -71,133 +69,143 @@
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/appCompatButton2"
+                android:includeFontPadding="false"
+                app:layout_constraintStart_toEndOf="@id/iv_mypage_user_img"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="menuw.google.com"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/appCompatButton2" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_mypage_"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:text="menuw.google.com"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@id/iv_mypage_user_img" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton3"
+            android:id="@+id/btn_mypage_notice"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="39dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/mypage_etc_top"
-            android:gravity=""
+            android:gravity="center_vertical"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingStart="18dp"
             android:paddingEnd="270dp"
-            android:text="공지사항"
+            android:text="@string/mypage_notice"
             android:textColor="@color/black"
             android:textSize="14dp"
+            android:outlineProvider="none"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton4"
+            android:id="@+id/btn_mypage_qna"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/mypage_etc_no_bottom"
-            android:gravity=""
+            android:gravity="center_vertical"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingStart="18dp"
             android:paddingEnd="270dp"
-            android:text="문의하기"
+            android:text="@string/mypage_qna"
             android:textColor="@color/black"
             android:textSize="14dp"
+            android:outlineProvider="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton3" />
+            app:layout_constraintTop_toBottomOf="@id/btn_mypage_notice" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton5"
+            android:id="@+id/btn_mypage_policy"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/mypage_etc_no_bottom"
-            android:gravity=""
+            android:gravity="center_vertical"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingStart="18dp"
             android:paddingEnd="270dp"
-            android:text="약관 및 정책"
+            android:text="@string/mypage_policy"
             android:textColor="@color/black"
             android:textSize="14dp"
+            android:outlineProvider="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton4" />
+            app:layout_constraintTop_toBottomOf="@id/btn_mypage_qna" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton6"
+            android:id="@+id/btn_mypage_version"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/mypage_etc_no_bottom"
-            android:gravity=""
+            android:gravity="center_vertical"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingStart="18dp"
             android:paddingEnd="270dp"
-            android:text="버전 정보 1.0.0"
+            android:text="@string/mypage_version"
             android:textColor="@color/black"
             android:textSize="14dp"
+            android:outlineProvider="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton5" />
+            app:layout_constraintTop_toBottomOf="@id/btn_mypage_policy" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton7"
+            android:id="@+id/btn_mypage_logout"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/mypage_etc_bottom"
-            android:gravity=""
+            android:gravity="center_vertical"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingStart="18dp"
             android:paddingEnd="270dp"
-            android:text="로그아웃"
+            android:text="@string/mypage_logout"
             android:textColor="@color/red"
             android:textSize="14dp"
+            android:outlineProvider="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton6" />
+            app:layout_constraintTop_toBottomOf="@id/btn_mypage_version" />
 
         <TextView
+            android:id="@+id/tv_mypage_delete_user"
+            style="@style/body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="25dp"
-            android:text="회원탈퇴"
+            android:text="@string/mypage_delete_user"
             android:textSize="14dp"
+            android:paddingVertical="5dp"
+            android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton7" />
+            app:layout_constraintTop_toBottomOf="@id/btn_mypage_logout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.kaer.menuw.di
 
+import com.kaer.menuw.data.service.InfoService
 import com.kaer.menuw.data.service.IngredientService
 import com.kaer.menuw.data.service.LogInService
 import com.kaer.menuw.data.service.MenuService
@@ -8,7 +9,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -29,4 +29,9 @@ object ApiModule {
     @Singleton
     fun provideLogInService(@MenuwRetrofit retrofit: Retrofit): LogInService =
         retrofit.create(LogInService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideInfoService(@MenuwRetrofit retrofit: Retrofit): InfoService =
+        retrofit.create(InfoService::class.java)
 }
