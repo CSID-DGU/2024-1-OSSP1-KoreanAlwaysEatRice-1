@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.kaer.menuw.domain.entity.IngredientTotal.IngredientItem" />
+            type="com.kaer.menuw.domain.entity.RefrigeratorIngredientItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,13 +46,14 @@
             style="@style/body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="2024-06-17"
+            android:text="@{item.expiryDate.toString()}"
             android:layout_marginEnd="20dp"
             android:textSize="15dp"
             android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_ingredient_name"
-            app:layout_constraintBottom_toBottomOf="@id/tv_ingredient_name"/>
+            app:layout_constraintBottom_toBottomOf="@id/tv_ingredient_name"
+            tools:text="2024-06-15"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

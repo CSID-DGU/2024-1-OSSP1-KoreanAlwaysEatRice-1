@@ -8,25 +8,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.databinding.ItemIngredientRefrigeratorBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
+import com.kaer.menuw.domain.entity.RefrigeratorIngredientItem
 import com.kaer.menuw.util.ItemDiffCallback
 import com.kaer.menuw.util.base.BindingAdapter.setCoilImage
 
 class RefrigeratorAdapter :
-    ListAdapter<IngredientTotal.IngredientItem, RefrigeratorAdapter.RefrigeratorViewHolder>(
-        ItemDiffCallback<IngredientTotal.IngredientItem>(
+    ListAdapter<RefrigeratorIngredientItem, RefrigeratorAdapter.RefrigeratorViewHolder>(
+        ItemDiffCallback<RefrigeratorIngredientItem>(
             onContentsTheSame = { old, new -> old == new },
             onItemsTheSame = { old, new -> old.ingredientId == new.ingredientId }
         )
     ) {
 
-    private var onItemClickListener: ((IngredientTotal.IngredientItem) -> Unit)? = null
+    private var onItemClickListener: ((RefrigeratorIngredientItem) -> Unit)? = null
     var editEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
-    var selectedIngredientArray: ArrayList<IngredientTotal.IngredientItem> = ArrayList()
+    var selectedIngredientArray: ArrayList<RefrigeratorIngredientItem> = ArrayList()
 
     inner class RefrigeratorViewHolder(
         val binding: ItemIngredientRefrigeratorBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: IngredientTotal.IngredientItem, onClickListener: View.OnClickListener) {
+        fun onBind(data: RefrigeratorIngredientItem, onClickListener: View.OnClickListener) {
             with(binding) {
                 item = data
                 ivIngredientImg.setCoilImage(data.ingredientImageUrl)
@@ -35,7 +36,7 @@ class RefrigeratorAdapter :
         }
     }
 
-    fun setOnIngredientClickListener(listener: (IngredientTotal.IngredientItem) -> Unit) {
+    fun setOnIngredientClickListener(listener: (RefrigeratorIngredientItem) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -45,7 +46,7 @@ class RefrigeratorAdapter :
 
     private fun ingredientSelection(
         binding: ItemIngredientRefrigeratorBinding,
-        ingredientItem: IngredientTotal.IngredientItem
+        ingredientItem: RefrigeratorIngredientItem
     ) {
         val isIngredientSelected: Boolean = selectedIngredientArray.contains(ingredientItem)
 
@@ -62,7 +63,7 @@ class RefrigeratorAdapter :
     }
 
     private fun removeIngredientItem(
-        ingredientArray: ArrayList<IngredientTotal.IngredientItem>,
+        ingredientArray: ArrayList<RefrigeratorIngredientItem>,
         selectedId: Int,
         binding: ItemIngredientRefrigeratorBinding
     ) {

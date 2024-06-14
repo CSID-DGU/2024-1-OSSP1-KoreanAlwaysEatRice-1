@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kaer.menuw.domain.entity.IngredientTotal
+import com.kaer.menuw.domain.entity.RefrigeratorIngredientItem
 import com.kaer.menuw.domain.usecase.GetIngredientUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,6 +41,10 @@ class AddIngredientViewModel @Inject constructor(
         MutableLiveData()
     val updateStoredIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
         get() = _updateStoredIngredientArray
+
+    private val _refrigeratorIngredientArray: MutableLiveData<ArrayList<RefrigeratorIngredientItem>> = MutableLiveData()
+    val refrigeratorIngredientArray: LiveData<ArrayList<RefrigeratorIngredientItem>>
+        get() = _refrigeratorIngredientArray
 
     private val _selectedIngredientIdArray: MutableLiveData<ArrayList<Int>> = MutableLiveData()
     val selectedIngredientIdArray: LiveData<ArrayList<Int>>
@@ -112,12 +118,30 @@ class AddIngredientViewModel @Inject constructor(
         _updateStoredIngredientArray.value = storedList
     }
 
-    fun setIngredientIdList(selectedArray: ArrayList<IngredientTotal.IngredientItem>) {
+    fun setIngredientIdList(selectedArray: ArrayList<RefrigeratorIngredientItem>) {
         val idArray = ArrayList<Int>()
         for (i in 0 until  selectedArray.size) {
             idArray.add(selectedArray[i].ingredientId)
         }
         _selectedIngredientIdArray.value = idArray
+    }
+
+    fun changeIngredientToRefrigerator(originalArray: ArrayList<IngredientTotal.IngredientItem>): ArrayList<RefrigeratorIngredientItem> {
+        val date = LocalDate.now()
+        val temp = ArrayList<RefrigeratorIngredientItem>()
+        for (i in 0 until  originalArray.size) {
+            temp.add(RefrigeratorIngredientItem(originalArray[i].ingredientId, originalArray[i].ingredientName, originalArray[i].ingredientImageUrl, date))
+        }
+//        _refrigeratorIngredientArray.value = temp
+        return temp
+    }
+
+    fun changeRefrigeratorToIngredient(originalArray: ArrayList<RefrigeratorIngredientItem>): ArrayList<IngredientTotal.IngredientItem> {
+        val temp = ArrayList<IngredientTotal.IngredientItem>()
+        for (i in 0 until originalArray.size) {
+            temp.add(IngredientTotal.IngredientItem(originalArray[i].ingredientId, originalArray[i].ingredientName, originalArray[i].ingredientImageUrl))
+        }
+        return temp
     }
 
     fun setAddBtnEnabled(enabled: Boolean) {

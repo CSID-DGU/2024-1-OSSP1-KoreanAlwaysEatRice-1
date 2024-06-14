@@ -86,7 +86,8 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun makeListAdapter() {
-        viewModel.selectedIngredientList(sharedPreferences.getIngredientList())
+//        viewModel.selectedIngredientList(sharedPreferences.getIngredientList())
+        viewModel.selectedIngredientList(viewModel.changeRefrigeratorToIngredient(sharedPreferences.getIngredientList()))
         _ingredientListAdapter = viewModel.selectedIngredientArray.value?.let {
             IngredientListAdapter(
                 it
@@ -118,9 +119,14 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
 
     private fun clickAddBtn() {
         binding.btnAddIngredientAdd.setOnClickListener {
-            viewModel.selectedIngredientArray.observe(viewLifecycleOwner) {
-                sharedPreferences.storeIngredientIdList(it)
-                viewModel.updateStoredList(it)
+            viewModel.selectedIngredientArray.observe(viewLifecycleOwner) { ingredientList ->
+//                viewModel.changeIngredientToRefrigerator(ingredientList)
+//                viewModel.refrigeratorIngredientArray.observe(viewLifecycleOwner) { refrigeratorList ->
+//                    sharedPreferences.storeIngredientIdList(refrigeratorList)
+//                }
+                sharedPreferences.storeIngredientIdList(viewModel.changeIngredientToRefrigerator(ingredientList))
+//                sharedPreferences.storeIngredientIdList(it)
+                viewModel.updateStoredList(ingredientList)
             }
             dismiss()
         }

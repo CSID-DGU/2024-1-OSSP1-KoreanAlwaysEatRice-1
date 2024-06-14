@@ -50,7 +50,7 @@ class RefrigeratorFragment :
 
     private fun updateRefrigerator() {
         viewModel.updateStoredIngredientArray.observe(viewLifecycleOwner) {
-            refrigeratorAdapter.submitList(it)
+            refrigeratorAdapter.submitList(viewModel.changeIngredientToRefrigerator(it))
             viewModel.setBackgroundTextVisible(it.isEmpty())
         }
     }
