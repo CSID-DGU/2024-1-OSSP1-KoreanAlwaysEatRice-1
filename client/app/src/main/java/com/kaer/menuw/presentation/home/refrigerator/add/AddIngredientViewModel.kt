@@ -38,6 +38,11 @@ class AddIngredientViewModel @Inject constructor(
     val selectedIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
         get() = _selectedIngredientArray
 
+    private val _expiryDate: MutableLiveData<ArrayList<String>> = MutableLiveData()
+    val expiryDate: LiveData<ArrayList<String>>
+        get() = _expiryDate
+
+
 //    private val _updateStoredIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> =
 //        MutableLiveData()
 //    val updateStoredIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
@@ -62,6 +67,10 @@ class AddIngredientViewModel @Inject constructor(
     private val _deleteEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
     val deleteEnabled: LiveData<Boolean>
         get() = _deleteEnabled
+
+    fun setExpiryDate(dates: ArrayList<String>) {
+        _expiryDate.value = dates
+    }
 
     fun getIngredientList() {
         val vegList = ArrayList<IngredientTotal.IngredientItem>()
@@ -127,13 +136,12 @@ class AddIngredientViewModel @Inject constructor(
         _selectedIngredientIdArray.value = idArray
     }
 
-    fun changeIngredientToRefrigerator(originalArray: ArrayList<IngredientTotal.IngredientItem>): ArrayList<RefrigeratorIngredientItem> {
-        val date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        val temp = ArrayList<RefrigeratorIngredientItem>()
+    fun changeIngredientToRefrigerator(date: ArrayList<String>, originalArray: ArrayList<IngredientTotal.IngredientItem>): ArrayList<RefrigeratorIngredientItem> {
+        val changeArray = ArrayList<RefrigeratorIngredientItem>()
         for (i in 0 until  originalArray.size) {
-            temp.add(RefrigeratorIngredientItem(originalArray[i].ingredientId, originalArray[i].ingredientName, originalArray[i].ingredientImageUrl, date))
+            changeArray.add(RefrigeratorIngredientItem(originalArray[i].ingredientId, originalArray[i].ingredientName, originalArray[i].ingredientImageUrl, date[i]))
         }
-        return temp
+        return changeArray
     }
 
     fun changeRefrigeratorToIngredient(originalArray: ArrayList<RefrigeratorIngredientItem>): ArrayList<IngredientTotal.IngredientItem> {

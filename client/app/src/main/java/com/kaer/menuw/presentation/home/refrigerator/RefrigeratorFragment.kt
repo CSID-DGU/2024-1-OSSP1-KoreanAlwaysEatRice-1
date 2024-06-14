@@ -132,7 +132,7 @@ class RefrigeratorFragment :
     }
 
     companion object {
-        private const val BOTTOM_SHEET = "BOTTOM_SHEET"
+        const val BOTTOM_SHEET = "BOTTOM_SHEET"
         const val INGREDIENT_ID_LIST = "INGREDIENT_ID_LIST"
     }
 }

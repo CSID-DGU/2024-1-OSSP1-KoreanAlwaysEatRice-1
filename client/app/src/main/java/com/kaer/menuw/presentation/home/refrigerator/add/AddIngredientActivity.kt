@@ -7,12 +7,14 @@ import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityAddIngredientBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.presentation.home.HomeActivity
+import com.kaer.menuw.presentation.home.refrigerator.RefrigeratorFragment.Companion.BOTTOM_SHEET
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.DAIRY_FOOD
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.FISH
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.GRAIN
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.MEAT
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.SEASONING
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
+import com.kaer.menuw.presentation.home.refrigerator.add.checkdate.GetExpiryDateBottomSheet
 import com.kaer.menuw.util.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -107,16 +109,21 @@ class AddIngredientActivity :
     private fun clickAddBtn() {
         val intent = Intent(this, HomeActivity::class.java)
         binding.btnAddIngredientAdd.setOnClickListener {
-            viewModel.selectedIngredientArray.observe(this) { ingredientList ->
-                sharedPreferences.storeIngredientIdList(
-                    viewModel.changeIngredientToRefrigerator(
-                        ingredientList
+            GetExpiryDateBottomSheet().show(supportFragmentManager, BOTTOM_SHEET)
+
+            viewModel.selectedIngredientArray.observe(this) { ingredients ->
+                viewModel.expiryDate.observe(this) { dates ->
+                    sharedPreferences.storeIngredientIdList(
+                        viewModel.changeIngredientToRefrigerator(
+                            dates,
+                            ingredients
+                        )
                     )
-                )
-//                viewModel.updateStoredList(ingredientList)
+
+                    startActivity(intent)
+                    finish()
+                }
             }
-            startActivity(intent)
-            finish()
         }
     }
 
