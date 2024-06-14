@@ -142,6 +142,25 @@ class AddIngredientViewModel @Inject constructor(
         return temp
     }
 
+    fun getDatesFromRefrigerator(originalArray: ArrayList<RefrigeratorIngredientItem>, currentArray: ArrayList<IngredientTotal.IngredientItem>): ArrayList<String> {
+        val originalNameList = ArrayList<String>()
+        for (i in 0 until originalArray.size) {
+            originalNameList.add(originalArray[i].ingredientName)
+        }
+
+        val tempDate = ArrayList<String>()
+
+        for (item in currentArray) {
+            val index = originalNameList.indexOfFirst { it.equals(item.ingredientName, ignoreCase = true) }
+            if (index != -1) {
+                Timber.d("테스트 클릭 viewmodel 같은지 -> ${originalNameList[index]}")
+                tempDate.add(originalArray[index].expiryDate)
+            }
+        }
+        Timber.d("테스트 클릭 viewmodel dates -> $tempDate")
+        return tempDate
+    }
+
     fun setAddBtnEnabled(enabled: Boolean) {
         _addBtnEnabled.value = enabled
     }
