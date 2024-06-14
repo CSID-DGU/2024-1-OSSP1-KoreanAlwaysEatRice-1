@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ItemIngredientListBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.util.ItemDiffCallback
@@ -68,6 +69,7 @@ class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientI
         } else {
             selectedIngredientArray.add(ingredientItem)
             binding.root.isActivated = true
+            binding.tvIngredientName.setTextAppearance(R.style.body_bold)
         }
     }
 
@@ -78,6 +80,7 @@ class IngredientListAdapter(selectedArray: ArrayList<IngredientTotal.IngredientI
     ) {
         ingredientArray.removeAt(selectedId)
         binding.root.isActivated = false
+        binding.tvIngredientName.setTextAppearance(R.style.body)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientListViewHolder {

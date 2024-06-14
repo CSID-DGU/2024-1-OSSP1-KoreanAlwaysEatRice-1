@@ -72,7 +72,7 @@ class CategoryRecipeAdapter :
             }
 
             false -> {
-                binding.layoutItemCategory.setBackgroundResource(R.drawable.shape_gray_bright_fill_5_rect)
+                binding.layoutItemCategory.setBackgroundResource(R.drawable.shape_green2_bright_fill_5_rect)
             }
         }
     }

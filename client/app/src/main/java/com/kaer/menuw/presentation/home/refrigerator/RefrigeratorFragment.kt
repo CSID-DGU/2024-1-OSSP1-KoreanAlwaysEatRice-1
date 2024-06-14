@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentRefrigeratorBinding
-import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientBottomSheet
+import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientActivity
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.home.refrigerator.add.SharedPreferenceManager
 import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryActivity
@@ -43,16 +43,8 @@ class RefrigeratorFragment :
         _refrigeratorAdapter = RefrigeratorAdapter()
         binding.rcvRefrigeratorList.adapter = refrigeratorAdapter
         refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
+        Timber.d("저장된 재료 테스트1 -> ${sharedPreferences.getIngredientList()}")
         viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
-
-        updateRefrigerator()
-    }
-
-    private fun updateRefrigerator() {
-        viewModel.updateStoredIngredientArray.observe(viewLifecycleOwner) {
-            refrigeratorAdapter.submitList(it)
-            viewModel.setBackgroundTextVisible(it.isEmpty())
-        }
     }
 
     private fun clickEditBtn() {
@@ -114,10 +106,13 @@ class RefrigeratorFragment :
     }
 
     private fun clickAddIngredientBtn() {
+        val intent = Intent(requireActivity(), AddIngredientActivity::class.java)
 
         binding.btnRefrigeratorAddIngredient.setOnClickListener {
             viewModel.clickTypeId(0)
-            AddIngredientBottomSheet().show(parentFragmentManager, BOTTOM_SHEET)
+//            AddIngredientActivity().show(parentFragmentManager, BOTTOM_SHEET)
+            activity?.finishAffinity()
+            startActivity(intent)
         }
     }
 
@@ -127,7 +122,7 @@ class RefrigeratorFragment :
     }
 
     companion object {
-        private const val BOTTOM_SHEET = "BOTTOM_SHEET"
+        const val BOTTOM_SHEET = "BOTTOM_SHEET"
         const val INGREDIENT_ID_LIST = "INGREDIENT_ID_LIST"
     }
 }

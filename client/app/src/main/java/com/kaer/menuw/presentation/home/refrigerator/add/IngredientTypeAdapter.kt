@@ -63,7 +63,7 @@ class IngredientTypeAdapter :
     ) {
         when (selected) {
             true -> binding.tvItemIngredientTypeName.setBackgroundResource(R.drawable.shape_green_fill_10_rect)
-            false -> binding.tvItemIngredientTypeName.setBackgroundResource(R.drawable.shape_gray_fill_10_green_line_rect)
+            false -> binding.tvItemIngredientTypeName.setBackgroundResource(R.drawable.shape_gray_bright_fill_10_gray_line_rect)
         }
     }
 

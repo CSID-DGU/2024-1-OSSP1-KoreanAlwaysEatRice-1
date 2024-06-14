@@ -1,31 +1,30 @@
 package com.kaer.menuw.presentation.home.refrigerator.add
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.kaer.menuw.databinding.BottomsheetIngredientBinding
+import androidx.activity.viewModels
+import com.kaer.menuw.R
+import com.kaer.menuw.databinding.ActivityAddIngredientBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
+import com.kaer.menuw.presentation.home.HomeActivity
+import com.kaer.menuw.presentation.home.refrigerator.RefrigeratorFragment.Companion.BOTTOM_SHEET
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.DAIRY_FOOD
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.FISH
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.GRAIN
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.MEAT
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.SEASONING
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
+import com.kaer.menuw.presentation.home.refrigerator.add.checkdate.GetExpiryDateBottomSheet
+import com.kaer.menuw.util.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddIngredientBottomSheet : BottomSheetDialogFragment() {
+class AddIngredientActivity :
+    BaseActivity<ActivityAddIngredientBinding>(R.layout.activity_add_ingredient) {
 
-    private val viewModel by activityViewModels<AddIngredientViewModel>()
+    private val viewModel by viewModels<AddIngredientViewModel>()
 
     private lateinit var sharedPreferences: SharedPreferenceManager
-
-    private var _binding: BottomsheetIngredientBinding? = null
-    val binding: BottomsheetIngredientBinding
-        get() = requireNotNull(_binding as BottomsheetIngredientBinding)
 
     private var _ingredientTypeAdapter: IngredientTypeAdapter? = null
     private val ingredientTypeAdapter
@@ -35,21 +34,11 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     private val ingredientListAdapter
         get() = requireNotNull(_ingredientListAdapter)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = BottomsheetIngredientBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
-        sharedPreferences = SharedPreferenceManager(requireContext())
+        sharedPreferences = SharedPreferenceManager(this)
 
         initSetAdapter()
     }
@@ -78,14 +67,16 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
         }
 
         binding.rcvAddIngredientType.adapter = ingredientTypeAdapter
-        viewModel.ingredientList.observe(viewLifecycleOwner) {
+        viewModel.ingredientList.observe(this) {
             ingredientTypeAdapter.submitList(it)
+            ingredientListAdapter.submitList(it[0].ingredientListItem)
         }
         makeListAdapter()
     }
 
     private fun makeListAdapter() {
-        viewModel.selectedIngredientList(sharedPreferences.getIngredientList())
+//        viewModel.selectedIngredientList(sharedPreferences.getIngredientList())
+        viewModel.selectedIngredientList(viewModel.changeRefrigeratorToIngredient(sharedPreferences.getIngredientList()))
         _ingredientListAdapter = viewModel.selectedIngredientArray.value?.let {
             IngredientListAdapter(
                 it
@@ -95,7 +86,7 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun changeListAdapter() {
-        viewModel.selectedTypeId.observe(viewLifecycleOwner) {
+        viewModel.selectedTypeId.observe(this) {
             ingredientListAdapter.submitList(viewModel.ingredientList.value?.get(it)?.ingredientListItem)
         }
         selectedIngredientList()
@@ -109,25 +100,35 @@ class AddIngredientBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun setAddBtnEnabled() {
-        ingredientListAdapter.addEnabled.observe(viewLifecycleOwner) {
+        ingredientListAdapter.addEnabled.observe(this) {
             viewModel.setAddBtnEnabled(it)
             clickAddBtn()
         }
     }
 
     private fun clickAddBtn() {
+        val intent = Intent(this, HomeActivity::class.java)
         binding.btnAddIngredientAdd.setOnClickListener {
-            viewModel.selectedIngredientArray.observe(viewLifecycleOwner) {
-                sharedPreferences.storeIngredientIdList(it)
-                viewModel.updateStoredList(it)
+
+            viewModel.selectedIngredientArray.observe(this) { ingredients ->
+                GetExpiryDateBottomSheet().show(supportFragmentManager, BOTTOM_SHEET)
+                viewModel.expiryDate.observe(this) { dates ->
+                    sharedPreferences.storeIngredientIdList(
+                        viewModel.changeIngredientToRefrigerator(
+                            dates,
+                            ingredients
+                        )
+                    )
+
+                    startActivity(intent)
+                    finish()
+                }
             }
-            dismiss()
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onDestroy() {
+        super.onDestroy()
         _ingredientTypeAdapter = null
         _ingredientListAdapter = null
     }

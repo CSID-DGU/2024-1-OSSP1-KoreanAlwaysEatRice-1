@@ -5,131 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kaer.menuw.domain.entity.IngredientTotal
+import com.kaer.menuw.domain.entity.RefrigeratorIngredientItem
 import com.kaer.menuw.domain.usecase.GetIngredientUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
 class AddIngredientViewModel @Inject constructor(
     private val getIngredientUseCase: GetIngredientUseCase,
-//    private val getTestUseCase: GetTestUseCase,
 ) : ViewModel() {
-
-//    private val _mockIngredientList: MutableLiveData<List<IngredientTotal>> = MutableLiveData(
-//        mutableListOf(
-//            IngredientTotal(
-//                "채소",
-//                arrayListOf(
-//                    IngredientTotal.IngredientItem(1, "가지", "https://d25vrbl2gtcuw7.cloudfront.net/채소/가지.svg"),
-//                    IngredientTotal.IngredientItem(2, "감자", "https://d25vrbl2gtcuw7.cloudfront.net/채소/감자.svg"),
-//                    IngredientTotal.IngredientItem(3, "고구마", "https://d25vrbl2gtcuw7.cloudfront.net/채소/고구마.svg"),
-//                    IngredientTotal.IngredientItem(4, "깻잎", "https://d25vrbl2gtcuw7.cloudfront.net/채소/깻잎.svg"),
-//                    IngredientTotal.IngredientItem(5, "당근", "https://d25vrbl2gtcuw7.cloudfront.net/채소/당근.svg"),
-//                    IngredientTotal.IngredientItem(6, "대파", "https://d25vrbl2gtcuw7.cloudfront.net/채소/대파.svg"),
-//                    IngredientTotal.IngredientItem(7, "마늘", "https://d25vrbl2gtcuw7.cloudfront.net/채소/마늘.svg"),
-//                    IngredientTotal.IngredientItem(8, "무", "https://d25vrbl2gtcuw7.cloudfront.net/채소/무.svg"),
-//                    IngredientTotal.IngredientItem(9, "방울토마토", "https://d25vrbl2gtcuw7.cloudfront.net/채소/방울토마토.svg"),
-//                    IngredientTotal.IngredientItem(10, "배추", "https://d25vrbl2gtcuw7.cloudfront.net/채소/배추.svg"),
-//                    IngredientTotal.IngredientItem(11, "부추", "https://d25vrbl2gtcuw7.cloudfront.net/채소/부추.svg"),
-//                    IngredientTotal.IngredientItem(12, "브로콜리", "https://d25vrbl2gtcuw7.cloudfront.net/채소/브로콜리.svg"),
-//                    IngredientTotal.IngredientItem(13, "새송이버섯", "https://d25vrbl2gtcuw7.cloudfront.net/채소/새송이버섯.svg"),
-//                    IngredientTotal.IngredientItem(14, "생강", "https://d25vrbl2gtcuw7.cloudfront.net/채소/생강.svg"),
-//                    IngredientTotal.IngredientItem(15, "시금치", "https://d25vrbl2gtcuw7.cloudfront.net/채소/시금치.svg"),
-//                    IngredientTotal.IngredientItem(16, "아스파라거스", "https://d25vrbl2gtcuw7.cloudfront.net/채소/아스파라거스.svg"),
-//                    IngredientTotal.IngredientItem(17, "애호박", "https://d25vrbl2gtcuw7.cloudfront.net/채소/애호박.svg"),
-//                    IngredientTotal.IngredientItem(18, "양배추", "https://d25vrbl2gtcuw7.cloudfront.net/채소/양배추.svg"),
-//                    IngredientTotal.IngredientItem(19, "양상추", "https://d25vrbl2gtcuw7.cloudfront.net/채소/양상추.svg"),
-//                    IngredientTotal.IngredientItem(20, "양송이버섯", "https://d25vrbl2gtcuw7.cloudfront.net/채소/양송이버섯.svg"),
-//                    IngredientTotal.IngredientItem(21, "양파", "https://d25vrbl2gtcuw7.cloudfront.net/채소/양파.svg"),
-//                    IngredientTotal.IngredientItem(22, "청경채", "https://d25vrbl2gtcuw7.cloudfront.net/채소/청경채.svg"),
-//                    IngredientTotal.IngredientItem(23, "콩나물", "https://d25vrbl2gtcuw7.cloudfront.net/채소/콩나물.svg"),
-//                    IngredientTotal.IngredientItem(24, "토마토", "https://d25vrbl2gtcuw7.cloudfront.net/채소/토마토.svg"),
-//                    IngredientTotal.IngredientItem(25, "파프리카", "https://d25vrbl2gtcuw7.cloudfront.net/채소/파프리카.svg"),
-//                    IngredientTotal.IngredientItem(26, "팽이버섯", "https://d25vrbl2gtcuw7.cloudfront.net/채소/팽이버섯.svg"),
-//                    IngredientTotal.IngredientItem(27, "표고버섯", "https://d25vrbl2gtcuw7.cloudfront.net/채소/표고버섯.svg"),
-//                    IngredientTotal.IngredientItem(28, "피망", "https://d25vrbl2gtcuw7.cloudfront.net/채소/피망.svg")
-//                )
-//            ),
-//            IngredientTotal(
-//                "유제품",
-//                arrayListOf(
-//                    IngredientTotal.IngredientItem(29, "버터", "https://d25vrbl2gtcuw7.cloudfront.net/유제품/버터.svg"),
-//                    IngredientTotal.IngredientItem(30, "생크림", "https://d25vrbl2gtcuw7.cloudfront.net/유제품/생크림.svg"),
-//                    IngredientTotal.IngredientItem(31, "아이스크림", "https://d25vrbl2gtcuw7.cloudfront.net/유제품/아이스크림.svg"),
-//                    IngredientTotal.IngredientItem(32, "요거트", "https://d25vrbl2gtcuw7.cloudfront.net/유제품/요거트.svg"),
-//                    IngredientTotal.IngredientItem(33, "우유", "https://d25vrbl2gtcuw7.cloudfront.net/유제품/우유.svg"),
-//                    IngredientTotal.IngredientItem(34, "치즈", "https://d25vrbl2gtcuw7.cloudfront.net/유제품/치즈.svg"),
-//                )
-//            ),
-//            IngredientTotal(
-//                "곡류",
-//                arrayListOf(
-//                    IngredientTotal.IngredientItem(35, "강낭콩", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/강낭콩.svg"),
-//                    IngredientTotal.IngredientItem(36, "기장", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/기장.svg"),
-//                    IngredientTotal.IngredientItem(37, "귀리", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/귀리.svg"),
-//                    IngredientTotal.IngredientItem(38, "메밀", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/메밀.svg"),
-//                    IngredientTotal.IngredientItem(39, "병아리콩", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/병아리콩.svg"),
-//                    IngredientTotal.IngredientItem(40, "보리", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/보리.svg"),
-//                    IngredientTotal.IngredientItem(41, "쌀", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/쌀.svg"),
-//                    IngredientTotal.IngredientItem(42, "옥수수", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/옥수수.svg"),
-//                    IngredientTotal.IngredientItem(43, "완두콩", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/완두콩.svg"),
-//                    IngredientTotal.IngredientItem(44, "팥", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/팥.svg"),
-//                    IngredientTotal.IngredientItem(45, "호밀", "https://d25vrbl2gtcuw7.cloudfront.net/곡물/호밀.svg")
-//                )
-//            ),
-//            IngredientTotal(
-//                "육류",
-//                arrayListOf(
-//                    IngredientTotal.IngredientItem(46, "달걀", "https://d25vrbl2gtcuw7.cloudfront.net/육류/달걀.svg"),
-//                    IngredientTotal.IngredientItem(47, "닭고기", "https://d25vrbl2gtcuw7.cloudfront.net/육류/닭고기.svg"),
-//                    IngredientTotal.IngredientItem(48, "돼지고기", "https://d25vrbl2gtcuw7.cloudfront.net/육류/돼지고기.svg"),
-//                    IngredientTotal.IngredientItem(49, "베이컨", "https://d25vrbl2gtcuw7.cloudfront.net/육류/베이컨.svg"),
-//                    IngredientTotal.IngredientItem(50, "소고기", "https://d25vrbl2gtcuw7.cloudfront.net/육류/소고기.svg"),
-//                    IngredientTotal.IngredientItem(51, "소세지", "https://d25vrbl2gtcuw7.cloudfront.net/육류/소세지.svg"),
-//                    IngredientTotal.IngredientItem(52, "양고기", "https://d25vrbl2gtcuw7.cloudfront.net/육류/양고기.svg"),
-//                    IngredientTotal.IngredientItem(53, "오리고기", "https://d25vrbl2gtcuw7.cloudfront.net/육류/오리고기.svg"),
-//                    IngredientTotal.IngredientItem(54, "칠면조", "https://d25vrbl2gtcuw7.cloudfront.net/육류/칠면조.svg"),
-//                    IngredientTotal.IngredientItem(55, "페퍼로니", "https://d25vrbl2gtcuw7.cloudfront.net/육류/페퍼로니.svg"),
-//                    IngredientTotal.IngredientItem(56, "햄", "https://d25vrbl2gtcuw7.cloudfront.net/육류/햄.svg")
-//                )
-//            ),
-//            IngredientTotal(
-//                "생선",
-//                arrayListOf(
-//                    IngredientTotal.IngredientItem(57, "고등어", "https://d25vrbl2gtcuw7.cloudfront.net/생선/고등어.svg"),
-//                    IngredientTotal.IngredientItem(58, "꽁치", "https://d25vrbl2gtcuw7.cloudfront.net/생선/꽁치.svg"),
-//                    IngredientTotal.IngredientItem(59, "대구", "https://d25vrbl2gtcuw7.cloudfront.net/생선/대구.svg"),
-//                    IngredientTotal.IngredientItem(60, "멸치", "https://d25vrbl2gtcuw7.cloudfront.net/생선/멸치.svg"),
-//                    IngredientTotal.IngredientItem(61, "연어", "https://d25vrbl2gtcuw7.cloudfront.net/생선/연어.svg"),
-//                    IngredientTotal.IngredientItem(62, "아귀", "https://d25vrbl2gtcuw7.cloudfront.net/생선/아귀.svg"),
-//                    IngredientTotal.IngredientItem(63, "장어", "https://d25vrbl2gtcuw7.cloudfront.net/생선/장어.svg"),
-//                    IngredientTotal.IngredientItem(64, "참치", "https://d25vrbl2gtcuw7.cloudfront.net/생선/참치.svg")
-//                )
-//            ),
-//            IngredientTotal(
-//                "조미료",
-//                arrayListOf(
-//                    IngredientTotal.IngredientItem(65, "간장", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/간장.svg"),
-//                    IngredientTotal.IngredientItem(66, "고추장", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/고추장.svg"),
-//                    IngredientTotal.IngredientItem(67, "고춧가루", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/고춧가루.svg"),
-//                    IngredientTotal.IngredientItem(68, "꿀", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/꿀.svg"),
-//                    IngredientTotal.IngredientItem(69, "조미료", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/된장.svg"),
-//                    IngredientTotal.IngredientItem(70, "레몬즙", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/레몬즙.svg"),
-//                    IngredientTotal.IngredientItem(71, "설탕", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/설탕.svg",),
-//                    IngredientTotal.IngredientItem(72, "소금", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/소금.svg"),
-//                    IngredientTotal.IngredientItem(73, "식용유", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/식용유.svg"),
-//                    IngredientTotal.IngredientItem(74, "식초", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/식초.svg"),
-//                    IngredientTotal.IngredientItem(75, "올리브유", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/올리브유.svg"),
-//                    IngredientTotal.IngredientItem(76, "후추", "https://d25vrbl2gtcuw7.cloudfront.net/조미료/후추.svg")
-//                )
-//            ),
-//        )
-//    )
-//
-//    val mockIngredientList: LiveData<List<IngredientTotal>>
-//        get() = _mockIngredientList
 
     private val ingredientTypeList = ArrayList<IngredientTotal>()
 
@@ -150,10 +38,13 @@ class AddIngredientViewModel @Inject constructor(
     val selectedIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
         get() = _selectedIngredientArray
 
-    private val _updateStoredIngredientArray: MutableLiveData<ArrayList<IngredientTotal.IngredientItem>> =
-        MutableLiveData()
-    val updateStoredIngredientArray: LiveData<ArrayList<IngredientTotal.IngredientItem>>
-        get() = _updateStoredIngredientArray
+    private val _expiryDate: MutableLiveData<ArrayList<String>> = MutableLiveData()
+    val expiryDate: LiveData<ArrayList<String>>
+        get() = _expiryDate
+
+    private val _refrigeratorIngredientArray: MutableLiveData<ArrayList<RefrigeratorIngredientItem>> = MutableLiveData()
+    val refrigeratorIngredientArray: LiveData<ArrayList<RefrigeratorIngredientItem>>
+        get() = _refrigeratorIngredientArray
 
     private val _selectedIngredientIdArray: MutableLiveData<ArrayList<Int>> = MutableLiveData()
     val selectedIngredientIdArray: LiveData<ArrayList<Int>>
@@ -170,6 +61,10 @@ class AddIngredientViewModel @Inject constructor(
     private val _deleteEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
     val deleteEnabled: LiveData<Boolean>
         get() = _deleteEnabled
+
+    fun setExpiryDate(dates: ArrayList<String>) {
+        _expiryDate.value = dates
+    }
 
     fun getIngredientList() {
         val vegList = ArrayList<IngredientTotal.IngredientItem>()
@@ -223,16 +118,47 @@ class AddIngredientViewModel @Inject constructor(
         _selectedIngredientArray.value = selectedArray
     }
 
-    fun updateStoredList(storedList: ArrayList<IngredientTotal.IngredientItem>) {
-        _updateStoredIngredientArray.value = storedList
-    }
-
-    fun setIngredientIdList(selectedArray: ArrayList<IngredientTotal.IngredientItem>) {
+    fun setIngredientIdList(selectedArray: ArrayList<RefrigeratorIngredientItem>) {
         val idArray = ArrayList<Int>()
         for (i in 0 until  selectedArray.size) {
             idArray.add(selectedArray[i].ingredientId)
         }
         _selectedIngredientIdArray.value = idArray
+    }
+
+    fun changeIngredientToRefrigerator(date: ArrayList<String>, originalArray: ArrayList<IngredientTotal.IngredientItem>): ArrayList<RefrigeratorIngredientItem> {
+        val changeArray = ArrayList<RefrigeratorIngredientItem>()
+        for (i in 0 until  originalArray.size) {
+            changeArray.add(RefrigeratorIngredientItem(originalArray[i].ingredientId, originalArray[i].ingredientName, originalArray[i].ingredientImageUrl, date[i]))
+        }
+        return changeArray
+    }
+
+    fun changeRefrigeratorToIngredient(originalArray: ArrayList<RefrigeratorIngredientItem>): ArrayList<IngredientTotal.IngredientItem> {
+        val temp = ArrayList<IngredientTotal.IngredientItem>()
+        for (i in 0 until originalArray.size) {
+            temp.add(IngredientTotal.IngredientItem(originalArray[i].ingredientId, originalArray[i].ingredientName, originalArray[i].ingredientImageUrl))
+        }
+        return temp
+    }
+
+    fun getDatesFromRefrigerator(originalArray: ArrayList<RefrigeratorIngredientItem>, currentArray: ArrayList<IngredientTotal.IngredientItem>): ArrayList<String> {
+        val originalNameList = ArrayList<String>()
+        for (i in 0 until originalArray.size) {
+            originalNameList.add(originalArray[i].ingredientName)
+        }
+
+        val tempDate = ArrayList<String>()
+
+        for (item in currentArray) {
+            val index = originalNameList.indexOfFirst { it.equals(item.ingredientName, ignoreCase = true) }
+            if (index != -1) {
+                Timber.d("테스트 클릭 viewmodel 같은지 -> ${originalNameList[index]}")
+                tempDate.add(originalArray[index].expiryDate)
+            }
+        }
+        Timber.d("테스트 클릭 viewmodel dates -> $tempDate")
+        return tempDate
     }
 
     fun setAddBtnEnabled(enabled: Boolean) {

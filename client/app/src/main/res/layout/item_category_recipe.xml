@@ -17,7 +17,7 @@
             android:id="@+id/layout_item_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_gray_bright_fill_5_rect"
+            android:background="@drawable/shape_green2_bright_fill_5_rect"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/iv_item_recipe_img"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginHorizontal="35dp"
                 android:layout_marginBottom="35dp"

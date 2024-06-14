@@ -20,7 +20,7 @@ data class ResponseGetLikeMenuListDto(
         @SerialName("menuName")
         val menuName: String,
         @SerialName("menuImageURL")
-        val menuImageUrl: String,
+        val menuImageUrl: String?,
         @SerialName("ingredients")
         val ingredients: String
     )

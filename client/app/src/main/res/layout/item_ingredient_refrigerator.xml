@@ -6,41 +6,54 @@
     <data>
         <variable
             name="item"
-            type="com.kaer.menuw.domain.entity.IngredientTotal.IngredientItem" />
+            type="com.kaer.menuw.domain.entity.RefrigeratorIngredientItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_ingredient_edit_btn"
-        android:layout_margin="10dp">
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="15dp">
 
         <ImageView
             android:id="@+id/iv_ingredient_img"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="34dp"
-            android:layout_marginHorizontal="26dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="26dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/tv_ingredient_name"
-            style="@style/body"
+            style="@style/body_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{item.ingredientName}"
             android:textSize="18dp"
             android:textColor="@color/green_primary"
             android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/iv_ingredient_img"
-            app:layout_constraintStart_toStartOf="@id/iv_ingredient_img"
-            app:layout_constraintEnd_toEndOf="@id/iv_ingredient_img"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="@id/iv_ingredient_img"
+            app:layout_constraintBottom_toBottomOf="@id/iv_ingredient_img"
+            app:layout_constraintStart_toEndOf="@id/iv_ingredient_img"
             tools:text="가지"/>
+
+        <TextView
+            android:id="@+id/tv_ingredient_expiry_date"
+            style="@style/body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.expiryDate.toString()}"
+            android:layout_marginEnd="20dp"
+            android:textSize="15dp"
+            android:includeFontPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_ingredient_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_ingredient_name"
+            tools:text="2024-06-15"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

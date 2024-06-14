@@ -21,7 +21,6 @@ class LikeMenuListAdapter: ListAdapter<LikeMenu, LikeMenuListAdapter.LikeMenuLis
     ): RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: LikeMenu) {
             binding.item = data
-            binding.ivItemLikeMenu.setImage(data.menuImageUrl)
         }
     }
 

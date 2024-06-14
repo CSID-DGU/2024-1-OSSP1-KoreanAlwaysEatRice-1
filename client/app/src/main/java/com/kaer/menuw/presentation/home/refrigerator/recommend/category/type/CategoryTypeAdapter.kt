@@ -66,7 +66,7 @@ class CategoryTypeAdapter :
             }
 
             false -> {
-                binding.layoutItemCategoryType.setBackgroundResource(R.drawable.shape_gray_bright_fill_3_rect)
+                binding.layoutItemCategoryType.setBackgroundResource(R.drawable.shape_green2_bright_fill_3_rect)
             }
         }
     }
