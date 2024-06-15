@@ -11,6 +11,11 @@ import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.domain.entity.RefrigeratorIngredientItem
 import com.kaer.menuw.util.ItemDiffCallback
 import com.kaer.menuw.util.base.BindingAdapter.setCoilImage
+import timber.log.Timber
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 class RefrigeratorAdapter :
     ListAdapter<RefrigeratorIngredientItem, RefrigeratorAdapter.RefrigeratorViewHolder>(
@@ -28,8 +33,16 @@ class RefrigeratorAdapter :
         val binding: ItemIngredientRefrigeratorBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RefrigeratorIngredientItem, onClickListener: View.OnClickListener) {
+            val localDate = LocalDate.now()
+            val expiryDateFormat = LocalDate.parse(data.expiryDate, DateTimeFormatter.ofPattern("yyyy - M - d"))
             with(binding) {
                 item = data
+                if (localDate.compareTo(expiryDateFormat) >= 0) {
+                    Timber.d("날짜 출력 -> $localDate")
+                    tvIngredientExpiryDate.text = data.expiryDate + " : " + ChronoUnit.DAYS.between(expiryDateFormat, localDate)
+                } else {
+                    tvIngredientExpiryDate.text = data.expiryDate
+                }
                 ivIngredientImg.setCoilImage(data.ingredientImageUrl)
                 root.setOnClickListener(onClickListener)
             }
