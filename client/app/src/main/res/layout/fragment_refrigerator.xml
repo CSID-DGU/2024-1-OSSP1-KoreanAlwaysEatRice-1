@@ -25,6 +25,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="20dp"
             android:paddingStart="5dp"
+            android:clickable="false"
             android:paddingVertical="5dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

@@ -35,7 +35,7 @@ class RefrigeratorFragment :
 
         clickAddIngredientBtn()
         initSetRefrigerator()
-        initSetNotice()
+//        initSetNotice()
         clickEditBtn()
         clickSeeRecommendBtn()
     }
@@ -45,6 +45,7 @@ class RefrigeratorFragment :
         viewModel.needNotice.observe(viewLifecycleOwner) {
             Timber.d("공지 테스트 -> ${viewModel.noticeContent}")
             if (it) {
+                binding.ivRefrigeratorNotice.isClickable = true
                 binding.ivRefrigeratorNotice.setOnClickListener {
                     BaseDialog.Builder().build(
                         type = BaseDialog.DialogType.SINGLE,
@@ -56,6 +57,8 @@ class RefrigeratorFragment :
                         cancelBtnAction = {}
                     ).show(parentFragmentManager, BaseDialog.DIALOG)
                 }
+            } else {
+                binding.ivRefrigeratorNotice.isClickable = false
             }
         }
     }
@@ -67,7 +70,7 @@ class RefrigeratorFragment :
         Timber.d("저장된 재료 테스트1 -> ${sharedPreferences.getIngredientList()}")
         viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
 
-//        initSetNotice()
+        initSetNotice()
     }
 
     private fun clickEditBtn() {
@@ -99,9 +102,13 @@ class RefrigeratorFragment :
             sharedPreferences.removeIngredientItem(refrigeratorAdapter.selectedIngredientArray[i])
         }
 
+        initSetNotice()
+
         refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
         viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
         viewModel.setDeleteBtnVisible(false)
+
+//        initSetNotice()
     }
 
     private fun clickSeeRecommendBtn() {

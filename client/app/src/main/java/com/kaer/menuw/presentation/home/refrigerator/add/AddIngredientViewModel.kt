@@ -93,6 +93,7 @@ class AddIngredientViewModel @Inject constructor(
             noticeContent += "\n[ 유통기한 임박한 재료 ]\n" + changeArrayToString(nearArray)
         } else {
             _needNotice.value = false
+            noticeContent += "\n유통기한이 지난/임박한 재료가 없습니다"
         }
     }
 
