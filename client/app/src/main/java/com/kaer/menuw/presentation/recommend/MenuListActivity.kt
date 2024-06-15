@@ -27,7 +27,7 @@ class MenuListActivity :
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
-        setStatusBarColorFromResource(R.color.background)
+        setStatusBarColorFromResource(R.color.background_bright)
 
         val loadingProgress = LoadingIndicator(this@MenuListActivity)
         loadingProgress.show()
