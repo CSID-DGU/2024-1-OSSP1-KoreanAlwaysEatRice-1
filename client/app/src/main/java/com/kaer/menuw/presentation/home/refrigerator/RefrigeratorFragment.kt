@@ -9,7 +9,7 @@ import com.kaer.menuw.databinding.FragmentRefrigeratorBinding
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientActivity
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel
 import com.kaer.menuw.presentation.home.refrigerator.add.SharedPreferenceManager
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryActivity
+import com.kaer.menuw.presentation.recommend.category.MenuCategoryActivity
 import com.kaer.menuw.util.base.BaseDialog
 import com.kaer.menuw.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,16 +35,42 @@ class RefrigeratorFragment :
 
         clickAddIngredientBtn()
         initSetRefrigerator()
+//        initSetNotice()
         clickEditBtn()
         clickSeeRecommendBtn()
     }
 
+    private fun initSetNotice() {
+        viewModel.checkNeedNotice(sharedPreferences.getIngredientList())
+        viewModel.needNotice.observe(viewLifecycleOwner) {
+            Timber.d("공지 테스트 -> ${viewModel.noticeContent}")
+            if (it) {
+                binding.ivRefrigeratorNotice.isClickable = true
+                binding.ivRefrigeratorNotice.setOnClickListener {
+                    BaseDialog.Builder().build(
+                        type = BaseDialog.DialogType.SINGLE,
+                        title = "냉장고 재료 알림",
+                        content = "\n유통기한이 지난/임박한 재료를 확인해주세요!\n" + viewModel.noticeContent,
+                        doBtnText = "확인",
+                        cancelBtnText = "",
+                        doBtnAction = {},
+                        cancelBtnAction = {}
+                    ).show(parentFragmentManager, BaseDialog.DIALOG)
+                }
+            } else {
+                binding.ivRefrigeratorNotice.isClickable = false
+            }
+        }
+    }
+
     private fun initSetRefrigerator() {
-        _refrigeratorAdapter = RefrigeratorAdapter()
+        _refrigeratorAdapter = RefrigeratorAdapter(requireContext())
         binding.rcvRefrigeratorList.adapter = refrigeratorAdapter
         refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
         Timber.d("저장된 재료 테스트1 -> ${sharedPreferences.getIngredientList()}")
         viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
+
+        initSetNotice()
     }
 
     private fun clickEditBtn() {
@@ -76,9 +102,13 @@ class RefrigeratorFragment :
             sharedPreferences.removeIngredientItem(refrigeratorAdapter.selectedIngredientArray[i])
         }
 
+        initSetNotice()
+
         refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
         viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
         viewModel.setDeleteBtnVisible(false)
+
+//        initSetNotice()
     }
 
     private fun clickSeeRecommendBtn() {
@@ -111,7 +141,7 @@ class RefrigeratorFragment :
         binding.btnRefrigeratorAddIngredient.setOnClickListener {
             viewModel.clickTypeId(0)
 //            AddIngredientActivity().show(parentFragmentManager, BOTTOM_SHEET)
-            activity?.finishAffinity()
+//            activity?.finishAffinity()
             startActivity(intent)
         }
     }

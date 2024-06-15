@@ -8,6 +8,7 @@ import com.kaer.menuw.data.service.KakaoAuthService
 import com.kaer.menuw.databinding.ActivityLoginBinding
 import com.kaer.menuw.presentation.home.HomeActivity
 import com.kaer.menuw.util.base.BaseActivity
+import com.kaer.menuw.util.setStatusBarColorFromResource
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -23,14 +24,18 @@ class LogInActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setStatusBarColorFromResource(R.color.background)
+
         UserApiClient.instance.accessTokenInfo {tokenInfo, error ->
             if (error != null) {
                 startKakaoLogIn()
                 isKakaoLogInSuccess()
             } else if (tokenInfo != null) {
                 val intent = Intent(this, HomeActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()
+//                finishAffinity()
             }
         }
 
@@ -49,6 +54,7 @@ class LogInActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
+//            finishAffinity()
         }
     }
 }

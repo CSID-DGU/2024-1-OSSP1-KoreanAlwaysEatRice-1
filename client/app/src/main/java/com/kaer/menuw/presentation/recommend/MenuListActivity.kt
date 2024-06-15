@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend
+package com.kaer.menuw.presentation.recommend
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +9,10 @@ import com.google.android.material.tabs.TabLayout
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMenuListBinding
 import com.kaer.menuw.presentation.home.HomeActivity
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryActivity.Companion.RECOMMEND_REQUEST_INTENT
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.model.RecommendRequestIntent
+import com.kaer.menuw.presentation.recommend.category.MenuCategoryActivity.Companion.RECOMMEND_REQUEST_INTENT
+import com.kaer.menuw.presentation.recommend.category.model.RecommendRequestIntent
 import com.kaer.menuw.util.base.BaseActivity
+import com.kaer.menuw.util.setStatusBarColorFromResource
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -21,9 +22,21 @@ class MenuListActivity :
 
     private val viewModel by viewModels<MenuListViewModel>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+
+        setStatusBarColorFromResource(R.color.background_bright)
+
+        val loadingProgress = LoadingIndicator(this@MenuListActivity)
+        loadingProgress.show()
+
+        viewModel.isLoading.observe(this) {
+            if (!it) {
+                loadingProgress.dismiss()
+            }
+        }
 
         clickBackBtn()
         initSetTabPage()
@@ -32,7 +45,13 @@ class MenuListActivity :
     }
 
     private fun initPostRecommendMenuList() {
-        Timber.d("request intent test -> ${intent.getParcelableExtra<RecommendRequestIntent>(RECOMMEND_REQUEST_INTENT)}")
+        Timber.d(
+            "request intent test -> ${
+                intent.getParcelableExtra<RecommendRequestIntent>(
+                    RECOMMEND_REQUEST_INTENT
+                )
+            }"
+        )
         val intentData = intent.getParcelableExtra<RecommendRequestIntent>(RECOMMEND_REQUEST_INTENT)
         intentData?.let {
             viewModel.postRecommendMenuList(

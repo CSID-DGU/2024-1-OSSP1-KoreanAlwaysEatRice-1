@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend
+package com.kaer.menuw.presentation.recommend
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,8 @@ import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentMenuRecommendBinding
 import com.kaer.menuw.domain.entity.RecommendMenu
-import com.kaer.menuw.presentation.home.menurecipe.RecipePageActivity
-import com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListViewModel.Companion.CHOOSE_MENU
+import com.kaer.menuw.presentation.menurecipe.RecipePageActivity
+import com.kaer.menuw.presentation.recommend.MenuListViewModel.Companion.CHOOSE_MENU
 import com.kaer.menuw.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

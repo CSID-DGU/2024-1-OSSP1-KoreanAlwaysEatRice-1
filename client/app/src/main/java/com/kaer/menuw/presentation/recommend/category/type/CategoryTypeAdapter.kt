@@ -1,18 +1,17 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend.category.recipe
+package com.kaer.menuw.presentation.recommend.category.type
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kaer.menuw.R
-import com.kaer.menuw.databinding.ItemCategoryRecipeBinding
-import com.kaer.menuw.domain.entity.CategoryRecipe
+import com.kaer.menuw.databinding.ItemCategoryTypeBinding
 import com.kaer.menuw.util.ItemDiffCallback
 
-class CategoryRecipeAdapter :
-    ListAdapter<CategoryRecipe, CategoryRecipeAdapter.CategoryRecipeViewHolder>(
-        ItemDiffCallback<CategoryRecipe>(
-            onItemsTheSame = { old, new -> old.recipeName == new.recipeName },
+class CategoryTypeAdapter :
+    ListAdapter<String, CategoryTypeAdapter.CategoryTypeViewHolder>(
+        ItemDiffCallback<String>(
+            onItemsTheSame = { old, new -> old == new },
             onContentsTheSame = { old, new -> old == new }
         )
     ) {
@@ -21,23 +20,18 @@ class CategoryRecipeAdapter :
     private var selectedPosition: Int = 10
 
     interface OnItemClickListener {
-        fun onItemClick(item: CategoryRecipe, position: Int)
+        fun onItemClick(item: String, position: Int)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.onItemClickListener = listener
     }
 
-    inner class CategoryRecipeViewHolder(
-        private val binding: ItemCategoryRecipeBinding
+    inner class CategoryTypeViewHolder(
+        private val binding: ItemCategoryTypeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: CategoryRecipe) {
-            binding.item = data
-            binding.ivItemRecipeImg.setImageResource(data.recipeImg)
-//             binding.root.setOnClickListener {
-//                 recipeSelection(binding, data.recipeName)
-//                 onItemClickListener?.let { it(data.recipeName) }
-//             }
+        fun onBind(data: String) {
+            binding.tvItemCategoryType.text = data
 
             if (selectedPosition == absoluteAdapterPosition) {
                 changeItemColor(binding, true)
@@ -63,30 +57,30 @@ class CategoryRecipeAdapter :
     }
 
     private fun changeItemColor(
-        binding: ItemCategoryRecipeBinding,
+        binding: ItemCategoryTypeBinding,
         selected: Boolean
     ) {
         when (selected) {
             true -> {
-                binding.layoutItemCategory.setBackgroundResource(R.drawable.shape_bright_fill_5_green_line_rect)
+                binding.layoutItemCategoryType.setBackgroundResource(R.drawable.shape_bright_fill_3_green_line_rect)
             }
 
             false -> {
-                binding.layoutItemCategory.setBackgroundResource(R.drawable.shape_green2_bright_fill_5_rect)
+                binding.layoutItemCategoryType.setBackgroundResource(R.drawable.shape_green2_bright_fill_3_rect)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryRecipeViewHolder {
-        val binding = ItemCategoryRecipeBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryTypeViewHolder {
+        val binding = ItemCategoryTypeBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return CategoryRecipeViewHolder(binding)
+        return CategoryTypeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CategoryRecipeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryTypeViewHolder, position: Int) {
         holder.onBind(currentList[position])
     }
 }

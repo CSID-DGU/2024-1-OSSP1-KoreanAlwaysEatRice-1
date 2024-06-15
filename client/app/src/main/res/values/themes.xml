@@ -3,6 +3,9 @@
     <style name="Base.Theme.MENUW" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="Theme.MENUW" parent="Base.Theme.MENUW" />

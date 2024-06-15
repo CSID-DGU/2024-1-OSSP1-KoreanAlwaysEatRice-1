@@ -1,9 +1,11 @@
 package com.kaer.menuw.presentation.home.refrigerator.add
 
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kaer.menuw.R
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.domain.entity.RefrigeratorIngredientItem
 import com.kaer.menuw.domain.usecase.GetIngredientUseCase
@@ -12,6 +14,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -62,8 +65,68 @@ class AddIngredientViewModel @Inject constructor(
     val deleteEnabled: LiveData<Boolean>
         get() = _deleteEnabled
 
+    private val _needNotice: MutableLiveData<Boolean> = MutableLiveData(false)
+    val needNotice: LiveData<Boolean>
+        get() = _needNotice
+
+    var noticeContent: String = ""
+
+    private val _isLoading = MutableLiveData<Boolean>(true)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     fun setExpiryDate(dates: ArrayList<String>) {
         _expiryDate.value = dates
+    }
+
+    fun checkNeedNotice(ingredientList: ArrayList<RefrigeratorIngredientItem>) {
+        val expiredArray = ArrayList<String>()
+        val nearArray = ArrayList<String>()
+        noticeContent = ""
+
+        countDate(expiredArray, nearArray, ingredientList)
+
+        if (expiredArray.size > 0 && nearArray.size > 0) {
+            _needNotice.value = true
+            noticeContent += "\n[ 유통기한 지난 재료 ]\n" + changeArrayToString(expiredArray) + "\n[ 유통기한 임박한 재료 ]\n" + changeArrayToString(nearArray)
+        } else if (expiredArray.size > 0) {
+            _needNotice.value = true
+            noticeContent += "\n[ 유통기한 지난 재료 ]\n" + changeArrayToString(expiredArray)
+        } else if (nearArray.size > 0) {
+            _needNotice.value = true
+            noticeContent += "\n[ 유통기한 임박한 재료 ]\n" + changeArrayToString(nearArray)
+        } else {
+            _needNotice.value = false
+            noticeContent += "\n유통기한이 지난/임박한 재료가 없습니다"
+        }
+    }
+
+    private fun countDate(expired: ArrayList<String>, near: ArrayList<String>, ingredients: ArrayList<RefrigeratorIngredientItem>) {
+        val localDate = LocalDate.now()
+
+        for (i in 0 until ingredients.size) {
+            val expiryDateFormat = LocalDate.parse(
+                ingredients[i].expiryDate,
+                DateTimeFormatter.ofPattern("yyyy - M - d")
+            )
+
+            if (ChronoUnit.DAYS.between(expiryDateFormat, localDate) > 0) {
+                expired.add(ingredients[i].ingredientName)
+            } else if (ChronoUnit.DAYS.between(localDate, expiryDateFormat) <= 3) {
+                near.add(ingredients[i].ingredientName)
+            }
+        }
+    }
+
+    private fun changeArrayToString(array: ArrayList<String>): String {
+        var temp = ""
+        for (i in 0 until array.size) {
+            temp += array[i]
+            if (i != array.size - 1) {
+                temp += ", "
+            }
+        }
+        return temp
     }
 
     fun getIngredientList() {
@@ -93,6 +156,10 @@ class AddIngredientViewModel @Inject constructor(
                 ingredientTypeList.add(IngredientTotal(SEASONING, seaList))
 
                 _ingredientList.value = ingredientTypeList
+
+                if (ingredientTypeList.size > 0) {
+                    _isLoading.value = false
+                }
             }
         }
     }

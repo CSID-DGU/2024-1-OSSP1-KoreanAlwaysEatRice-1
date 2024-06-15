@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend.category
+package com.kaer.menuw.presentation.recommend.category
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,13 +9,14 @@ import androidx.fragment.app.replace
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMenuCategoryBinding
 import com.kaer.menuw.presentation.home.refrigerator.RefrigeratorFragment.Companion.INGREDIENT_ID_LIST
-import com.kaer.menuw.presentation.home.refrigerator.recommend.MenuListActivity
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryViewModel.Companion.TYPE_PAGE
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.model.RecommendRequestIntent
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.recipe.CategoryRecipeFragment
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.type.CategoryTypeFragment
+import com.kaer.menuw.presentation.recommend.MenuListActivity
+import com.kaer.menuw.presentation.recommend.category.MenuCategoryViewModel.Companion.RECOMMEND_PAGE
+import com.kaer.menuw.presentation.recommend.category.MenuCategoryViewModel.Companion.TYPE_PAGE
+import com.kaer.menuw.presentation.recommend.category.model.RecommendRequestIntent
+import com.kaer.menuw.presentation.recommend.category.recipe.CategoryRecipeFragment
+import com.kaer.menuw.presentation.recommend.category.type.CategoryTypeFragment
 import com.kaer.menuw.util.base.BaseActivity
+import com.kaer.menuw.util.setStatusBarColorFromResource
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -27,6 +28,8 @@ class MenuCategoryActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setStatusBarColorFromResource(R.color.background)
 
         Timber.d("선택한 메뉴 아이디 후 -> ${intent.getSerializableExtra(INGREDIENT_ID_LIST) as? ArrayList<Int>}")
         (intent.getSerializableExtra(INGREDIENT_ID_LIST) as? ArrayList<Int>)?.let {
