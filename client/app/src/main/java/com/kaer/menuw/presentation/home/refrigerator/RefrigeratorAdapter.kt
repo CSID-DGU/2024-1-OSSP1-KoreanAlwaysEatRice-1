@@ -1,5 +1,6 @@
 package com.kaer.menuw.presentation.home.refrigerator
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -36,16 +37,9 @@ class RefrigeratorAdapter(private val context : Context) :
         val binding: ItemIngredientRefrigeratorBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RefrigeratorIngredientItem, onClickListener: View.OnClickListener) {
-//            val localDate = LocalDate.now()
-//            val expiryDateFormat = LocalDate.parse(data.expiryDate, DateTimeFormatter.ofPattern("yyyy - M - d"))
             with(binding) {
                 item = data
-//                if (localDate.compareTo(expiryDateFormat) >= 0) {
-//                    Timber.d("날짜 출력 -> $localDate")
-//                    tvIngredientExpiryDate.text = data.expiryDate + " : " + ChronoUnit.DAYS.between(expiryDateFormat, localDate)
-//                } else {
-//                    tvIngredientExpiryDate.text = data.expiryDate
-//                }
+
                 checkExpiryDate(data, binding)
 
                 ivIngredientImg.setCoilImage(data.ingredientImageUrl)
@@ -54,11 +48,12 @@ class RefrigeratorAdapter(private val context : Context) :
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun checkExpiryDate(data: RefrigeratorIngredientItem, binding: ItemIngredientRefrigeratorBinding) {
         val localDate = LocalDate.now()
         val expiryDateFormat = LocalDate.parse(data.expiryDate, DateTimeFormatter.ofPattern("yyyy - M - d"))
 
-        if (localDate.compareTo(expiryDateFormat) >= 0) {
+        if (ChronoUnit.DAYS.between(expiryDateFormat, localDate) >= 0 || ChronoUnit.DAYS.between(localDate, expiryDateFormat) <= 3) {
             binding.tvIngredientExpiryDate.setTextColor(ContextCompat.getColor(context, R.color.red_bright))
             binding.tvIngredientExpiryDate.text = data.expiryDate + " (" + ChronoUnit.DAYS.between(expiryDateFormat, localDate) + ")"
         } else {
