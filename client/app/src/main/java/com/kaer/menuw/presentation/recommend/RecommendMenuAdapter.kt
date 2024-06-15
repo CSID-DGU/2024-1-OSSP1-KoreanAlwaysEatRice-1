@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend
+package com.kaer.menuw.presentation.recommend
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

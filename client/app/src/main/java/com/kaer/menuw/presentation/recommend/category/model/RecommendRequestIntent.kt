@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend.category.model
+package com.kaer.menuw.presentation.recommend.category.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

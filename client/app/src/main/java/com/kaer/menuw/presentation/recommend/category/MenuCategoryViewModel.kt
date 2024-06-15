@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend.category
+package com.kaer.menuw.presentation.recommend.category
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

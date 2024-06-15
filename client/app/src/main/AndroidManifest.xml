@@ -32,7 +32,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.home.refrigerator.recommend.MenuListActivity"
+            android:name=".presentation.recommend.MenuListActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -40,7 +40,7 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.home.refrigerator.recommend.category.MenuCategoryActivity"
+            android:name=".presentation.recommend.category.MenuCategoryActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

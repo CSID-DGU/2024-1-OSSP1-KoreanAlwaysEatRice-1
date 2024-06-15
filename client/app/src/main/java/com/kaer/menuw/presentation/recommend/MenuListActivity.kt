@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.home.refrigerator.recommend
+package com.kaer.menuw.presentation.recommend
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import com.google.android.material.tabs.TabLayout
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ActivityMenuListBinding
 import com.kaer.menuw.presentation.home.HomeActivity
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.MenuCategoryActivity.Companion.RECOMMEND_REQUEST_INTENT
-import com.kaer.menuw.presentation.home.refrigerator.recommend.category.model.RecommendRequestIntent
+import com.kaer.menuw.presentation.recommend.category.MenuCategoryActivity.Companion.RECOMMEND_REQUEST_INTENT
+import com.kaer.menuw.presentation.recommend.category.model.RecommendRequestIntent
 import com.kaer.menuw.util.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
