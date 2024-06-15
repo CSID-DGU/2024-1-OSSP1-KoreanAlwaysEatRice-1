@@ -44,6 +44,19 @@ class RefrigeratorFragment :
         viewModel.checkNeedNotice(sharedPreferences.getIngredientList())
         viewModel.needNotice.observe(viewLifecycleOwner) {
             Timber.d("공지 테스트 -> ${viewModel.noticeContent}")
+            if (it) {
+                binding.ivRefrigeratorNotice.setOnClickListener {
+                    BaseDialog.Builder().build(
+                        type = BaseDialog.DialogType.SINGLE,
+                        title = "냉장고 재료 알림",
+                        content = "\n유통기한이 지난/임박한 재료를 확인해주세요!\n" + viewModel.noticeContent,
+                        doBtnText = "확인",
+                        cancelBtnText = "",
+                        doBtnAction = {},
+                        cancelBtnAction = {}
+                    ).show(parentFragmentManager, BaseDialog.DIALOG)
+                }
+            }
         }
     }
 

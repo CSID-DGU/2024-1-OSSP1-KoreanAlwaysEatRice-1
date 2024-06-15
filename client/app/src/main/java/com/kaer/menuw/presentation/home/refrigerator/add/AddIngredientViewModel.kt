@@ -84,13 +84,13 @@ class AddIngredientViewModel @Inject constructor(
 
         if (expiredArray.size > 0 && nearArray.size > 0) {
             _needNotice.value = true
-            noticeContent += "[ 유통기한 지난 재료 ]\n" + changeArrayToString(expiredArray) + "\n[ 유통기한 임박한 재료 ]\n" + changeArrayToString(nearArray)
+            noticeContent += "\n[ 유통기한 지난 재료 ]\n" + changeArrayToString(expiredArray) + "\n[ 유통기한 임박한 재료 ]\n" + changeArrayToString(nearArray)
         } else if (expiredArray.size > 0) {
             _needNotice.value = true
-            noticeContent += "[ 유통기한 지난 재료 ]\n" + changeArrayToString(expiredArray)
+            noticeContent += "\n[ 유통기한 지난 재료 ]\n" + changeArrayToString(expiredArray)
         } else if (nearArray.size > 0) {
             _needNotice.value = true
-            noticeContent += "[ 유통기한 임박한 재료 ]\n" + changeArrayToString(nearArray)
+            noticeContent += "\n[ 유통기한 임박한 재료 ]\n" + changeArrayToString(nearArray)
         } else {
             _needNotice.value = false
         }
