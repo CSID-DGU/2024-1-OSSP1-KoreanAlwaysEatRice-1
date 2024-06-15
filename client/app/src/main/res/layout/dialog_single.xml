@@ -16,23 +16,26 @@
 
         <TextView
             android:id="@+id/tv_dialog_update_title"
+            style="@style/body_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialog_update_title"
-            android:textStyle="bold"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:layout_marginTop="40dp"
+            android:includeFontPadding="false"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/tv_dialog_update_content"
+            style="@style/body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:text="@string/dialog_update_content"
-            android:textSize="14dp"
+            android:textSize="16dp"
+            android:includeFontPadding="false"
             android:gravity="center_horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
