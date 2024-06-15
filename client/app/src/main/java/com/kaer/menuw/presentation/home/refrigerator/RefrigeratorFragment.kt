@@ -141,7 +141,7 @@ class RefrigeratorFragment :
         binding.btnRefrigeratorAddIngredient.setOnClickListener {
             viewModel.clickTypeId(0)
 //            AddIngredientActivity().show(parentFragmentManager, BOTTOM_SHEET)
-            activity?.finishAffinity()
+//            activity?.finishAffinity()
             startActivity(intent)
         }
     }

@@ -2,6 +2,8 @@ package com.kaer.menuw.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -19,15 +21,31 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
+    private var backPressedTime: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
         viewModel.getUserInfo()
 
+        clickBackBtn()
+
         initSetTabPage()
         clickTabItem()
         clickSetting()
+    }
+
+    private fun clickBackBtn() {
+        onBackPressedDispatcher.addCallback {
+            if (System.currentTimeMillis() - backPressedTime >= BACK_PRESSED_TIME) {
+                backPressedTime = System.currentTimeMillis()
+                Toast.makeText(applicationContext, "앱을 종료하려면 한 번 더 눌러주세요", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                finishAffinity()
+            }
+        }
     }
 
     private fun clickSetting() {
@@ -64,5 +82,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
         supportFragmentManager.commit {
             replace(R.id.fcv_home_tab_main, fragment)
         }
+    }
+
+    companion object {
+        const val BACK_PRESSED_TIME = 2000L
     }
 }

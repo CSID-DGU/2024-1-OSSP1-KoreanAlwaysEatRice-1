@@ -29,8 +29,10 @@ class LogInActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
                 isKakaoLogInSuccess()
             } else if (tokenInfo != null) {
                 val intent = Intent(this, HomeActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()
+//                finishAffinity()
             }
         }
 
@@ -49,6 +51,7 @@ class LogInActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
+//            finishAffinity()
         }
     }
 }
