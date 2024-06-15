@@ -40,7 +40,7 @@ class RefrigeratorFragment :
     }
 
     private fun initSetRefrigerator() {
-        _refrigeratorAdapter = RefrigeratorAdapter()
+        _refrigeratorAdapter = RefrigeratorAdapter(requireContext())
         binding.rcvRefrigeratorList.adapter = refrigeratorAdapter
         refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
         Timber.d("저장된 재료 테스트1 -> ${sharedPreferences.getIngredientList()}")

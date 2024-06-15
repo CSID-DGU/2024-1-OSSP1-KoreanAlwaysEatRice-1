@@ -1,11 +1,14 @@
 package com.kaer.menuw.presentation.home.refrigerator
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.kaer.menuw.R
 import com.kaer.menuw.databinding.ItemIngredientRefrigeratorBinding
 import com.kaer.menuw.domain.entity.IngredientTotal
 import com.kaer.menuw.domain.entity.RefrigeratorIngredientItem
@@ -17,7 +20,7 @@ import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
-class RefrigeratorAdapter :
+class RefrigeratorAdapter(private val context : Context) :
     ListAdapter<RefrigeratorIngredientItem, RefrigeratorAdapter.RefrigeratorViewHolder>(
         ItemDiffCallback<RefrigeratorIngredientItem>(
             onContentsTheSame = { old, new -> old == new },
@@ -33,19 +36,33 @@ class RefrigeratorAdapter :
         val binding: ItemIngredientRefrigeratorBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RefrigeratorIngredientItem, onClickListener: View.OnClickListener) {
-            val localDate = LocalDate.now()
-            val expiryDateFormat = LocalDate.parse(data.expiryDate, DateTimeFormatter.ofPattern("yyyy - M - d"))
+//            val localDate = LocalDate.now()
+//            val expiryDateFormat = LocalDate.parse(data.expiryDate, DateTimeFormatter.ofPattern("yyyy - M - d"))
             with(binding) {
                 item = data
-                if (localDate.compareTo(expiryDateFormat) >= 0) {
-                    Timber.d("날짜 출력 -> $localDate")
-                    tvIngredientExpiryDate.text = data.expiryDate + " : " + ChronoUnit.DAYS.between(expiryDateFormat, localDate)
-                } else {
-                    tvIngredientExpiryDate.text = data.expiryDate
-                }
+//                if (localDate.compareTo(expiryDateFormat) >= 0) {
+//                    Timber.d("날짜 출력 -> $localDate")
+//                    tvIngredientExpiryDate.text = data.expiryDate + " : " + ChronoUnit.DAYS.between(expiryDateFormat, localDate)
+//                } else {
+//                    tvIngredientExpiryDate.text = data.expiryDate
+//                }
+                checkExpiryDate(data, binding)
+
                 ivIngredientImg.setCoilImage(data.ingredientImageUrl)
                 root.setOnClickListener(onClickListener)
             }
+        }
+    }
+
+    private fun checkExpiryDate(data: RefrigeratorIngredientItem, binding: ItemIngredientRefrigeratorBinding) {
+        val localDate = LocalDate.now()
+        val expiryDateFormat = LocalDate.parse(data.expiryDate, DateTimeFormatter.ofPattern("yyyy - M - d"))
+
+        if (localDate.compareTo(expiryDateFormat) >= 0) {
+            binding.tvIngredientExpiryDate.setTextColor(ContextCompat.getColor(context, R.color.red_bright))
+            binding.tvIngredientExpiryDate.text = data.expiryDate + " (" + ChronoUnit.DAYS.between(expiryDateFormat, localDate) + ")"
+        } else {
+            binding.tvIngredientExpiryDate.text = data.expiryDate
         }
     }
 
