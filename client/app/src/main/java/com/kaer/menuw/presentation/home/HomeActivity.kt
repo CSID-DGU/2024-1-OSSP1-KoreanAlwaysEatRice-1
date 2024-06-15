@@ -14,6 +14,7 @@ import com.kaer.menuw.presentation.home.likemenu.LikeMenuListFragment
 import com.kaer.menuw.presentation.home.refrigerator.RefrigeratorFragment
 import com.kaer.menuw.presentation.mypage.MyPageActivity
 import com.kaer.menuw.util.base.BaseActivity
+import com.kaer.menuw.util.setStatusBarColorFromResource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +27,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+        setStatusBarColorFromResource(R.color.background_bright)
 
         viewModel.getUserInfo()
 

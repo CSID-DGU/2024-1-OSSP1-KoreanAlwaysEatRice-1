@@ -9,6 +9,7 @@ import com.kaer.menuw.databinding.ActivityRecipePageBinding
 import com.kaer.menuw.presentation.recommend.MenuListViewModel.Companion.CHOOSE_MENU
 import com.kaer.menuw.util.base.BaseActivity
 import com.kaer.menuw.util.base.BaseDialog
+import com.kaer.menuw.util.setStatusBarColorFromResource
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -23,6 +24,8 @@ class RecipePageActivity : BaseActivity<ActivityRecipePageBinding>(R.layout.acti
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setStatusBarColorFromResource(R.color.background)
 
         clickBackBtn()
         initSetAdapter()

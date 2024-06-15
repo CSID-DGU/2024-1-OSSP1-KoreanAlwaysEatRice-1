@@ -17,6 +17,7 @@ import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.
 import com.kaer.menuw.presentation.home.refrigerator.add.checkdate.GetExpiryDateBottomSheet
 import com.kaer.menuw.presentation.recommend.LoadingIndicator
 import com.kaer.menuw.util.base.BaseActivity
+import com.kaer.menuw.util.setStatusBarColorFromResource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +39,8 @@ class AddIngredientActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+
+        setStatusBarColorFromResource(R.color.background)
 
         sharedPreferences = SharedPreferenceManager(this)
 

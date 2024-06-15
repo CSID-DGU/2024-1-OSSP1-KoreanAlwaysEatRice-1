@@ -8,6 +8,7 @@ import com.kaer.menuw.data.service.KakaoAuthService
 import com.kaer.menuw.databinding.ActivityLoginBinding
 import com.kaer.menuw.presentation.home.HomeActivity
 import com.kaer.menuw.util.base.BaseActivity
+import com.kaer.menuw.util.setStatusBarColorFromResource
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -22,6 +23,8 @@ class LogInActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setStatusBarColorFromResource(R.color.background)
 
         UserApiClient.instance.accessTokenInfo {tokenInfo, error ->
             if (error != null) {
