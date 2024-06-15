@@ -1,4 +1,4 @@
-package com.kaer.menuw.presentation.home.menurecipe
+package com.kaer.menuw.presentation.menurecipe
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

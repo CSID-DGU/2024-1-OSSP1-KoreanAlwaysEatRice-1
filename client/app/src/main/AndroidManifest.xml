@@ -48,7 +48,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.home.menurecipe.RecipePageActivity"
+            android:name=".presentation.menurecipe.RecipePageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

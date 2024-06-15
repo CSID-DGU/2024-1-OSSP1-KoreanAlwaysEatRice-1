@@ -7,7 +7,7 @@ import androidx.fragment.app.activityViewModels
 import com.kaer.menuw.R
 import com.kaer.menuw.databinding.FragmentMenuNotRecommendBinding
 import com.kaer.menuw.domain.entity.RecommendMenu
-import com.kaer.menuw.presentation.home.menurecipe.RecipePageActivity
+import com.kaer.menuw.presentation.menurecipe.RecipePageActivity
 import com.kaer.menuw.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
