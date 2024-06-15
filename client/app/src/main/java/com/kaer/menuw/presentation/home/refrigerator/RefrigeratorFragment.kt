@@ -35,8 +35,16 @@ class RefrigeratorFragment :
 
         clickAddIngredientBtn()
         initSetRefrigerator()
+        initSetNotice()
         clickEditBtn()
         clickSeeRecommendBtn()
+    }
+
+    private fun initSetNotice() {
+        viewModel.checkNeedNotice(sharedPreferences.getIngredientList())
+        viewModel.needNotice.observe(viewLifecycleOwner) {
+            Timber.d("공지 테스트 -> ${viewModel.noticeContent}")
+        }
     }
 
     private fun initSetRefrigerator() {
@@ -45,6 +53,8 @@ class RefrigeratorFragment :
         refrigeratorAdapter.submitList(sharedPreferences.getIngredientList())
         Timber.d("저장된 재료 테스트1 -> ${sharedPreferences.getIngredientList()}")
         viewModel.setBackgroundTextVisible(sharedPreferences.getIngredientList().isEmpty())
+
+//        initSetNotice()
     }
 
     private fun clickEditBtn() {
