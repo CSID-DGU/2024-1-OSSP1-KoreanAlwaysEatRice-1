@@ -24,6 +24,10 @@ class MenuListViewModel @Inject constructor(
     val notRecommendMenuList: LiveData<List<RecommendMenu>>
         get() = _notRecommendMenuList
 
+    private val _isLoading = MutableLiveData<Boolean>(true)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     fun postRecommendMenuList(recipe: String, menuType: String, ingredientList: ArrayList<Int>) {
         viewModelScope.launch {
             postRecommendMenuListUseCase(recipe, menuType, ingredientList).onSuccess { list ->
@@ -40,6 +44,10 @@ class MenuListViewModel @Inject constructor(
                 }
                 _recommendMenuList.value = recommendList
                 _notRecommendMenuList.value = notRecommendList
+
+                if (notRecommendList.size > 0) {
+                    _isLoading.value = false
+                }
             }.onFailure { Timber.d("추천 메뉴 불러오기 fail ${it.message}") }
         }
     }

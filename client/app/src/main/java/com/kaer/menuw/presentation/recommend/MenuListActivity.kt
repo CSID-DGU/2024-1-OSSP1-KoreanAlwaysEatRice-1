@@ -21,9 +21,19 @@ class MenuListActivity :
 
     private val viewModel by viewModels<MenuListViewModel>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+
+        val loadingProgress = LoadingIndicator(this@MenuListActivity)
+        loadingProgress.show()
+
+        viewModel.isLoading.observe(this) {
+            if (!it) {
+                loadingProgress.dismiss()
+            }
+        }
 
         clickBackBtn()
         initSetTabPage()
@@ -32,7 +42,13 @@ class MenuListActivity :
     }
 
     private fun initPostRecommendMenuList() {
-        Timber.d("request intent test -> ${intent.getParcelableExtra<RecommendRequestIntent>(RECOMMEND_REQUEST_INTENT)}")
+        Timber.d(
+            "request intent test -> ${
+                intent.getParcelableExtra<RecommendRequestIntent>(
+                    RECOMMEND_REQUEST_INTENT
+                )
+            }"
+        )
         val intentData = intent.getParcelableExtra<RecommendRequestIntent>(RECOMMEND_REQUEST_INTENT)
         intentData?.let {
             viewModel.postRecommendMenuList(

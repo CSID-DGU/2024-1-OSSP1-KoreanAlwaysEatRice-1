@@ -71,6 +71,10 @@ class AddIngredientViewModel @Inject constructor(
 
     var noticeContent: String = ""
 
+    private val _isLoading = MutableLiveData<Boolean>(true)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     fun setExpiryDate(dates: ArrayList<String>) {
         _expiryDate.value = dates
     }
@@ -152,6 +156,10 @@ class AddIngredientViewModel @Inject constructor(
                 ingredientTypeList.add(IngredientTotal(SEASONING, seaList))
 
                 _ingredientList.value = ingredientTypeList
+
+                if (ingredientTypeList.size > 0) {
+                    _isLoading.value = false
+                }
             }
         }
     }

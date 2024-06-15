@@ -15,6 +15,7 @@ import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.SEASONING
 import com.kaer.menuw.presentation.home.refrigerator.add.AddIngredientViewModel.Companion.VEGETABLE
 import com.kaer.menuw.presentation.home.refrigerator.add.checkdate.GetExpiryDateBottomSheet
+import com.kaer.menuw.presentation.recommend.LoadingIndicator
 import com.kaer.menuw.util.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,6 +40,15 @@ class AddIngredientActivity :
         binding.viewModel = viewModel
 
         sharedPreferences = SharedPreferenceManager(this)
+
+        val loadingProgress = LoadingIndicator(this@AddIngredientActivity)
+        loadingProgress.show()
+
+        viewModel.isLoading.observe(this) {
+            if (!it) {
+                loadingProgress.dismiss()
+            }
+        }
 
         initSetAdapter()
     }
