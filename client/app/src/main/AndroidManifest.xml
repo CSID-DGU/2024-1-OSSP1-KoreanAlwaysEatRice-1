@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.onboarding.login.onboarding.splash.SplashActivity"
+            android:name=".presentation.onboarding.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar" >
             <intent-filter>
